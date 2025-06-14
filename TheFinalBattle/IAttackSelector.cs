@@ -3,7 +3,7 @@
     public interface IAttackSelector
     {
         int SelectEnemy();
-        AttackCommand GetAttack(Entity player);
+        IEntityCommand GetAttack(Entity player);
     }
     public class AttackSelectorAI : IAttackSelector
     {
@@ -11,7 +11,7 @@
         public AttackSelectorAI(Party enemies) { 
             _enemies = enemies;
         }
-        public AttackCommand GetAttack(Entity player)
+        public IEntityCommand GetAttack(Entity player)
         {
             int enemyIndex = SelectEnemy();
             Entity enemy = _enemies.GetMemberAt(enemyIndex);
