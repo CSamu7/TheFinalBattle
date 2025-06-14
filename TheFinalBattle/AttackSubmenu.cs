@@ -8,40 +8,36 @@ namespace TheFinalBattle
         public AttackSubmenu(Party enemies) {
             _enemies = enemies;
         }
-        public AttackCommand GetAttack(Entity entity)
+        public IEntityCommand? GetAttack(Entity entity)
         {
-            while (true)
-            {
-                int enemyIndex = SelectEnemy();
+            int enemyIndex = SelectEnemy();
 
-                if (enemyIndex < _enemies.Length) return
-                        new AttackCommand(entity.StandardAttack, _enemies.GetMemberAt(enemyIndex));
-
-                if (enemyIndex == _enemies.Length) return null;
-            };
+            if (enemyIndex == _enemies.Length) return null;
+                        
+            return new AttackCommand(entity.StandardAttack, _enemies.GetMemberAt(enemyIndex));
         }
         public int SelectEnemy()
         {
-            int enemyOption;
+            int enemyIndex;
 
             do
             {
                 DisplayMenu(_enemies);
 
                 Console.Write("Enter a number: ");
-                if(!int.TryParse(Console.ReadLine(), out enemyOption)){
+                if(!int.TryParse(Console.ReadLine(), out enemyIndex)){
                     ConsoleUtils.WriteLine("You have to write a number...", ConsoleColor.Red);
                 }
 
-                enemyOption -= 1;
+                enemyIndex -= 1;
             }
-            while (enemyOption > _enemies.Length);
+            while (enemyIndex > _enemies.Length || enemyIndex < 0);
 
-            return enemyOption;
+            return enemyIndex;
         }
         private void DisplayMenu(Party enemies)
         {
-            Console.WriteLine("Which enemy do you want to attack? ");
+            Console.WriteLine("=========ENEMY PARTY========");
 
             for (int i = 0; i < enemies.Length; i++)
             {
