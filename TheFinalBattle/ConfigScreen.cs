@@ -8,8 +8,8 @@
             while (true)
             {
                 Console.Write(message);
-                string inputAI = Console.ReadLine();
-                IPartyControl ai = _partyValidator.Validate(inputAI);
+                string inputAI = Console.ReadLine() ?? "";
+                IPartyControl? ai = _partyValidator.Validate(inputAI);
 
                 if (ai != null) return new Party(ai);
             }
