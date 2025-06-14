@@ -31,15 +31,16 @@ namespace TheFinalBattle
                 Console.Write("Which item do you want to use? ");
                 if(!int.TryParse(Console.ReadLine(), out itemIndex))
                 {
-                    ConsoleUtils.WriteLine("Enter a number...", ConsoleColor.Red);
-                    continue;
+                    ConsoleUtils.WriteLine("You have to write a number...", ConsoleColor.Red);
                 }
+
+                itemIndex -= 1;
             }
-            while (itemIndex > party.Items.Count + 1 || itemIndex <= 0);
+            while (itemIndex > party.Items.Count || itemIndex < 0);
 
-            if (itemIndex == party.Items.Count + 1) return null;
+            if (itemIndex == party.Items.Count ) return null;
 
-            return party.Items.ElementAt(itemIndex - 1);
+            return party.Items.ElementAt(itemIndex);
         }
         private void DisplayMenu(Party party)
         {

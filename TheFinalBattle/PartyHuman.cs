@@ -26,7 +26,7 @@ namespace TheFinalBattle
                 
                 if(!int.TryParse(Console.ReadLine(), out inputUser))
                 {
-                    ConsoleUtils.WriteLine("Enter a number...", ConsoleColor.Red);
+                    ConsoleUtils.WriteLine("You have to write a number...", ConsoleColor.Red);
                     continue;
                 }
 
@@ -44,8 +44,6 @@ namespace TheFinalBattle
 
             return command;
         }
-
-        //Refactor?
         private void DisplayOptions(List<MenuOption> options)
         {
             for (int i = 0; i < options.Count; i++)
@@ -54,10 +52,10 @@ namespace TheFinalBattle
 
                 if (option.isAvailable)
                 {
-                    Console.WriteLine($"({i+1}) {option.Description}");
+                    Console.WriteLine($" ({i+1}) {option.Description}");
                 } else
                 {
-                    ConsoleUtils.WriteLine($"({i+1}) {option.Description}", ConsoleColor.Gray);
+                    ConsoleUtils.WriteLine($" ({i+1}) {option.Description}", ConsoleColor.Gray);
                 }
             }
         }
