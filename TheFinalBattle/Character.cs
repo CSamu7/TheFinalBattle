@@ -8,6 +8,7 @@
             Name = name;
             MaxHP = 25;
             HP = MaxHP;
+            Gear = new Sword();
         }
     }
 }

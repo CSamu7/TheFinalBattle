@@ -1,51 +1,34 @@
-﻿using Utils;
-
-namespace TheFinalBattle
+﻿namespace TheFinalBattle
 {
-    public class AttackSubmenu : IAttackSelector
+    public interface ICommandCreation
     {
+        public IEntityCommand? BuildCommand();
+    }
+    public class AttackSubmenu : ICommandCreation
+    {
+        private readonly EnemiesSubmenu _enemiesSubmenu;
+        private readonly AttacksSubmenu _attacksSubmenu;
         private readonly Party _enemies;
-        public AttackSubmenu(Party enemies) {
+        public AttackSubmenu(Party enemies, Entity entity) {
+            _enemiesSubmenu = new EnemiesSubmenu(entity, enemies);
+            _attacksSubmenu = new AttacksSubmenu(entity);
             _enemies = enemies;
         }
-        public IEntityCommand? GetAttack(Entity entity)
+        public IEntityCommand? BuildCommand()
         {
-            int enemyIndex = SelectEnemy();
-
-            if (enemyIndex == _enemies.Length) return null;
-                        
-            return new AttackCommand(entity.StandardAttack, _enemies.GetMemberAt(enemyIndex));
-        }
-        public int SelectEnemy()
-        {
-            int enemyIndex;
-
-            do
+            while (true)
             {
-                DisplayMenu(_enemies);
+                Entity? enemy = _enemiesSubmenu.SelectEnemy();
+                if (enemy is null) return null;
 
-                Console.Write("Enter a number: ");
-                if(!int.TryParse(Console.ReadLine(), out enemyIndex)){
-                    ConsoleUtils.WriteLine("You have to write a number...", ConsoleColor.Red);
-                }
+                //Loop infinito
+                IAttack? attack = _attacksSubmenu.SelectAttack();
 
-                enemyIndex -= 1;
+                if (_enemies.Length == 1 && attack is null) return null;
+                if (attack is null) continue;
+
+                return new AttackCommand(attack, enemy);
             }
-            while (enemyIndex > _enemies.Length || enemyIndex < 0);
-
-            return enemyIndex;
         }
-        private void DisplayMenu(Party enemies)
-        {
-            Console.WriteLine("=========ENEMY PARTY========");
-
-            for (int i = 0; i < enemies.Length; i++)
-            {
-                Entity enemy = enemies.GetMemberAt(i);
-                Console.WriteLine($" ({i + 1}) {enemy.Name} {enemy.HP}/{enemy.MaxHP}");
-            }
-
-            Console.WriteLine($" ({_enemies.Length + 1}) Back");
-        }
-    } 
+    }
 }

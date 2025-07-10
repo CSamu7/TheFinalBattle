@@ -5,6 +5,8 @@ namespace TheFinalBattle
     public class BattleStatus
     {
         private readonly int _maxLength = 77;
+        private readonly char _marginChar = '=';
+        private readonly char _marginInsideChar = '-';
         public void Display(Entity entity, Battle battle)
         {
             Party heroes = battle.GetPartyFor(entity);
@@ -14,12 +16,16 @@ namespace TheFinalBattle
             Console.Clear();
 
             DisplayTitle();
-            Console.WriteLine("".PadRight(_maxLength, '='));
+            Console.WriteLine("".PadRight(_maxLength, _marginChar));
+            ConsoleUtils.WriteLine("PARTY", ConsoleColor.Green);
+            DisplayParty(entity, heroes);
+            
+            Console.WriteLine("".PadRight(_maxLength, _marginInsideChar));
+            
+            ConsoleUtils.WriteLine("\t\t\t\t\t\t\tENEMIES", ConsoleColor.Red);
+            DisplayParty(entity, enemies,true);
 
-            DisplayActualParty(entity, heroes);
-            Console.WriteLine("".PadRight(_maxLength, '-'));
-            DisplayEnemyParty(enemies);
-            Console.WriteLine("".PadRight(_maxLength, '='));
+            Console.WriteLine("".PadRight(_maxLength, _marginChar));
 
             Thread.Sleep(800);
         }
@@ -29,28 +35,19 @@ namespace TheFinalBattle
             Console.Write("BATTLE STATUS");
             Console.WriteLine("".PadRight(32, '='));
         }
-        private void DisplayActualParty(Entity actualEntity, Party heroes)
+        private void DisplayParty(Entity actualEntity, Party party, bool IsEnemyParty = false)
         {
-            ConsoleUtils.WriteLine("PARTY", ConsoleColor.Green);
-
-            foreach (Entity entity in heroes.Members)
+            foreach (Entity entity in party.Members)
             {
-                if (actualEntity == entity)
+                if (IsEnemyParty) Console.Write("\t\t\t\t\t\t\t");
+                ConsoleColor color = actualEntity == entity ? ConsoleColor.Yellow : ConsoleColor.White;
+                ConsoleUtils.WriteLine($"* {entity.Name} ({entity.HP}/{entity.MaxHP})", color);
+
+                if (entity.Gear is not null)
                 {
-                    ConsoleUtils.WriteLine($"* {entity.Name} ({entity.HP}/{entity.MaxHP})", ConsoleColor.Yellow);
-                } else
-                {
-                    Console.WriteLine($"* {entity.Name} ({entity.HP}/{entity.MaxHP})");
+                    if (IsEnemyParty) Console.Write("\t\t\t\t\t\t\t");
+                    Console.WriteLine($"  - {entity.Gear.Name}");
                 }
-            }
-        }
-        private void DisplayEnemyParty(Party enemies)
-        {
-            ConsoleUtils.WriteLine("\t\t\t\t\t\t\tPARTY ENEMY", ConsoleColor.Red);
-
-            foreach (Entity enemy in enemies.Members)
-            {
-                Console.WriteLine($"\t\t\t\t\t\t\t* {enemy.Name} ({enemy.HP}/{enemy.MaxHP})");
             }
         }
     }

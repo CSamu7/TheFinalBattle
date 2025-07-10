@@ -1,6 +1,5 @@
 ﻿namespace TheFinalBattle
 {
-    //No me termina de convencer
     public interface IAttack
     {
         int CalculateDamage();
@@ -40,6 +39,28 @@
             Random rnd = new Random();
             int damage = rnd.Next(0, 3);
             return damage;
+        }
+    }
+    public class Slash : IAttack
+    {
+        public override string ToString()
+        {
+            return "Slash";
+        }
+        public int CalculateDamage()
+        {
+            return 2;
+        }
+    }
+    public class Stab : IAttack
+    {
+        public override string ToString()
+        {
+            return "Stab";
+        }
+        public int CalculateDamage()
+        {
+            return 1;
         }
     }
 }

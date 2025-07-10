@@ -10,8 +10,8 @@
             Party heroes = configParty.CreateParty("The player is controlled by (PC, Human): ");
             Party enemy = configParty.CreateParty("The monsters are controlled by (PC, Human): ");
 
-            heroes.AddItem(new HealthPotion(), 3);
-            enemy.AddItem(new HealthPotion(), 1);
+            heroes.Inventory.AddItem(new HealthPotion(), 3);
+            heroes.Inventory.AddItem(new Dagger());
 
             Console.Write("Enter your name, hero: ");
             string name = Console.ReadLine() ?? "Kiryu";

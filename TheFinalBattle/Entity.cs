@@ -6,5 +6,6 @@
         public int MaxHP { get; init; }
         public int HP { get; set; }
         public IAttack StandardAttack { get; protected set; }
+        public Gear? Gear { get; set; }
     }
 }

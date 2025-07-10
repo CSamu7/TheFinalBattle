@@ -14,9 +14,15 @@
             Console.WriteLine(message);
             Console.ForegroundColor = ConsoleColor.White;
         }
-        public static void DisplayBox()
+        public static string Input(string message)
         {
-
+            Console.Write(message);
+            string input = Console.ReadLine() ?? "";
+            return input.Clean();
+        }
+        public static void Error(string message)
+        {
+            ConsoleUtils.WriteLine(message, ConsoleColor.Red);
         }
     }
 }

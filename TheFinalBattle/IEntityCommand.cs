@@ -1,5 +1,4 @@
-﻿using Utils;
-namespace TheFinalBattle
+﻿namespace TheFinalBattle
 {
     public interface IEntityCommand
     {
@@ -25,45 +24,32 @@ namespace TheFinalBattle
             _attack = attack;
             _enemy = enemy;
         }
-        public void Execute(Entity entity)
+        public void Execute(Entity player)
         {
             int damage = _attack.CalculateDamage();
             _enemy.HP -= damage;
 
-            Console.WriteLine($"{entity.Name.ToUpper()} used {_attack.ToString().ToUpper()} on {_enemy.Name.ToUpper()}");
+            if(_enemy.HP < 0) _enemy.HP = 0;
+
+            Console.WriteLine($"{player.Name.ToUpper()} used {_attack.ToString().ToUpper()} on {_enemy.Name.ToUpper()}");
             Console.WriteLine($"{_attack.ToString().ToUpper()} dealt {damage} damage to {_enemy.Name.ToUpper()} ");
             Console.WriteLine($"{_enemy.Name.ToUpper()} is now at {_enemy.HP}/{_enemy.MaxHP}");
         }
     }
-    public class UseItem : IEntityCommand
+    public class RemoveGear : IEntityCommand
     {
-        public Item Item;
         private Battle _battle;
-        public override string ToString()
+        public RemoveGear(Battle battle)
         {
-            return "Use item";
-        }
-        public UseItem(Item item, Battle battle)
-        {
-            Item = item;
-            _battle = battle;
+            _battle = battle;   
         }
         public void Execute(Entity entity)
         {
-            Console.WriteLine($"{entity.Name} has used {Item.Name}");
-            Item.Effect.Use(entity);
-            DisplayItemMessage(entity.Name);
             Party party = _battle.GetPartyFor(entity);
-            party.Items.Remove(Item);
-        }
-        private void DisplayItemMessage(string name)
-        {
-            string message = Item.Type switch
-            {
-                Type.Health => $"{name} feels more healthy!"
-            };
 
-            ConsoleUtils.WriteLine(message, ConsoleColor.Green);
+            party.Inventory.AddItem(entity.Gear);
+            Console.WriteLine($"{entity.Name} has removed its {entity.Gear.Name}");
+            entity.Gear = null;
         }
     }
 }

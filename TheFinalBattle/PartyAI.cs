@@ -3,39 +3,38 @@
     public class PartyAI : IPartyControl
     {
         private Random rnd = new Random();
-        public void Act(Entity entity, Battle battle) {
-            IEntityCommand action = SelectAction(entity, battle);
-
-            action.Execute(entity);
-        }
         public IEntityCommand SelectAction(Entity entity, Battle battle)
         {
+            Party party = battle.GetPartyFor(entity);
+            Party enemies = battle.GetEnemyPartyFor(entity);
+
+            Inventory inventory = party.Inventory;
+
             while (true)
             {
-                Party enemies = battle.GetEnemyPartyFor(entity);
+                double probability = rnd.NextDouble();
 
-                EntityActions randomAction = SelectRandomAction();
+                if (probability < .01) return new DoNothing();
 
-                IEntityCommand? command = randomAction switch {
-                    EntityActions.DoNothing => new DoNothing(),
-                    EntityActions.Attack => new AttackSelectorAI(enemies).GetAttack(entity),
-                    EntityActions.UseItem => new ItemSelectorAI(entity, battle).GetItem()
-                };
+                //No checa realmente si hay pociones de salud, solo si hay pociones.
+                //LINQ method.
+                if (probability < .25 && entity.HP < entity.MaxHP / 2 && inventory.HasItem(ItemType.Potion))
+                {
+                    List<Item> potions = inventory.GetItemsByType(ItemType.Potion);
+                    return new UseItemCommand(potions[0], inventory);
+                }
+                //LINQ method.
+                if (probability < .50 && entity.Gear is null && party.Inventory.HasItem(ItemType.Gear))
+                {
+                    List<Item> gears = inventory.GetItemsByType(ItemType.Gear);
+                    return new UseItemCommand(gears[0], inventory);
+                }
 
-                if (command is not null) return command;
+                if (entity.Gear is not null) 
+                    return new AttackCommand(entity.Gear.SpecialAttack, enemies.Members[0]);
+
+                return new AttackCommand(entity.StandardAttack, enemies.Members[0]);
             }
         }
-        private EntityActions SelectRandomAction()
-        {
-            double probability = rnd.NextDouble();
-
-            return probability switch
-            {
-                < .01 => EntityActions.DoNothing,
-                < .25 => EntityActions.UseItem,
-                _ => EntityActions.Attack,
-            };
-        }
     }
-    public enum EntityActions { DoNothing, Attack, UseItem };
 }

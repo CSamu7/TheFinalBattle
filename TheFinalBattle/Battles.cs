@@ -1,25 +1,22 @@
 ﻿namespace TheFinalBattle
 {
-    internal class Battles
+    public class Battles
     {
-        private EnemyFactory _enemiesFactory;
-        private Party _enemies;
+        private PartyEnemyFactory _enemiesFactory;
         private int _levelNumber = 1;
         public Battles(Party enemies)
         {
-            _enemies = enemies;
-            _enemiesFactory = new EnemyFactory(enemies.Control);
+            _enemiesFactory = new PartyEnemyFactory(enemies.PartyControl);
         }
         public void StartBattles(Party heroes)
         {
             while(heroes.Length > 0)
             {
-                List<Entity>? enemies = _enemiesFactory.CreateEnemies(_levelNumber);
+                Party? enemies = _enemiesFactory.Create(_levelNumber);
                 if (enemies is null) break;
-                _enemies.AddMembers(enemies);
 
                 Console.Clear();
-                Battle battle = new Battle(heroes, _enemies);
+                Battle battle = new Battle(heroes, enemies);
                 battle.StartBattle();
                 _levelNumber++;
 
@@ -33,7 +30,6 @@
                 Console.WriteLine("You have been defeated...");
                 Console.WriteLine("End of the game!");
             }
-
             //TODO: The game has finished!!
             Console.WriteLine("You have won!");
             Console.WriteLine("The next battle is starting...");

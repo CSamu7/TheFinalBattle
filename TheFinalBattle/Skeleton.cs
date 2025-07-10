@@ -8,6 +8,10 @@
             MaxHP = 5;
             HP = MaxHP;
         }
+        public Skeleton(Gear gear) : this()
+        {
+            Gear = gear;
+        }
     }
     public class TheUncodedOne : Entity
     {

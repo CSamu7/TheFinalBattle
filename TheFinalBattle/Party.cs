@@ -4,26 +4,20 @@
     {
         private readonly int _maxMembers = 3;
         public List<Entity> Members { get; private set; }
-        public List<Item> Items { get; set; } = new List<Item>();
-        public IPartyControl Control;
+        public Inventory Inventory { get; private set; } = new Inventory();
+
+        public IPartyControl PartyControl;
         public int Length { get; private set; } = 0;
         public Party(IPartyControl control)
         {
             Members = new List<Entity>();
-            Control = control;
+            PartyControl = control;
         }
         public Party(IPartyControl control, params Entity[] members)
         {
-            Control = control;
+            PartyControl = control;
             Length += members.Length;
             Members = members.ToList();
-        }
-        public void AddItem(Item item, int amount)
-        {
-            for (int i = 0; i < amount; i++)
-            {
-                Items.Add(item);
-            }
         }
         public Entity GetMemberAt(int index) => Members[index];
         public void RemoveMember(Entity entity) => Members.Remove(entity);
@@ -38,7 +32,6 @@
             Length++;
             return true;
         }
-
         public bool AddMembers(List<Entity> members)
         {
             if (Members.Count > _maxMembers)
@@ -60,7 +53,6 @@
                 Console.WriteLine($"{entity.Name} has been defeated!");
                 Length--;
             }
-
         }
     }
     public enum PartyControl { AI, Player};

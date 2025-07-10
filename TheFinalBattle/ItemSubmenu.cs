@@ -1,57 +1,22 @@
-﻿using Utils;
-
-namespace TheFinalBattle
+﻿namespace TheFinalBattle
 {
-    public class ItemSubmenu : IItemSelector
+    public class ItemSubmenu : MenuTemplate<Item>, ICommandCreation
     {
-        private readonly Entity _entity;
-        private readonly Battle _battle;
-        public ItemSubmenu(Entity entity, Battle battle) { 
-            _entity = entity;
-            _battle = battle;   
+        protected override List<MenuItemAction<Item>> Options { get; set; }
+        private Inventory _inventory;
+        public ItemSubmenu(Inventory inventory, Entity entity) {
+            _inventory = inventory;
+
+            Options = new MenuOptions(entity).GetItems(_inventory);
+            InputText = "Which item do you want to use? ";
+            MenuTitle = "=========ITEMS=========";
         }
-        public IEntityCommand? GetItem()
+        public IEntityCommand? BuildCommand()
         {
-            Party party = _battle.GetPartyFor(_entity);
-   
-            DisplayMenu(party);
-            Item? selectedItem = SelectItem();
-
-            if (selectedItem is null) return null;
-
-            return new UseItem(selectedItem, _battle);
-        }
-        public Item? SelectItem()
-        {
-            Party party = _battle.GetPartyFor(_entity);
-            int itemIndex;
-
-            do
-            {
-                Console.Write("Which item do you want to use? ");
-                if(!int.TryParse(Console.ReadLine(), out itemIndex))
-                {
-                    ConsoleUtils.WriteLine("You have to write a number...", ConsoleColor.Red);
-                }
-
-                itemIndex -= 1;
-            }
-            while (itemIndex > party.Items.Count || itemIndex < 0);
-
-            if (itemIndex == party.Items.Count ) return null;
-
-            return party.Items.ElementAt(itemIndex);
-        }
-        private void DisplayMenu(Party party)
-        {
-            Console.WriteLine("=========ITEMS========");
-
-            for (int i = 0; i < party.Items.Count; i++)
-            {
-                Console.WriteLine($"* ({i + 1}) {party.Items[i].Name}");
-            }
-
-            Console.WriteLine($"* ({party.Items.Count + 1}) Back");
+            Item item = GetOption();
+            return item is null 
+                ? null 
+                : new UseItemCommand(item, _inventory);
         }
     }
 }

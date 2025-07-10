@@ -2,28 +2,57 @@
 {
     public class MenuOptions
     {
-        public List<MenuOption> GenerateMainOptions(Entity entity, Battle battle)
+        private Entity _entity;
+        public MenuOptions(Entity entity)
         {
-            Party party = battle.GetPartyFor(entity);
+            _entity = entity;
+        }
+        public List<MenuItemAction<Func<IEntityCommand?>>> GetActions(Battle battle)
+        {
+            Inventory inventory = battle.GetPartyFor(_entity).Inventory;
+            Party enemies = battle.GetEnemyPartyFor(_entity);
 
-            return new List<MenuOption>
+            return new List<MenuItemAction<Func<IEntityCommand?>>>
             {
-                new MenuOption("Do nothing", true),
-                new MenuOption($"{entity.StandardAttack.ToString()} - Standard Attack", true),
-                new MenuOption("Use item", party.Items.Count > 0)
+                new("Do nothing", true, () => new DoNothing()),
+                new("Attack", true, new AttackSubmenu(enemies, _entity).BuildCommand),
+                new("Use item", inventory.Items.Count > 0, new ItemSubmenu(inventory, _entity).BuildCommand),
+                new("Remove gear", _entity.Gear is not null, () => new RemoveGear(battle))
             };
         }
-        public List<MenuOption> GenerateItems(Entity entity, Party party)
+        public List<MenuItemAction<Item>> GetItems(Inventory inventory)
         {
-            List<MenuOption> optionItems = new List<MenuOption>();
+            List<MenuItemAction<Item>> optionItems = new();
 
-            foreach (Item item in party.Items)
+            foreach (Item item in inventory.Items)
             {
-                optionItems.Add(new MenuOption($"{item.Name}", true));
+                optionItems.Add(new MenuItemAction<Item>($"{item.Name}", true, item));
             }
 
             return optionItems;
         }
+        public List<MenuItemAction<IAttack>> GetAttacks()
+        {
+            return new List<MenuItemAction<IAttack>>
+            {
+                new MenuItemAction<IAttack>($"Standard Attack: {_entity.StandardAttack.ToString()}",
+                    true, _entity.StandardAttack),
+                new MenuItemAction<IAttack>($"Special Attack: {_entity.Gear?.SpecialAttack.ToString() ?? "????"}",
+                    _entity.Gear is not null, _entity.Gear?.SpecialAttack)
+            };
+        }
+        public List<MenuItemAction<Entity>> GetEnemies(Party enemyParty)
+        {
+            var enemies = new List<MenuItemAction<Entity>>();
+
+            foreach (Entity enemy in enemyParty.Members)
+            {
+                enemies.Add(new MenuItemAction<Entity>($"{enemy.Name} {enemy.HP}/{enemy.MaxHP}", true, enemy));
+            }
+
+            return enemies;
+        }
     }
-    public record MenuOption(string Description, bool isAvailable);
+    public record MenuItemAction<T>(string Text, bool IsAvailable, T? Action);
+    public enum MenuState { BackPrevMenu, InvalidInput, ValidItem }
 }

@@ -45,9 +45,11 @@
             foreach (Entity entity in party.Members)
             {
                 _battleStatus.Display(entity, this);
-
                 Console.WriteLine($"It is {entity.Name} turn...");
-                party.Control.Act(entity, this);
+
+                IEntityCommand command = party.PartyControl.SelectAction(entity, this);
+                command.Execute(entity);
+                
                 Console.WriteLine("-------------------------------------");
             }
 
