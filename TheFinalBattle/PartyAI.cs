@@ -5,15 +5,13 @@
         private Random rnd = new Random();
         public IEntityCommand SelectAction(Entity entity, Battle battle)
         {
-            Party party = battle.GetPartyFor(entity);
+            Inventory inventory = battle.GetPartyFor(entity).Inventory;
             Party enemies = battle.GetEnemyPartyFor(entity);
 
-            Inventory inventory = party.Inventory;
-
+            double probability = rnd.NextDouble();
+            
             while (true)
             {
-                double probability = rnd.NextDouble();
-
                 if (probability < .01) return new DoNothing();
       
                 if (probability < .25 && entity.HP < entity.MaxHP / 2 && inventory.HasItem<Potion>())
