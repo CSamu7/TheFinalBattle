@@ -15,13 +15,13 @@
         {
             return Items.ElementAt(index);
         }
-        public List<Item> GetItemsByType(ItemType type)
+        public bool HasItem<T>() where T : Item
         {
-            return Items.Where(item => item.ItemType.Equals(type)).ToList();
+            return Items.Any(item => item is T);
         }
-        public bool HasItem(ItemType type)
+        public List<T> GetItemsByType<T>() where T : Item
         {
-            return Items.Any(item => item.ItemType.Equals(type));
+            return Items.OfType<T>().ToList();
         }
         public void RemoveItem(Item item)
         {

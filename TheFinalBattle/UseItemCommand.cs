@@ -21,8 +21,8 @@ namespace TheFinalBattle
         }
         public void Execute(Entity entity)
         {
-            if(_item.ItemType.Equals(ItemType.Potion)) new DrinkPotion((Potion) _item, _inventory).Use(entity);
-            if(_item.ItemType.Equals(ItemType.Gear)) new EquipGear((Gear) _item, _inventory).Use(entity);   
+            if(_item is Potion) new DrinkPotion((Potion) _item, _inventory).Use(entity);
+            if(_item is Gear) new EquipGear((Gear) _item, _inventory).Use(entity);   
         }
     }
     public class DrinkPotion : IUseItem
@@ -42,9 +42,9 @@ namespace TheFinalBattle
         }
         private void DisplayItemMessage(string name)
         {
-            string message = _potion.PotionType switch
+            string message = _potion.Effect switch
             {
-                PotionType.Health => $"{name} feels more healthy!",
+                Heal => $"{name} feels more healthy!",
                 _ => $"{name} feels something?"
             };
 
