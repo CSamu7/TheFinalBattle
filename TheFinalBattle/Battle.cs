@@ -4,7 +4,7 @@
     {
         public Party Heroes {  get; private set; } 
         public Party Enemies { get; private set; }
-        private BattleStatus _battleStatus = new BattleStatus();
+        private BattleStatus _battleStatus = new();
         public Battle(Party heroes, Party enemies) {
             Enemies = enemies;
             Heroes = heroes;
@@ -13,46 +13,50 @@
         {
             while (Heroes.Length > 0 && Enemies.Length > 0)
             {
-                StartTurn(Heroes);
-                StartTurn(Enemies);
+                StartPartyTurn(Heroes);
+                StartPartyTurn(Enemies);
             }
-
-            Console.WriteLine("The battle has finished!");
-            Thread.Sleep(500);
         }
         public Party GetPartyFor(Entity entity)
         {
-            if (Heroes.Members.Contains(entity))
-            {
-                return Heroes;
-            }
-
-            return Enemies;
+            return Heroes.Members.Contains(entity)
+                    ? Heroes
+                    : Enemies;
         }
         public Party GetEnemyPartyFor(Entity entity)
         {
-            if (Heroes.Members.Contains(entity))
-            {
-                return Enemies;
-            }
-
-            return Heroes;
+            return Heroes.Members.Contains(entity)
+                    ? Enemies
+                    : Heroes;
         }
-        private void StartTurn(Party party)
+        private void StartPartyTurn(Party party)
         {
-            party.RemoveDeadMembers();
-            
+            RemoveDeadMembers(party);
+
             foreach (Entity entity in party.Members)
             {
                 _battleStatus.Display(entity, this);
-                Console.WriteLine($"It is {entity.Name} turn...");
-
                 IEntityCommand command = party.PartyControl.SelectAction(entity, this);
                 command.Execute(entity);
-                
                 Console.WriteLine("-------------------------------------");
             }
+        }
+        private void RemoveDeadMembers(Party party)
+        {
+            List<Entity> deadMembers = party.Members.Where(member => member.HP <= 0).ToList();
 
+            foreach (Entity entity in deadMembers)
+            {
+                if(entity.Gear is not null)
+                {
+                    Party enemyParty = GetEnemyPartyFor(entity);
+                    Console.WriteLine($"The enemy {entity.Name} has dropped the gear: {entity.Gear.Name}");
+                    Thread.Sleep(1000);
+                    party.Inventory.TransferItem(enemyParty.Inventory, entity.Gear);
+                }
+
+                party.RemoveMember(entity);
+            }
         }
     }
 }

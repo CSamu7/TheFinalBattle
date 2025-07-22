@@ -19,8 +19,11 @@
             Length += members.Length;
             Members = members.ToList();
         }
-        public Entity GetMemberAt(int index) => Members[index];
-        public void RemoveMember(Entity entity) => Members.Remove(entity);
+        public void RemoveMember(Entity entity)
+        {
+            Members.Remove(entity);
+            Length--;
+        }
         public bool AddMember(Entity entity)
         {
             if (Members.Count > _maxMembers)
@@ -42,17 +45,6 @@
             Members.AddRange(members);
             Length += members.Count;
             return true;
-        }
-        public void RemoveDeadMembers()
-        {
-            List<Entity> deadMembers = Members.Where(member => member.HP <= 0).ToList();
-
-            foreach (Entity entity in deadMembers)
-            {
-                Members.Remove(entity);
-                Console.WriteLine($"{entity.Name} has been defeated!");
-                Length--;
-            }
         }
     }
     public enum PartyControl { AI, Player};

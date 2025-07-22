@@ -2,30 +2,42 @@
 {
     public class Inventory
     {
-        public List<Item> Items { get; private set; } = new List<Item>();
+        public Dictionary<Item, int> Items { get; private set; } = new();
         public Inventory() { }
         public void AddItem(Item item, int amount = 1)
         {
-            for (int i = 0; i < amount; i++)
+            if (Items.ContainsKey(item))
             {
-                Items.Add(item);
+                Items[item] += amount;
+            } else
+            {
+                Items.Add(item, amount);
             }
         }
-        public Item GetItemAt(int index)
+        public void TransferItem(Inventory inventory, Item item)
         {
-            return Items.ElementAt(index);
+            inventory.AddItem(item);
         }
         public List<Item> GetItemsByType(ItemType type)
         {
-            return Items.Where(item => item.ItemType.Equals(type)).ToList();
+            return Items.Keys.Where(item => item.ItemType.Equals(type)).ToList();
         }
         public bool HasItem(ItemType type)
         {
-            return Items.Any(item => item.ItemType.Equals(type));
+            return Items.Keys.Any(item => item.ItemType.Equals(type));
         }
         public void RemoveItem(Item item)
         {
-            Items.Remove(item);
+            if (Items.ContainsKey(item))
+            {
+                if (Items[item] <= 1)
+                {
+                    Items.Remove(item);
+                } else
+                {
+                    Items[item] -= 1;
+                }
+            }
         }
     }
 }

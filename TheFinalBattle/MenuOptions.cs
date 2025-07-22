@@ -24,7 +24,7 @@
         {
             List<MenuItemAction<Item>> optionItems = new();
 
-            foreach (Item item in inventory.Items)
+            foreach (Item item in inventory.Items.Keys)
             {
                 optionItems.Add(new MenuItemAction<Item>($"{item.Name}", true, item));
             }
