@@ -17,6 +17,7 @@
         public void TransferItem(Inventory inventory, Item item)
         {
             inventory.AddItem(item);
+            Items.Remove(item);
         }
         public List<Item> GetItemsByType(ItemType type)
         {
