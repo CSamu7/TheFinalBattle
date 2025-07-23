@@ -1,4 +1,6 @@
-﻿namespace TheFinalBattle
+﻿using Utils;
+
+namespace TheFinalBattle
 {
     public class Battle
     {
@@ -49,10 +51,10 @@
             {
                 if(entity.Gear is not null)
                 {
-                    Party enemyParty = GetEnemyPartyFor(entity);
-                    Console.WriteLine($"The enemy {entity.Name} has dropped the gear: {entity.Gear.Name}");
+                    Console.Write($"The enemy {entity.Name} has dropped the gear: ");
+                    ConsoleUtils.WriteLine($"{entity.Gear.Name}", ConsoleColor.Green);
                     Thread.Sleep(1000);
-                    party.Inventory.TransferItem(enemyParty.Inventory, entity.Gear);
+                    party.Inventory.TransferItem(Enemies.Inventory, entity.Gear);
                 }
 
                 party.RemoveMember(entity);

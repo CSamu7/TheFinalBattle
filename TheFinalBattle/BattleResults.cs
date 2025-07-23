@@ -1,45 +1,56 @@
-﻿namespace TheFinalBattle
+﻿using Utils;
+
+namespace TheFinalBattle
 {
     public class BattleResults
     {
-        private Party _heroes;
-        private Party _enemies;
-        public BattleResults(Party heroes, Party enemies) { 
-            _heroes = heroes;
-            _enemies = enemies;
+        private Battle _battle;
+        public BattleResults(Battle battle) { 
+            _battle = battle;
+        }
+        public static void DisplayGameOver()
+        {
+            Console.WriteLine("GAME OVER!");
+            Console.WriteLine("Thanks for play");
         }
         public void DisplayResults()
         {
             Console.WriteLine("The battle has finished!");
             Thread.Sleep(500);
 
-            if (_heroes.Length <= 0)
+            if (_battle.Heroes.Length <= 0)
             {
                 DisplayDefeat();
-                return;
+                Console.WriteLine("End of the game!");
+            } else
+            {
+                DisplayVictory();
             }
-            //TODO: The game has finished!!
-            Console.WriteLine("You have won!");
-            DisplayItemsWon();
 
             Console.WriteLine("The next battle is starting...");
             Thread.Sleep(800);
         }
+        private void DisplayVictory()
+        {
+            Console.WriteLine("You have won!");
+            DisplayItemsWon();
+        }
         private void DisplayDefeat()
         {
-            Console.WriteLine("You have been defeated...");
-            Console.WriteLine("End of the game!");
+            ConsoleUtils.WriteLine("You have been defeated...", ConsoleColor.Red);
         }
         private void DisplayItemsWon()
         {
-            if(_enemies.Inventory.Items.Count <= 0)
+            Inventory enemyInventory = _battle.Enemies.Inventory;
+
+            if(enemyInventory.Items.Count <= 0)
             {
-                Console.WriteLine("You have obtained nothing!");
+                Console.WriteLine("The enemies didn't have anything!");
             } else
             {
-                Console.WriteLine("You have obtained the next items: ");
+                Console.WriteLine("You have got the next items: ");
 
-                foreach (KeyValuePair<Item, int> item in _enemies.Inventory.Items)
+                foreach (KeyValuePair<Item, int> item in enemyInventory.Items)
                 {
                     Console.WriteLine($" * {item.Key.Name} x{item.Value}");
                     Thread.Sleep(800);

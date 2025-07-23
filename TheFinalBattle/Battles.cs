@@ -6,6 +6,8 @@ namespace TheFinalBattle
         private PartyEnemyFactory _enemiesFactory;
         private int _levelNumber = 1;
         private Party _heroes;
+        private BattleResults _results;
+
         public Battles(Party heroes, Party enemies)
         {
             _enemiesFactory = new PartyEnemyFactory(enemies.PartyControl);
@@ -16,25 +18,28 @@ namespace TheFinalBattle
             while(_heroes.Length > 0)
             {
                 Party? enemies = _enemiesFactory.Create(_levelNumber);
-                if (enemies is null) break;
+                if (enemies == null)
+                {
+                    BattleResults.DisplayGameOver();
+                }
 
-                Console.Clear();
-                
                 Battle battle = new Battle(_heroes, enemies);
                 battle.StartBattle();
                 _levelNumber++;
 
-                FinishBattle(enemies);
+                FinishBattle(battle);
             }
         }
-        public void FinishBattle(Party enemies)
+        public void FinishBattle(Battle battle)
         {
-            BattleResults results = new BattleResults(_heroes, enemies);
+            var results = new BattleResults(battle);
             results.DisplayResults();
 
-            foreach (KeyValuePair<Item, int> item in enemies.Inventory.Items)
+            Inventory enemyInventory = battle.Enemies.Inventory;
+
+            foreach (KeyValuePair<Item, int> item in enemyInventory.Items)
             {
-                enemies.Inventory.TransferItem(_heroes.Inventory, item.Key);
+                enemyInventory.TransferItem(_heroes.Inventory, item.Key);
             }
         }
     }

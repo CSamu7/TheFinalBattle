@@ -4,9 +4,16 @@ namespace TheFinalBattle
 {
     public class BattleStatus
     {
-        private readonly int _maxLength = 77;
-        private readonly char _marginChar = '=';
-        private readonly char _marginInsideChar = '-';
+        private readonly int _borderLength = 91;
+        private readonly char _symbolBorder = '=';
+        private readonly char _innerSymbolBorder = '-';
+
+        private readonly string _tabs;
+        private readonly string _innerBorder;
+        public BattleStatus() {
+            _innerBorder = "".PadRight(_borderLength, _innerSymbolBorder); 
+            _tabs = "".PadRight(8, '\t');
+        }
         public void Display(Entity entity, Battle battle)
         {
             Party heroes = battle.GetPartyFor(entity);
@@ -16,37 +23,49 @@ namespace TheFinalBattle
             Console.Clear();
 
             DisplayTitle();
-            Console.WriteLine("".PadRight(_maxLength, _marginChar));
-            ConsoleUtils.WriteLine("PARTY", ConsoleColor.Green);
-            DisplayParty(entity, heroes);
-            
-            Console.WriteLine("".PadRight(_maxLength, _marginInsideChar));
-            
-            ConsoleUtils.WriteLine("\t\t\t\t\t\t\tENEMIES", ConsoleColor.Red);
-            DisplayParty(entity, enemies,true);
 
-            Console.WriteLine("".PadRight(_maxLength, _marginChar));
+            Console.WriteLine(_innerBorder);
+            DisplayActualParty(entity, heroes);
+            Console.WriteLine(_innerBorder);
+            DisplayEnemyParty(enemies);
+            Console.WriteLine(_innerBorder);
 
             Thread.Sleep(800);
+            Console.WriteLine($"It is {entity.Name} turn...");
         }
         private void DisplayTitle()
         {
-            Console.Write("".PadRight(32, '='));
+            int margin = (_borderLength / 2) - 6;
+            string outerBorder = "".PadRight(margin, _symbolBorder);
+
+            Console.Write(outerBorder);
             Console.Write("BATTLE STATUS");
-            Console.WriteLine("".PadRight(32, '='));
+            Console.WriteLine(outerBorder);
         }
-        private void DisplayParty(Entity actualEntity, Party party, bool IsEnemyParty = false)
+        private void DisplayActualParty(Entity actualEntity, Party party)
         {
+            ConsoleUtils.WriteLine("PARTY", ConsoleColor.Green);
+
             foreach (Entity entity in party.Members)
             {
-                if (IsEnemyParty) Console.Write("\t\t\t\t\t\t\t");
-                ConsoleColor color = actualEntity == entity ? ConsoleColor.Yellow : ConsoleColor.White;
-                ConsoleUtils.WriteLine($"* {entity.Name} ({entity.HP}/{entity.MaxHP})", color);
-
+                ConsoleColor entityActiveColor = actualEntity == entity ? ConsoleColor.Yellow : ConsoleColor.White;
+                ConsoleUtils.WriteLine($"* {entity.Name} ({entity.HP}/{entity.MaxHP})", entityActiveColor);
                 if (entity.Gear is not null)
                 {
-                    if (IsEnemyParty) Console.Write("\t\t\t\t\t\t\t");
                     Console.WriteLine($"  - {entity.Gear.Name}");
+                }
+            }
+        }
+        private void DisplayEnemyParty(Party party)
+        {
+            ConsoleUtils.WriteLine($"{_tabs}ENEMIES", ConsoleColor.Red);
+
+            foreach (Entity entity in party.Members)
+            {
+                Console.WriteLine($"{_tabs}* {entity.Name} ({entity.HP}/{entity.MaxHP})");
+                if (entity.Gear is not null)
+                {
+                    Console.WriteLine($"{_tabs}  - {entity.Gear.Name}");
                 }
             }
         }
