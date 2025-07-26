@@ -15,18 +15,20 @@
                 double probability = rnd.NextDouble();
 
                 if (probability < .01) return new DoNothing();
-
-                //No checa realmente si hay pociones de salud, solo si hay pociones.
-                //LINQ method.
-                if (probability < .25 && entity.HP < entity.MaxHP / 2 && inventory.HasItem(ItemType.Potion))
+      
+                if (probability < .25 && entity.HP < entity.MaxHP / 2 && inventory.HasItem<Potion>())
                 {
-                    List<Item> potions = inventory.GetItemsByType(ItemType.Potion);
-                    return new UseItemCommand(potions[0], inventory);
+                    List<Potion> potions = inventory.GetItemsByType<Potion>();
+                    
+                    if(potions.Any(potion => potion.Effect is Heal))
+                    {
+                        return new UseItemCommand(potions[0], inventory);
+                    }
                 }
-                //LINQ method.
-                if (probability < .50 && entity.Gear is null && party.Inventory.HasItem(ItemType.Gear))
+
+                if (probability < .50 && entity.Gear is null && inventory.HasItem<Gear>())
                 {
-                    List<Item> gears = inventory.GetItemsByType(ItemType.Gear);
+                    List<Gear> gears = inventory.GetItemsByType<Gear>();
                     return new UseItemCommand(gears[0], inventory);
                 }
 

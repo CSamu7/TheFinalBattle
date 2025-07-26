@@ -6,7 +6,6 @@
         public PartyEnemyFactory(IPartyControl control)
         {
             _enemyParty = new Party(control);
-            _enemyParty.Inventory.AddItem(new HealthPotion());
         }
         public Party? Create(int battleNumber)
         {
@@ -28,13 +27,14 @@
             {
                 1 => new List<Item> { new HealthPotion() },
                 2 => new List<Item> { new Dagger(), new Dagger() },
+                _ => new()
             };
         }
         private List<Entity>? GetEnemies(int battleNumber)
         {
             return battleNumber switch
             {
-                1 => new List<Entity> { new Skeleton() },
+                1 => new List<Entity> { new Skeleton(new Dagger()) },
                 2 => new List<Entity> { new Skeleton(), new Skeleton() },
                 3 => new List<Entity> { new Skeleton(), new TheUncodedOne() },
                 _ => null

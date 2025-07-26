@@ -16,16 +16,16 @@
         }
         public void TransferItem(Inventory inventory, Item item)
         {
-            inventory.AddItem(item);
+            inventory.AddItem(item, Items[item]);
             Items.Remove(item);
         }
-        public List<Item> GetItemsByType(ItemType type)
+        public bool HasItem<T>()
         {
-            return Items.Keys.Where(item => item.ItemType.Equals(type)).ToList();
+            return Items.Keys.Any(item => item is T);
         }
-        public bool HasItem(ItemType type)
+        public List<T> GetItemsByType<T>()
         {
-            return Items.Keys.Any(item => item.ItemType.Equals(type));
+            return Items.Keys.OfType<T>().ToList();
         }
         public void RemoveItem(Item item)
         {

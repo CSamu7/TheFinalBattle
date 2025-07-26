@@ -6,8 +6,6 @@ namespace TheFinalBattle
         private PartyEnemyFactory _enemiesFactory;
         private int _levelNumber = 1;
         private Party _heroes;
-        private BattleResults _results;
-
         public Battles(Party heroes, Party enemies)
         {
             _enemiesFactory = new PartyEnemyFactory(enemies.PartyControl);
