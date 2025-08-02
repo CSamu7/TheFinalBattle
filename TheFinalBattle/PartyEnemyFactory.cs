@@ -16,7 +16,7 @@
             _enemyParty.AddMembers(enemies);
 
             foreach (Item item in items) {
-                _enemyParty.Inventory.AddItem(item);
+                _enemyParty.Inventory.AddItem(item.ID);
             }
 
             return _enemyParty;

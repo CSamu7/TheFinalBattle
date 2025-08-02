@@ -1,23 +1,27 @@
 ﻿namespace TheFinalBattle
 {
+    public record ItemInventory(Item item, int amount);
     public class Inventory
     {
-        public Dictionary<Item, int> Items { get; private set; } = new();
+        public Dictionary<int, int> Items { get; private set; } = new Dictionary<int, int>();
         public Inventory() { }
-        public void AddItem(Item item, int amount = 1)
+        public void AddItem(int ID, int amount = 1)
         {
-            if (Items.ContainsKey(item))
+            if (Items.ContainsKey(ID))
             {
-                Items[item] += amount;
+                Items[ID] += amount;
             } else
             {
-                Items.Add(item, amount);
+                Items.Add(ID, amount);
             }
         }
-        public void TransferItem(Inventory inventory, Item item)
+        public void TransferInventory(Inventory inventory)
         {
-            inventory.AddItem(item, Items[item]);
-            Items.Remove(item);
+            foreach (KeyValuePair<int, int> invItem in Items)
+            {
+                inventory.AddItem(invItem.Key, invItem.Value);
+                RemoveItem(invItem.Key, invItem.Value);
+            }
         }
         public bool HasItem<T>()
         {
@@ -27,16 +31,16 @@
         {
             return Items.Keys.OfType<T>().ToList();
         }
-        public void RemoveItem(Item item)
+        public void RemoveItem(int ID, int amount)
         {
-            if (Items.ContainsKey(item))
+            if (Items.ContainsKey(ID))
             {
-                if (Items[item] <= 1)
+                if (Items[ID] <= 1)
                 {
-                    Items.Remove(item);
+                    Items.Remove(ID);
                 } else
                 {
-                    Items[item] -= 1;
+                    Items[ID] -= amount;
                 }
             }
         }

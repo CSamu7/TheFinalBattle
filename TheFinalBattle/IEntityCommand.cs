@@ -47,7 +47,7 @@
         {
             Party party = _battle.GetPartyFor(entity);
 
-            party.Inventory.AddItem(entity.Gear);
+            party.Inventory.AddItem(entity.Gear.ID);
             Console.WriteLine($"{entity.Name} has removed its {entity.Gear.Name}");
             entity.Gear = null;
         }

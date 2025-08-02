@@ -21,8 +21,8 @@ namespace TheFinalBattle
         }
         public void Execute(Entity entity)
         {
-            if(_item.ItemType.Equals(ItemType.Potion)) new DrinkPotion((Potion) _item, _inventory).Use(entity);
-            if(_item.ItemType.Equals(ItemType.Gear)) new EquipGear((Gear) _item, _inventory).Use(entity);   
+            if(_item is Potion) new DrinkPotion((Potion) _item, _inventory).Use(entity);
+            if(_item is Gear) new EquipGear((Gear) _item, _inventory).Use(entity);   
         }
     }
     public class DrinkPotion : IUseItem
@@ -38,13 +38,13 @@ namespace TheFinalBattle
             Console.WriteLine($"{entity.Name} has used {_potion.Name}");
             _potion.Effect.Consume(entity);
             DisplayItemMessage(entity.Name);
-            _inventory.RemoveItem(_potion);
+            _inventory.RemoveItem(_potion.ID, 1);
         }
         private void DisplayItemMessage(string name)
         {
-            string message = _potion.PotionType switch
+            string message = _potion.Effect switch
             {
-                PotionType.Health => $"{name} feels more healthy!",
+                Heal => $"{name} feels more healthy!",
                 _ => $"{name} feels something?"
             };
 
@@ -65,11 +65,11 @@ namespace TheFinalBattle
             if(entity.Gear is null)
             {
                 entity.Gear = _gear;
-                _inventory.RemoveItem(_gear);
+                _inventory.RemoveItem(_gear.ID, 1);
             } else
             {
-                _inventory.RemoveItem(_gear);
-                _inventory.AddItem(entity.Gear);
+                _inventory.RemoveItem(_gear.ID, 1);
+                _inventory.AddItem(entity.Gear.ID);
                 entity.Gear = _gear;
             }
 

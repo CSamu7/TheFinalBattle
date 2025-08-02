@@ -3,6 +3,7 @@
     public class MenuOptions
     {
         private Entity _entity;
+        private ListItems _items = new ListItems();
         public MenuOptions(Entity entity)
         {
             _entity = entity;
@@ -24,9 +25,10 @@
         {
             List<MenuItemAction<Item>> optionItems = new();
 
-            foreach (KeyValuePair<Item, int> item in inventory.Items)
+            foreach (KeyValuePair<int, int> itemInv in inventory.Items)
             {
-                optionItems.Add(new MenuItemAction<Item>($"{item.Key.Name}", true, item.Key));
+                Item item = _items.GetItemByID(itemInv.Key);
+                optionItems.Add(new MenuItemAction<Item>($"{item.Name} x{itemInv.Value}", true, item));
             }
 
             return optionItems;

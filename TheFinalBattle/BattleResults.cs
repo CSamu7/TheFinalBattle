@@ -5,6 +5,7 @@ namespace TheFinalBattle
     public class BattleResults
     {
         private Battle _battle;
+        private ListItems _items = new ListItems();
         public BattleResults(Battle battle) { 
             _battle = battle;
         }
@@ -50,9 +51,10 @@ namespace TheFinalBattle
             {
                 Console.WriteLine("You have got the next items: ");
 
-                foreach (KeyValuePair<Item, int> item in enemyInventory.Items)
+                foreach (KeyValuePair<int, int> itemInv in enemyInventory.Items)
                 {
-                    Console.WriteLine($" * {item.Key.Name} x{item.Value}");
+                    Item item = _items.GetItemByID(itemInv.Key);
+                    Console.WriteLine($" * {item.Name} x{itemInv.Value}");
                     Thread.Sleep(800);
                 }
             }
