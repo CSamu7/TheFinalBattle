@@ -16,9 +16,11 @@ namespace TheFinalBattle
             while(_heroes.Length > 0)
             {
                 Party? enemies = _enemiesFactory.Create(_levelNumber);
-                if (enemies == null)
+               
+                if (enemies is null)
                 {
                     BattleResults.DisplayGameOver();
+                    return;
                 }
 
                 Battle battle = new Battle(_heroes, enemies);
@@ -34,11 +36,7 @@ namespace TheFinalBattle
             results.DisplayResults();
 
             Inventory enemyInventory = battle.Enemies.Inventory;
-
-            foreach (KeyValuePair<Item, int> item in enemyInventory.Items)
-            {
-                enemyInventory.TransferItem(_heroes.Inventory, item.Key);
-            }
+            enemyInventory.TransferInventory(_heroes.Inventory);
         }
     }
 }
