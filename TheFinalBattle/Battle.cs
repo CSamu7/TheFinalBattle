@@ -1,6 +1,4 @@
-﻿using Utils;
-
-namespace TheFinalBattle
+﻿namespace TheFinalBattle
 {
     public class Battle
     {
@@ -33,7 +31,8 @@ namespace TheFinalBattle
         }
         private void StartPartyTurn(Party party)
         {
-            RemoveDeadMembers(party);
+            Party enemy = GetEnemyPartyFor(party.Members[0]);
+            party.RemoveDeadMembers(enemy.Inventory);
 
             foreach (Entity entity in party.Members)
             {
@@ -41,23 +40,6 @@ namespace TheFinalBattle
                 IEntityCommand command = party.PartyControl.SelectAction(entity, this);
                 command.Execute(entity);
                 Console.WriteLine("-------------------------------------");
-            }
-        }
-        private void RemoveDeadMembers(Party party)
-        {
-            List<Entity> deadMembers = party.Members.Where(member => member.HP <= 0).ToList();
-
-            foreach (Entity entity in deadMembers)
-            {
-                if(entity.Gear is not null)
-                {
-                    Console.Write($"The enemy {entity.Name} has dropped the gear: ");
-                    ConsoleUtils.WriteLine($"{entity.Gear.Name}", ConsoleColor.Green);
-                    Thread.Sleep(1000);
-                    party.Inventory.TransferItem(Enemies.Inventory, entity.Gear);
-                }
-
-                party.RemoveMember(entity);
             }
         }
     }

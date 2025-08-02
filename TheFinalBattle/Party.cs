@@ -1,4 +1,6 @@
-﻿namespace TheFinalBattle
+﻿using Utils;
+
+namespace TheFinalBattle
 {
     public class Party
     {
@@ -45,6 +47,23 @@
             Members.AddRange(members);
             Length += members.Count;
             return true;
+        }
+        public void RemoveDeadMembers(Inventory enemyInventory)
+        {
+            List<Entity> deadMembers = Members.Where(member => member.HP <= 0).ToList();
+
+            foreach (Entity entity in deadMembers)
+            {
+                if (entity.Gear is not null)
+                {
+                    Console.Write($"The enemy {entity.Name} has dropped the gear: ");
+                    ConsoleUtils.WriteLine($"{entity.Gear.Name}", ConsoleColor.Green);
+                    Thread.Sleep(1000);
+                    enemyInventory.AddItem(entity.Gear.ID);
+                }
+
+                RemoveMember(entity);
+            }
         }
     }
     public enum PartyControl { AI, Player};
