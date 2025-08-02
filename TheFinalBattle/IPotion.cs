@@ -1,10 +1,10 @@
 ﻿namespace TheFinalBattle
 {
-    public interface IPotion
+    public interface IEffect
     {
         void Consume(Entity entity);
     }
-    public class Heal : IPotion
+    public class Heal : IEffect
     {
         private readonly int _healHP;
         public Heal(int healHP)
