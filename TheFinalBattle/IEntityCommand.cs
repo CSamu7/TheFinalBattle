@@ -1,4 +1,6 @@
-﻿namespace TheFinalBattle
+﻿using Utils;
+
+namespace TheFinalBattle
 {
     public interface IEntityCommand
     {
@@ -24,16 +26,34 @@
             _attack = attack;
             _enemy = enemy;
         }
-        public void Execute(Entity player)
-        {
-            int damage = _attack.CalculateDamage();
-            _enemy.HP -= damage;
 
-            if(_enemy.HP < 0) _enemy.HP = 0;
+        private void SuccessAttack(Entity player, int damage)
+        {
+            _enemy.HP -= damage;
+            if (_enemy.HP < 0) _enemy.HP = 0;
 
             Console.WriteLine($"{player.Name.ToUpper()} used {_attack.ToString().ToUpper()} on {_enemy.Name.ToUpper()}");
             Console.WriteLine($"{_attack.ToString().ToUpper()} dealt {damage} damage to {_enemy.Name.ToUpper()} ");
             Console.WriteLine($"{_enemy.Name.ToUpper()} is now at {_enemy.HP}/{_enemy.MaxHP}");
+        }
+        private void FailAttack(Entity player)
+        {
+            ConsoleUtils.WriteLine($"{player.Name.ToUpper()} fail its attack!", ConsoleColor.Red);
+        }
+        public void Execute(Entity player)
+        {
+            AttackData attackData = _attack.CalculateAttack();
+            Random rnd = new Random();
+
+            double success = rnd.NextDouble();
+
+            if (attackData.Success > success)
+            {
+                SuccessAttack(player, attackData.Damage);
+            } else
+            {
+                FailAttack(player);
+            }
         }
     }
     public class RemoveGear : IEntityCommand
