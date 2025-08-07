@@ -2,7 +2,7 @@
 {
     public interface IAttack
     {
-        int CalculateDamage();
+        AttackData CalculateAttack();
     }
     public class Punch : IAttack
     {
@@ -10,9 +10,9 @@
         {
             return "Punch";
         }
-        public int CalculateDamage()
+        public AttackData CalculateAttack()
         {
-            return 1;
+            return new AttackData(1);
         }
     }
     public class BoneCrunch : IAttack
@@ -21,11 +21,11 @@
         {
             return "Bone Crunch";
         }
-        public int CalculateDamage()
+        public AttackData CalculateAttack()
         {
             Random rnd = new Random();
             int damage = rnd.Next(0, 2);
-            return damage;
+            return new AttackData(damage);
         }
     }
     public class Unraveling : IAttack
@@ -34,11 +34,11 @@
         {
             return "Unraveling Attack";
         }
-        public int CalculateDamage()
+        public AttackData CalculateAttack()
         {
             Random rnd = new Random();
             int damage = rnd.Next(0, 3);
-            return damage;
+            return new AttackData(damage);
         }
     }
     public class Slash : IAttack
@@ -47,9 +47,9 @@
         {
             return "Slash";
         }
-        public int CalculateDamage()
+        public AttackData CalculateAttack()
         {
-            return 2;
+            return new AttackData(2);
         }
     }
     public class Stab : IAttack
@@ -58,9 +58,25 @@
         {
             return "Stab";
         }
-        public int CalculateDamage()
+        public AttackData CalculateAttack()
         {
-            return 1;
+            return new AttackData(1);
         }
     }
+
+    public class QuickShot : IAttack
+    {
+        public override string ToString()
+        {
+            return "Quick shot";
+        }
+
+        public AttackData CalculateAttack()
+        {
+            return new AttackData(3, .5);
+        }
+    }
+
+    /// <param name="success">0 = Absolute Failure, 1 = Success</param>
+    public record AttackData(int Damage, double Success = 1);
 }
