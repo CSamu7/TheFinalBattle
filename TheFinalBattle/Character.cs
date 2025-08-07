@@ -18,8 +18,9 @@
         {
             Name = "Vin";
             MaxHP = 15;
+            HP = MaxHP;
             StandardAttack = new Punch();
-            Gear = new
+            Gear = new VinBow();
         }
     }
 }
