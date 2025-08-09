@@ -14,7 +14,10 @@
             string name = Console.ReadLine() ?? "Kiryu";
 
             TrueProgrammer trueProgrammer = new TrueProgrammer(name);
+            VinFletcher vin = new VinFletcher();
+
             heroes.AddMember(trueProgrammer);
+            heroes.AddMember(vin);
 
             heroes.Inventory.AddItem(1, 3);
 

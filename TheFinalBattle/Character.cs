@@ -11,6 +11,7 @@
             Gear = new Sword();
         }
     }
+
     public class VinFletcher : Entity
     {
         public VinFletcher()
@@ -21,6 +22,5 @@
             StandardAttack = new Punch();
             Gear = new VinBow();
         }
-    }
     }
 }

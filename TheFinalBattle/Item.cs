@@ -5,7 +5,8 @@
     public record Potion(int ID, string Name, string Description, IEffect Effect) : Item(ID, Name, Description);
     public record HealthPotion() : Potion(1, "Health Potion", "Heal 10HP", new Heal(10));
     public record Sword() : Gear(2, "Sword", "Contains a slash attack!", new Slash());
-    public record Dagger() : Gear(3, "Dagger", "Contains a sta attack!", new Stab());
+    public record Dagger() : Gear(3, "Dagger", "Contains a stab attack!", new Stab());
+    public record VinBow() : Gear(4, "Vin's Bow", "Quick shot attack", new QuickShot());
     public class ListItems
     {
         public List<Item> Items { get; private set; } = new List<Item>()
