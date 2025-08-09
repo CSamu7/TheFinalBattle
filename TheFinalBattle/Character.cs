@@ -11,4 +11,16 @@
             Gear = new Sword();
         }
     }
+    public class VinFletcher : Entity
+    {
+        public VinFletcher()
+        {
+            Name = "Vin";
+            MaxHP = 15;
+            HP = MaxHP;
+            StandardAttack = new Punch();
+            Gear = new VinBow();
+        }
+    }
+    }
 }
