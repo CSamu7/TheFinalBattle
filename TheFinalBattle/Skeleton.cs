@@ -13,6 +13,18 @@
             Gear = gear;
         }
     }
+
+    public class StoneAmarok : Entity
+    {
+        public StoneAmarok()
+        {
+            StandardAttack = new Bite();
+            Name = "STONE AMAROK";
+            MaxHP = 4;
+            DefensiveModifier = new StoneArmor();
+            HP = MaxHP;
+        }
+    }
     public class TheUncodedOne : Entity
     {
         public TheUncodedOne()

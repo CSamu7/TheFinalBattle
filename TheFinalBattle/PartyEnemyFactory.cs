@@ -35,8 +35,9 @@
             return battleNumber switch
             {
                 1 => new List<Entity> { new Skeleton(new Dagger()) },
-                2 => new List<Entity> { new Skeleton(), new Skeleton() },
-                3 => new List<Entity> { new Skeleton(), new TheUncodedOne() },
+                2 => new List<Entity> { new StoneAmarok(), new StoneAmarok() },
+                3 => new List<Entity> { new Skeleton(), new Skeleton() },
+                4 => new List<Entity> { new Skeleton(), new TheUncodedOne() },
                 _ => null
             };
         }
