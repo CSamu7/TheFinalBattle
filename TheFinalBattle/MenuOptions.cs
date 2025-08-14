@@ -37,9 +37,9 @@
         {
             return new List<MenuItemAction<IAttack>>
             {
-                new MenuItemAction<IAttack>($"Standard Attack: {_entity.StandardAttack.ToString()}",
+                new MenuItemAction<IAttack>($"Standard Attack: {_entity.StandardAttack.Name}",
                     true, _entity.StandardAttack),
-                new MenuItemAction<IAttack>($"Special Attack: {_entity.Gear?.SpecialAttack.ToString() ?? "????"}",
+                new MenuItemAction<IAttack>($"Special Attack: {_entity.Gear?.SpecialAttack.Name ?? "????"}",
                     _entity.Gear is not null, _entity.Gear?.SpecialAttack)
             };
         }
