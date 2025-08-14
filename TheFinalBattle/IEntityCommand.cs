@@ -26,14 +26,13 @@ namespace TheFinalBattle
             _attack = attack;
             _enemy = enemy;
         }
-
         private void SuccessAttack(Entity player, int damage)
         {
             _enemy.HP -= damage;
             if (_enemy.HP < 0) _enemy.HP = 0;
 
-            Console.WriteLine($"{player.Name.ToUpper()} used {_attack.ToString().ToUpper()} on {_enemy.Name.ToUpper()}");
-            Console.WriteLine($"{_attack.ToString().ToUpper()} dealt {damage} damage to {_enemy.Name.ToUpper()} ");
+            Console.WriteLine($"{player.Name.ToUpper()} used {_attack.Name.ToUpper()} on {_enemy.Name.ToUpper()}");
+            Console.WriteLine($"{_attack.Name.ToUpper()} dealt {damage} damage to {_enemy.Name.ToUpper()} ");
             Console.WriteLine($"{_enemy.Name.ToUpper()} is now at {_enemy.HP}/{_enemy.MaxHP}");
         }
         private void FailAttack(Entity player)
@@ -45,11 +44,14 @@ namespace TheFinalBattle
             AttackData attackData = _attack.CalculateAttack();
             Random rnd = new Random();
 
-            double success = rnd.NextDouble();
+            double rndSuccess = rnd.NextDouble();
 
-            if (attackData.Success > success)
+            if (attackData.Success > rndSuccess)
             {
-                SuccessAttack(player, attackData.Damage);
+                AttackData attackDataModified = _enemy.DefensiveModifier?.AdjustAttack(attackData) ?? attackData;
+                ConsoleUtils.WriteLine(_enemy.DefensiveModifier?.Message ?? "", ConsoleColor.Red);
+
+                SuccessAttack(player, attackDataModified.Damage);
             } else
             {
                 FailAttack(player);
