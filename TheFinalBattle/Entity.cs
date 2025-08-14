@@ -7,5 +7,6 @@
         public int HP { get; set; }
         public IAttack StandardAttack { get; protected set; }
         public Gear? Gear { get; set; }
+        public IDefensiveModifier? DefensiveModifier { get; init; }
     }
 }
