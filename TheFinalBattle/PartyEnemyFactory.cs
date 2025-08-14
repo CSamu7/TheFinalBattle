@@ -9,10 +9,10 @@
         }
         public Party? Create(int battleNumber)
         {
-            List<Entity>? enemies = GetEnemies(battleNumber);
+            List<Entity>? enemies = GenerateEnemies(battleNumber);
             if (enemies is null) return null;
 
-            List<Item> items = GetItems(battleNumber);
+            List<Item> items = GenerateInventory(battleNumber);
             _enemyParty.AddMembers(enemies);
 
             foreach (Item item in items) {
@@ -21,7 +21,7 @@
 
             return _enemyParty;
         }
-        private List<Item> GetItems(int battleNumber)
+        private List<Item> GenerateInventory(int battleNumber)
         {
             return battleNumber switch
             {
@@ -30,7 +30,7 @@
                 _ => new()
             };
         }
-        private List<Entity>? GetEnemies(int battleNumber)
+        private List<Entity>? GenerateEnemies(int battleNumber)
         {
             return battleNumber switch
             {

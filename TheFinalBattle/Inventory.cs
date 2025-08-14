@@ -4,9 +4,15 @@
     public class Inventory
     {
         public Dictionary<int, int> Items { get; private set; } = new Dictionary<int, int>();
+        private ListItems _items = new ListItems();
         public Inventory() { }
         public void AddItem(int ID, int amount = 1)
         {
+            if (!_items.Items.Any(item => item.ID == ID))
+            {
+                throw new ArgumentException("Item doesn't exists");
+            }
+
             if (Items.ContainsKey(ID))
             {
                 Items[ID] += amount;
@@ -35,7 +41,7 @@
         {
             if (Items.ContainsKey(ID))
             {
-                if (Items[ID] <= 1)
+                if (Items[ID] <= amount)
                 {
                     Items.Remove(ID);
                 } else

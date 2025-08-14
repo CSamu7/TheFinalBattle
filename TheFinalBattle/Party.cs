@@ -7,8 +7,7 @@ namespace TheFinalBattle
         private readonly int _maxMembers = 3;
         public List<Entity> Members { get; private set; }
         public Inventory Inventory { get; private set; } = new Inventory();
-
-        public IPartyControl PartyControl;
+        public IPartyControl PartyControl { get; set; } 
         public int Length { get; private set; } = 0;
         public Party(IPartyControl control)
         {
