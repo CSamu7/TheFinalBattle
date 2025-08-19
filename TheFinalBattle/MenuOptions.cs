@@ -1,4 +1,10 @@
-﻿namespace TheFinalBattle
+﻿using TheFinalBattle.PlayerCommands;
+using TheFinalBattle.Interface;
+using TheFinalBattle.PlayableClasses;
+using TheFinalBattle.Attacks;
+using TheFinalBattle.Items;
+
+namespace TheFinalBattle
 {
     public class MenuOptions
     {

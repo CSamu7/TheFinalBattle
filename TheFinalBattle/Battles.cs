@@ -1,4 +1,5 @@
-﻿
+﻿using TheFinalBattle.Interface;
+
 namespace TheFinalBattle
 {
     public class Battles

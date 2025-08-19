@@ -1,4 +1,6 @@
-﻿using Utils;
+﻿using TheFinalBattle.PlayableClasses;
+using TheFinalBattle.PartyControl;
+using Utils;
 
 namespace TheFinalBattle
 {
@@ -65,5 +67,4 @@ namespace TheFinalBattle
             }
         }
     }
-    public enum PartyControl { AI, Player};
 }

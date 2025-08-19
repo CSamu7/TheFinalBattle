@@ -1,4 +1,6 @@
 ﻿using TheFinalBattle;
+using TheFinalBattle.Items;
+using TheFinalBattle.PlayerCommands;
 
 namespace TheFinalBattleUnitTests
 {
@@ -11,7 +13,7 @@ namespace TheFinalBattleUnitTests
             TrueProgrammer programmer = new TrueProgrammer("Dummy");
             Inventory inventory = new Inventory();
             HealthPotion potion = new HealthPotion();
-            UseItemCommand command = new UseItemCommand(potion, inventory);
+            UseItem command = new UseItem(potion, inventory);
 
             programmer.HP = 20;
             inventory.AddItem(potion.ID, 1);

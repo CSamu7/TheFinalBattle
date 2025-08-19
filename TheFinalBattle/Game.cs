@@ -1,4 +1,6 @@
-﻿namespace TheFinalBattle
+﻿using TheFinalBattle.PlayableClasses.Heroes;
+
+namespace TheFinalBattle
 {
     public class Game
     {

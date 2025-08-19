@@ -1,4 +1,8 @@
-﻿namespace TheFinalBattle
+﻿using TheFinalBattle.Interface;
+using TheFinalBattle.PlayableClasses;
+using TheFinalBattle.PlayerCommands;
+
+namespace TheFinalBattle
 {
     public class Battle
     {

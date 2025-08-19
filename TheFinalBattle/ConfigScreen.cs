@@ -1,4 +1,6 @@
-﻿namespace TheFinalBattle
+﻿using TheFinalBattle.PartyControl;
+
+namespace TheFinalBattle
 {
     public class ConfigParty
     {

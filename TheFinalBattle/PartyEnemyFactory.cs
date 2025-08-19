@@ -1,4 +1,9 @@
-﻿namespace TheFinalBattle
+﻿using TheFinalBattle.Items;
+using TheFinalBattle.PlayableClasses;
+using TheFinalBattle.PlayableClasses.Enemies;
+using TheFinalBattle.PartyControl;
+
+namespace TheFinalBattle
 {
     public class PartyEnemyFactory
     {

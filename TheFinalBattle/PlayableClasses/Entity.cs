@@ -1,0 +1,15 @@
+﻿using TheFinalBattle.Attacks;
+using TheFinalBattle.Items;
+
+namespace TheFinalBattle.PlayableClasses
+{
+    public abstract class Entity
+    {
+        public string Name { get; init; }
+        public int MaxHP { get; init; }
+        public int HP { get; set; }
+        public IAttack StandardAttack { get; protected set; }
+        public Gear? Gear { get; set; }
+        public IDefensiveModifier? DefensiveModifier { get; init; }
+    }
+}

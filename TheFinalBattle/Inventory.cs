@@ -1,4 +1,6 @@
-﻿namespace TheFinalBattle
+﻿using TheFinalBattle.Items;
+
+namespace TheFinalBattle
 {
     public record ItemInventory(Item item, int amount);
     public class Inventory
