@@ -12,6 +12,7 @@ namespace TheFinalBattle.PlayableClasses.Heroes
             MaxHP = 25;
             HP = MaxHP;
             Gear = new Sword();
+            DefensiveModifier = new ObjectSight();
         }
     }
 }
