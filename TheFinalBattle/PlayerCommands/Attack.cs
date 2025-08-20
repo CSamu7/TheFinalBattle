@@ -36,7 +36,11 @@ namespace TheFinalBattle.PlayerCommands
             if (attackData.Success > rndSuccess)
             {
                 AttackData attackDataModified = _enemy.DefensiveModifier?.AdjustAttack(attackData) ?? attackData;
-                ConsoleUtils.WriteLine(_enemy.DefensiveModifier?.Message ?? "", ConsoleColor.Red);
+
+                if(attackDataModified != attackData)
+                {
+                    ConsoleUtils.WriteLine(_enemy.DefensiveModifier?.Message ?? "", ConsoleColor.Red);
+                }
 
                 SuccessAttack(player, attackDataModified.Damage);
             } else
