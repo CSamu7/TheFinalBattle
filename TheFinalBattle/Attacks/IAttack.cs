@@ -3,8 +3,10 @@
     public interface IAttack
     {
         public string Name { get; }
+        public DamageType DamageType { get; }
         AttackData CalculateAttack();
     }
     /// <param name="success">0 = Absolute Failure, 1 = Success</param>
-    public record AttackData(int Damage, double Success = 1);
+    public enum DamageType { Physical, Decoding, Range }
+    public record AttackData(int Damage, DamageType DamageType, double Success = 1 );
 }

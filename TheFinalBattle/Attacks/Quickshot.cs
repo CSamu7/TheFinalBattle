@@ -2,14 +2,11 @@
 {
     public class QuickShot : IAttack
     {
-        public string Name { get; } = "QuickShot";
-        public override string ToString()
-        {
-            return "Quick shot";
-        }
+        public string Name { get; } = "Quick Shot";
+        public DamageType DamageType { get; } = DamageType.Range;
         public AttackData CalculateAttack()
         {
-            return new AttackData(3, .5);
+            return new AttackData(3, DamageType, .5);
         }
     }
 }
