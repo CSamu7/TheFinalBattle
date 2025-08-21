@@ -17,8 +17,11 @@ namespace TheFinalBattle
         {
             while (Heroes.Length > 0 && Enemies.Length > 0)
             {
-                StartPartyTurn(Heroes);
-                StartPartyTurn(Enemies);
+                StartTurn(Heroes);
+
+                if (Heroes.Length <= 0 || Enemies.Length <= 0) break;
+                    
+                StartTurn(Enemies);
             }
         }
         public Party GetPartyFor(Entity entity)
@@ -33,17 +36,22 @@ namespace TheFinalBattle
                     ? Enemies
                     : Heroes;
         }
-        private void StartPartyTurn(Party party)
+        private void StartTurn(Party actualParty)
         {
-            Party enemy = GetEnemyPartyFor(party.Members[0]);
-            party.RemoveDeadMembers(enemy.Inventory);
+            Party enemy = GetEnemyPartyFor(actualParty.Members[0]);
 
-            foreach (Entity entity in party.Members)
+            foreach (Entity entity in actualParty.Members)
             {
+                if (enemy.Length <= 0) return;
+
                 _battleStatus.Display(entity, this);
-                IEntityCommand command = party.PartyControl.SelectAction(entity, this);
+                IEntityCommand command = actualParty.PartyControl.SelectAction(entity, this);
                 command.Execute(entity);
+                
                 Console.WriteLine("-------------------------------------");
+                
+                enemy.RemoveDeadMembers(actualParty.Inventory);
+                actualParty.RemoveDeadMembers(enemy.Inventory);
             }
         }
     }
