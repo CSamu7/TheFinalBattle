@@ -45,13 +45,13 @@
 
             if (!_isSubmenu && IndexOption == _numOptions)
             {
-                Errors.Add($"{IndexOption} is not a valid option.");
+                Errors.Add($"{IndexOption + 1} is not a valid option.");
                 return false;
             }
 
             if (IndexOption < 0 || IndexOption > _numOptions)
             {
-                Errors.Add($"{IndexOption} is not a valid option.");
+                Errors.Add($"{IndexOption + 1} is not a valid option.");
                 return false;
             }
 

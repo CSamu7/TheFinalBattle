@@ -1,10 +1,6 @@
 ﻿using Utils;
 namespace TheFinalBattle.Interface
 {
-    /// <summary>
-    /// This template handles all the logic of the menu.
-    /// </summary>
-    /// <typeparam name="T"></typeparam>
     public abstract class MenuTemplate<T> where T : class
     {
         protected abstract List<MenuItemAction<T>> Options { get; set; }
