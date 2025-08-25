@@ -5,11 +5,15 @@ namespace TheFinalBattle.PlayableClasses
 {
     public abstract class Entity
     {
-        public string Name { get; init; }
-        public int MaxHP { get; init; }
-        public int HP { get; set; }
-        public IAttack StandardAttack { get; protected set; }
-        public Gear? Gear { get; set; }
-        public IDefensiveModifier? DefensiveModifier { get; init; }
+        public abstract string Name { get; init; }
+        public abstract int MaxHP { get; init; }
+        public abstract IAttack StandardAttack { get; init; }
+        public int HP { get; set; } 
+        public Gear? Gear { get; set; } = null;
+        public IDefensiveModifier? DefensiveModifier { get; init; } = null;
+        public Entity()
+        {
+            HP = MaxHP;
+        }
     }
 }

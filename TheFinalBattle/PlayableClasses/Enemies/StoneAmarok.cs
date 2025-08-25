@@ -5,13 +5,12 @@ namespace TheFinalBattle.PlayableClasses.Enemies
 {
     public class StoneAmarok : Entity
     {
-        public StoneAmarok()
+        public override string Name { get; init; } = "Stone Amarok";
+        public override int MaxHP { get; init; } = 4;
+        public override IAttack StandardAttack { get; init; } = new Bite();
+        public StoneAmarok() 
         {
-            Name = "STONE AMAROK";
-            StandardAttack = new Bite();
             DefensiveModifier = new StoneArmor();
-            MaxHP = 4;
-            HP = MaxHP;
         }
     }
 }

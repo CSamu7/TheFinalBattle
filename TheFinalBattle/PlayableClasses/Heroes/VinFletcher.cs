@@ -5,12 +5,11 @@ namespace TheFinalBattle.PlayableClasses.Heroes
 {
     public class VinFletcher : Entity
     {
+        public override string Name { get; init; } = "Vin";
+        public override int MaxHP { get; init; } = 15;
+        public override IAttack StandardAttack { get; init; } = new Punch();
         public VinFletcher()
         {
-            Name = "Vin";
-            MaxHP = 15;
-            HP = MaxHP;
-            StandardAttack = new Punch();
             Gear = new VinBow();
         }
     }
