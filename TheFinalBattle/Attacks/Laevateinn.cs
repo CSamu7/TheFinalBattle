@@ -1,12 +1,14 @@
 ﻿namespace TheFinalBattle.Attacks
 {
-    public class Punch : IAttack
+    public class Laevateinn : IAttack
     {
         public string Name { get; } = "Punch";
         public DamageType DamageType { get; } = DamageType.Physical;
         public AttackData CalculateAttack()
         {
-            return new AttackData(1, DamageType);
+            int rndDamage = new Random().Next(4, 6);
+
+            return new AttackData(rndDamage, DamageType);
         }
     }
 }

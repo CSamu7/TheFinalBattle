@@ -1,9 +1,9 @@
 ﻿namespace TheFinalBattle.Attacks
 {
-    public class Unraveling : IAttack
+    public class Megidolaon : IAttack
     {
-        public string Name { get; } = "Unraveling";
-        public DamageType DamageType { get; } = DamageType.Decoding;
+        public string Name { get; } = "Megidolaon";
+        public DamageType DamageType { get; } = DamageType.Mighty;
         public AttackData CalculateAttack()
         {
             Random rnd = new Random();

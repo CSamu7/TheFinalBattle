@@ -1,9 +1,9 @@
 ﻿namespace TheFinalBattle.Attacks
 {
-    public class Stab : IAttack
+    public class Zio : IAttack
     {
-        public string Name { get; } = "Stab";
-        public DamageType DamageType {  get; } = DamageType.Physical;
+        public string Name { get; } = "Zio";
+        public DamageType DamageType { get; } = DamageType.Electric;
         public AttackData CalculateAttack()
         {
             return new AttackData(1, DamageType);
