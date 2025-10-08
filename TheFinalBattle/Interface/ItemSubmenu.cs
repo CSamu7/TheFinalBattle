@@ -17,7 +17,8 @@ namespace TheFinalBattle.Interface
         }
         public IEntityCommand? BuildCommand()
         {
-            Item item = GetOption();
+            Item? item = GetOption();
+
             return item is null 
                 ? null 
                 : new UseItem(item, _inventory);

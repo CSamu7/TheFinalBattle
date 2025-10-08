@@ -15,11 +15,11 @@ namespace TheFinalBattle
         }
         public void StartBattle()
         {
-            while (Heroes.Length > 0 && Enemies.Length > 0)
+            while (Heroes.Members.Count > 0 && Enemies.Members.Count > 0)
             {
                 StartTurn(Heroes);
 
-                if (Heroes.Length <= 0 || Enemies.Length <= 0) break;
+                if (Heroes.Members.Count <= 0 || Enemies.Members.Count <= 0) break;
                     
                 StartTurn(Enemies);
             }
@@ -42,7 +42,7 @@ namespace TheFinalBattle
 
             foreach (Entity entity in actualParty.Members)
             {
-                if (enemy.Length <= 0) return;
+                if (enemy.Members.Count <= 0) return;
 
                 _battleStatus.Display(entity, this);
                 IEntityCommand command = actualParty.PartyControl.SelectAction(entity, this);

@@ -1,4 +1,6 @@
 ﻿using TheFinalBattle.PlayableClasses.Heroes;
+using TheFinalBattle.Items;
+using TheFinalBattle.Generators;
 
 namespace TheFinalBattle
 {
@@ -15,16 +17,12 @@ namespace TheFinalBattle
             Console.Write("Enter your name, hero: ");
             string name = Console.ReadLine() ?? "Kiryu";
 
-            TrueProgrammer trueProgrammer = new TrueProgrammer(name);
-            VinFletcher vin = new VinFletcher();
-
+            Protagonist trueProgrammer = new Protagonist(name);
             heroes.AddMember(trueProgrammer);
-            heroes.AddMember(vin);
+            heroes.Inventory.AddItem(new Medicine(), 3);
 
-            heroes.Inventory.AddItem(1, 3);
-
-            Battles battles = new Battles(heroes, enemies);
-            battles.Start();
+            Battles battles = new Battles(enemies.PartyControl, new ScriptedLevelGenerator());
+            battles.Start(heroes);
         }
     }
 }

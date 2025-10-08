@@ -13,7 +13,7 @@ namespace TheFinalBattle.PlayerCommands
         {
             Party party = _battle.GetPartyFor(entity);
 
-            party.Inventory.AddItem(entity.Gear.ID);
+            party.Inventory.AddItem(entity.Gear);
             Console.WriteLine($"{entity.Name} has removed its {entity.Gear.Name}");
             entity.Gear = null;
         }

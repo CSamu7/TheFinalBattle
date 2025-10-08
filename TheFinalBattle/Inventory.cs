@@ -2,54 +2,46 @@
 
 namespace TheFinalBattle
 {
-    public record ItemInventory(Item item, int amount);
+    //Cambiarle el nombre a: SlotInventory, SpaceInventory
+    public record SlotInventory(Item Item, int Amount = 1);
     public class Inventory
     {
-        public Dictionary<int, int> Items { get; private set; } = new Dictionary<int, int>();
-        private ListItems _items = new ListItems();
+        //id, amount
+        public List<SlotInventory> Items { get; private set; } = new List<SlotInventory>();
         public Inventory() { }
-        public void AddItem(int ID, int amount = 1)
+        public void AddItem(Item item, int amount = 1)
         {
-            if (!_items.Items.Any(item => item.ID == ID))
-            {
-                throw new ArgumentException("Item doesn't exists");
-            }
+            int index = Items.FindIndex(slot => slot.Item.ID == item.ID);
 
-            if (Items.ContainsKey(ID))
+            if (index == -1)
             {
-                Items[ID] += amount;
+                Items.Add(new SlotInventory(item, amount));
             } else
             {
-                Items.Add(ID, amount);
+                Items[index] = Items[index] with { Amount = amount + Items[index].Amount };
             }
         }
-        public void TransferInventory(Inventory inventory)
+        public void TransferInventory(Inventory invDestiny)
         {
-            foreach (KeyValuePair<int, int> invItem in Items)
+            foreach (SlotInventory invItem in Items)
             {
-                inventory.AddItem(invItem.Key, invItem.Value);
-                RemoveItem(invItem.Key, invItem.Value);
+                invDestiny.AddItem(invItem.Item, invItem.Amount);
             }
+
+            Items.Clear();
         }
-        public bool HasItem<T>()
+        public void RemoveItem(Item itemToRemove, int amount = 1)
         {
-            return Items.Keys.Any(item => item is T);
-        }
-        public List<T> GetItemsByType<T>()
-        {
-            return Items.Keys.OfType<T>().ToList();
-        }
-        public void RemoveItem(int ID, int amount)
-        {
-            if (Items.ContainsKey(ID))
+            int index = Items.FindIndex(slot => slot.Item.ID == itemToRemove.ID);
+
+            if (index == -1) return;
+
+            if (Items[index].Amount <= amount)
             {
-                if (Items[ID] <= amount)
-                {
-                    Items.Remove(ID);
-                } else
-                {
-                    Items[ID] -= amount;
-                }
+                Items.RemoveAt(index);
+            } else
+            {
+                Items[index] = Items[index] with { Amount = Items[index].Amount - amount };
             }
         }
     }

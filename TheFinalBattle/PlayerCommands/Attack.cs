@@ -39,7 +39,8 @@ namespace TheFinalBattle.PlayerCommands
 
                 if(attackDataModified != attackData)
                 {
-                    ConsoleUtils.WriteLine(_enemy.DefensiveModifier?.Message ?? "", ConsoleColor.Red);
+                    string msg = _enemy.DefensiveModifier?.GetSuccessfulMessage(player) ?? "";
+                    Console.WriteLine(msg);
                 }
 
                 SuccessAttack(player, attackDataModified.Damage);

@@ -6,7 +6,7 @@
         public DamageType DamageType {  get; } = DamageType.Ice;
         public AttackData CalculateAttack()
         {
-            return new AttackData(1, DamageType);
+            return new AttackData(10, DamageType);
         }
     }
 }

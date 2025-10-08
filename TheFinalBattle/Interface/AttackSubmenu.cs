@@ -28,7 +28,7 @@ namespace TheFinalBattle.Interface
                 //Loop infinito
                 IAttack? attack = _attacksSubmenu.SelectAttack();
 
-                if (_enemies.Length == 1 && attack is null) return null;
+                if (_enemies.Members.Count == 1 && attack is null) return null;
                 if (attack is null) continue;
 
                 return new Attack(attack, enemy);

@@ -1,45 +1,61 @@
-﻿using TheFinalBattle.Effects;
-using TheFinalBattle.Items;
+﻿using TheFinalBattle.Items;
 using TheFinalBattle.PlayableClasses;
 using TheFinalBattle.PlayerCommands;
 
 namespace TheFinalBattle.PartyControl
 {
+    //Rework PartyAI
     public class PartyAI : IPartyControl
     {
-        private Random rnd = new Random();
+        private Random _rnd = new Random();        
+        private ItemList _itemList = new ItemList();
         public IEntityCommand SelectAction(Entity entity, Battle battle)
         {
             Inventory inventory = battle.GetPartyFor(entity).Inventory;
             Party enemies = battle.GetEnemyPartyFor(entity);
+            IEntityCommand? command = null;
 
-            double probability = rnd.NextDouble();
-            
-            while (true)
-            {
-                if (probability < .01) return new DoNothing();
-      
-                if (probability < .25 && entity.HP < entity.MaxHP / 2 && inventory.HasItem<Potion>())
+            while (command is null) { 
+                double probability = _rnd.NextDouble();
+
+                command = probability switch
                 {
-                    List<Potion> potions = inventory.GetItemsByType<Potion>();
-                    
-                    if(potions.Any(potion => potion.Effect is Heal))
-                    {
-                        return new UseItem(potions[0], inventory);
-                    }
-                }
-
-                if (probability < .50 && entity.Gear is null && inventory.HasItem<Gear>())
-                {
-                    List<Gear> gears = inventory.GetItemsByType<Gear>();
-                    return new UseItem(gears[0], inventory);
-                }
-
-                if (entity.Gear is not null) 
-                    return new Attack(entity.Gear.SpecialAttack, enemies.Members[0]);
-
-                return new Attack(entity.StandardAttack, enemies.Members[0]);
+                    <= .01 => new DoNothing(),
+                    <= .25 => SelectItem(inventory, entity),
+                    _ => SelectAttack(enemies, entity)
+                };
             }
+
+            return command;
+        }
+        public IEntityCommand? SelectItem(Inventory inventory, Entity entity)
+        {
+            List<Potion> items = inventory.Items
+                .Select(slot => _itemList.GetItem(slot.Item.ID))
+                .OfType<Potion>().ToList();
+
+            List<Gear> gears = inventory.Items
+              .Select(slot => _itemList.GetItem(slot.Item.ID))
+              .OfType<Gear>().ToList();
+
+            if (entity.HP < entity.MaxHP / 2 && items.Count > 0)
+            {
+                return new UseItem(items[0], inventory);
+            }
+
+            if (entity.Gear is null && gears.Count > 0)
+            {
+                return new UseItem(gears[0], inventory);
+            }
+
+            return null;
+        }
+        public IEntityCommand SelectAttack(Party enemies, Entity entity)
+        {
+            if (entity.Gear is not null)
+                return new Attack(entity.Gear.SpecialAttack, enemies.Members[0]);
+
+            return new Attack(entity.StandardAttack, enemies.Members[0]);
         }
     }
 }

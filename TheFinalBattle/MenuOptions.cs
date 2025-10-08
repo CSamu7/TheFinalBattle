@@ -9,7 +9,7 @@ namespace TheFinalBattle
     public class MenuOptions
     {
         private Entity _entity;
-        private ListItems _items = new ListItems();
+        private ItemList _items = new ItemList();
         public MenuOptions(Entity entity)
         {
             _entity = entity;
@@ -31,10 +31,10 @@ namespace TheFinalBattle
         {
             List<MenuItemAction<Item>> optionItems = new();
 
-            foreach (KeyValuePair<int, int> itemInv in inventory.Items)
+            foreach (SlotInventory slot in inventory.Items)
             {
-                Item item = _items.GetItemByID(itemInv.Key);
-                optionItems.Add(new MenuItemAction<Item>($"{item.Name} x{itemInv.Value}", true, item));
+                optionItems.Add(
+                    new MenuItemAction<Item>($"{slot.Item.Name} x{slot.Amount}", true, slot.Item));
             }
 
             return optionItems;

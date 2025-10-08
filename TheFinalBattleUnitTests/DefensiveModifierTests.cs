@@ -10,7 +10,7 @@ namespace TheFinalBattleUnitTests
         public void AdjustAttack_ReduceDamage_DamageDataTo1()
         {
             AttackData data = new AttackData(5, 1);
-            StoneAmarok enemy = new StoneAmarok();
+            Mara enemy = new Mara();
 
             AttackData modifiedData = enemy.DefensiveModifier.AdjustAttack(data);
 

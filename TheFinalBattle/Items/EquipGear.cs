@@ -13,16 +13,14 @@ namespace TheFinalBattle.Items
         }
         public void Use(Entity entity)
         {
-            if (entity.Gear is null)
-            {
-                entity.Gear = _gear;
-                _inventory.RemoveItem(_gear.ID, 1);
-            } else
-            {
-                _inventory.RemoveItem(_gear.ID, 1);
-                _inventory.AddItem(entity.Gear.ID);
-                entity.Gear = _gear;
+            _inventory.RemoveItem(_gear);
+
+            if (entity.Gear is not null)
+            { 
+                _inventory.AddItem(entity.Gear);
             }
+
+            entity.Gear = _gear;
 
             Console.WriteLine($"{entity.Name} has equipped with {_gear.Name}");
         }

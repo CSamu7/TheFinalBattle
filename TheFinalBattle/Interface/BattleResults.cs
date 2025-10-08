@@ -6,7 +6,7 @@ namespace TheFinalBattle.Interface
     public class BattleResults
     {
         private Battle _battle;
-        private ListItems _items = new ListItems();
+        private ItemList _items = new ItemList();
         public BattleResults(Battle battle) { 
             _battle = battle;
         }
@@ -20,7 +20,7 @@ namespace TheFinalBattle.Interface
             Console.WriteLine("The battle has finished!");
             Thread.Sleep(500);
 
-            if (_battle.Heroes.Length <= 0)
+            if (_battle.Heroes.Members.Count <= 0)
             {
                 DisplayDefeat();
                 Console.WriteLine("End of the game!");
@@ -52,10 +52,9 @@ namespace TheFinalBattle.Interface
             {
                 Console.WriteLine("You have got the next items: ");
 
-                foreach (KeyValuePair<int, int> itemInv in enemyInventory.Items)
+                foreach (SlotInventory itemInv in enemyInventory.Items)
                 {
-                    Item item = _items.GetItemByID(itemInv.Key);
-                    Console.WriteLine($" * {item.Name} x{itemInv.Value}");
+                    Console.WriteLine($" * {itemInv.Item.Name} x{itemInv.Amount}");
                     Thread.Sleep(800);
                 }
             }

@@ -1,13 +1,23 @@
 ﻿using TheFinalBattle.Attacks;
+using TheFinalBattle.PlayableClasses;
 
 namespace TheFinalBattle.Items
 {
-    public class StoneArmor : IDefensiveModifier
+    public class KingFrostCape : IDefensiveModifier
     {
-        public string Message { get; init; } = "STONE ARMOR reduced the attack by 1 point";
+        public string Name { get; init; } = "King Frost Cape";
         public AttackData AdjustAttack(AttackData attackData)
         {
-            return attackData with { Damage = 1 };
+            if (attackData.DamageType.Equals(DamageType.Ice))
+            {
+                attackData = attackData with { Damage = 1 };
+            }
+
+            return attackData;
+        }
+        public string GetSuccessfulMessage(Entity defensor)
+        {
+            return $"The cape has protected {defensor.Name} from the cold...";
         }
     }
 }

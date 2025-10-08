@@ -18,7 +18,7 @@ namespace TheFinalBattle.Items
             Console.WriteLine($"{entity.Name} has used {_potion.Name}");
             _potion.Effect.Consume(entity);
             DisplayItemMessage(entity.Name);
-            _inventory.RemoveItem(_potion.ID, 1);
+            _inventory.RemoveItem(_potion);
         }
         private void DisplayItemMessage(string name)
         {

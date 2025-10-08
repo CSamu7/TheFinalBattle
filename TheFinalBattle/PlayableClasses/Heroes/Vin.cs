@@ -3,14 +3,16 @@ using TheFinalBattle.Attacks;
 
 namespace TheFinalBattle.PlayableClasses.Heroes
 {
-    public class VinFletcher : Entity
+    public class Vin : Entity
     {
         public override string Name { get; init; } = "Vin";
         public override int MaxHP { get; init; } = 15;
-        public override IAttack StandardAttack { get; init; } = new Punch();
-        public VinFletcher()
+        public override IAttack StandardAttack { get; init; } = new Push();
+        public Vin()
         {
-            Gear = new VinBow();
+            Gear = new KolossSword();
+            DefensiveModifier = new AtiumBead(); //10% de esquivar un ataque.
         }
+
     }
 }

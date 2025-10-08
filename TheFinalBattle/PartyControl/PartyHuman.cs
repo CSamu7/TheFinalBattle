@@ -5,7 +5,7 @@ using TheFinalBattle.PlayerCommands;
 namespace TheFinalBattle.PartyControl
 {
     /// <summary>
-    /// Choose a command by input.
+    /// Choose a command by console input.
     /// </summary>
     public class PartyHuman : IPartyControl
     {
