@@ -9,7 +9,6 @@ namespace TheFinalBattle
     public class MenuOptions
     {
         private Entity _entity;
-        private ItemList _items = new ItemList();
         public MenuOptions(Entity entity)
         {
             _entity = entity;

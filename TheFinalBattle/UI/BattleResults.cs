@@ -6,7 +6,6 @@ namespace TheFinalBattle.Interface
     public class BattleResults
     {
         private Battle _battle;
-        private ItemList _items = new ItemList();
         public BattleResults(Battle battle) { 
             _battle = battle;
         }

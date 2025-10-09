@@ -8,7 +8,6 @@ namespace TheFinalBattle.PartyControl
     public class PartyAI : IPartyControl
     {
         private Random _rnd = new Random();        
-        private ItemList _itemList = new ItemList();
         public IEntityCommand SelectAction(Entity entity, Battle battle)
         {
             Inventory inventory = battle.GetPartyFor(entity).Inventory;
@@ -30,13 +29,8 @@ namespace TheFinalBattle.PartyControl
         }
         public IEntityCommand? SelectItem(Inventory inventory, Entity entity)
         {
-            List<Potion> items = inventory.Items
-                .Select(slot => _itemList.GetItem(slot.Item.ID))
-                .OfType<Potion>().ToList();
-
-            List<Gear> gears = inventory.Items
-              .Select(slot => _itemList.GetItem(slot.Item.ID))
-              .OfType<Gear>().ToList();
+            List<Potion> items = inventory.Items.Select(slot => slot.Item).OfType<Potion>().ToList();
+            List<Gear> gears = inventory.Items.Select(slot => slot.Item).OfType<Gear>().ToList();
 
             if (entity.HP < entity.MaxHP / 2 && items.Count > 0)
             {

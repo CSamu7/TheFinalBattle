@@ -4,6 +4,7 @@ using TheFinalBattle.Effects;
 
 namespace TheFinalBattle.Items
 {
+    public record Item(int ID, string Name, string Description);
     public record Medicine() : Potion(1, "Medicine", "Heal 10HP", new Heal(10));
     public record LuminaSaber() : Gear
     (2, "Lumina Saber", "A glimmering saber", new BladedRunners());

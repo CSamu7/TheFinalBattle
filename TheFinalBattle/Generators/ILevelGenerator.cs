@@ -4,7 +4,7 @@ namespace TheFinalBattle.Generators
 {
     public record Level(
         Party Enemies,
-        List<SlotInventory>? Rewards = null
+        List<SlotInventory> Rewards
     );
     public interface ILevelGenerator
     {

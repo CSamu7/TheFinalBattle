@@ -2,11 +2,9 @@
 
 namespace TheFinalBattle
 {
-    //Cambiarle el nombre a: SlotInventory, SpaceInventory
     public record SlotInventory(Item Item, int Amount = 1);
     public class Inventory
     {
-        //id, amount
         public List<SlotInventory> Items { get; private set; } = new List<SlotInventory>();
         public Inventory() { }
         public void AddItem(Item item, int amount = 1)

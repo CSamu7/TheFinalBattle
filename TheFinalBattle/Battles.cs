@@ -46,12 +46,9 @@ namespace TheFinalBattle
 
             enemyInventory.TransferInventory(heroesInventory);
 
-            if(level.Rewards is not null)
+            foreach(SlotInventory slot in level.Rewards)
             {
-                foreach(SlotInventory slot in level.Rewards)
-                {
-                    battle.Heroes.Inventory.AddItem(slot.Item, slot.Amount);
-                }
+                battle.Heroes.Inventory.AddItem(slot.Item, slot.Amount);
             }
         }
     }
