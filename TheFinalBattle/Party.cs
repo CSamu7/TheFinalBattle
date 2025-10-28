@@ -1,34 +1,18 @@
 ﻿using TheFinalBattle.PlayableClasses;
 using TheFinalBattle.PartyControl;
 using Utils;
-using TheFinalBattle.Items;
 
 namespace TheFinalBattle
 {
     public class Party
     {
         private readonly int _maxMembers = 3;
-        public List<Entity> Members { get; private set; } = new List<Entity>();
-        public Inventory Inventory { get; private set; } = new Inventory();
-        public IPartyControl PartyControl { get; set; } 
-        public Party(IPartyControl control)
+        public List<Entity> Members { get; init; } = new List<Entity>();
+        public Inventory Inventory { get; init; } = new Inventory();
+        public IPartyControl PartyControl { get; set; } = new PartyAI();
+        public Party(IPartyControl partyControl)
         {
-            PartyControl = control;
-        }
-        public Party(IPartyControl control, List<Entity> members)
-        {
-            PartyControl = control;
-            Members = members.ToList();
-        }
-        public Party(IPartyControl control, List<Entity> members, List<Item> items)
-        {
-            PartyControl = control;
-            Members = members.ToList();
-
-            foreach (Item item in items)
-            {
-                Inventory.AddItem(item);
-            }
+            PartyControl = partyControl;
         }
         public void RemoveMember(Entity entity)
         {
@@ -43,6 +27,15 @@ namespace TheFinalBattle
 
             Members.Add(member);
             return true;
+        }
+        public void AddMembers(List<Entity> members)
+        {
+            foreach (Entity member in members)
+            {
+                if (!AddMember(member)){
+                    break;
+                }
+            }
         }
         public void RemoveDeadMembers(Inventory enemyInventory)
         {

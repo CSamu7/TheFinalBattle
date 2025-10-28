@@ -1,0 +1,12 @@
+[
+  {
+    "level": 1,
+    "enemies": [ "Pixie", "Pixie" ],
+    "enemyInventory": [ "Medicine", "Medicine" ],
+    "rewards": []
+  },
+  {
+    "level": 2,
+    "enemies": [ "Mothman" ]
+  }
+]

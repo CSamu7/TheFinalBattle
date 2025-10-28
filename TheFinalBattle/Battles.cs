@@ -1,34 +1,34 @@
 ﻿using TheFinalBattle.Generators;
 using TheFinalBattle.Interface;
-using TheFinalBattle.PartyControl;
+using TheFinalBattle.Items;
 
 namespace TheFinalBattle
 {
     public class Battles
     {
-        private ILevelGenerator _levelGenerator;
-        public IPartyControl EnemyControl { get; init; }
+        private ILevelBuilder _levelGenerator;
         public int battleNumber { get; private set; } = 1;
-        public Battles(IPartyControl enemyControl, ILevelGenerator levelGenerator)
+        public Battles(ILevelBuilder levelGenerator)
         {
             _levelGenerator = levelGenerator;
-            EnemyControl = enemyControl;
         }
 
-        //¿Que pasa si ganan los enemigos? Parece que Heroes esta hardcodeado y no toma en cuenta realmente quien gano.
-        public void Start(Party heroes)
+        public void Start(Party heroes, Party enemies)
         {
             while(heroes.Members.Count > 0)
             {
-                Level level = _levelGenerator.GenerateLevel(this);
-               
-                if (level.Enemies.Members.Count <= 0)
+                Level level = _levelGenerator.GetLevel(this);
+
+                if (level.Enemies.Count <= 0)
                 {
                     BattleResults.DisplayGameOver();
                     return;
                 }
 
-                Battle battle = new Battle(heroes, level.Enemies);
+                enemies.AddMembers(level.Enemies);
+                level.EnemyInventory.TransferInventory(enemies.Inventory);
+
+                Battle battle = new Battle(heroes, enemies);
                 battle.StartBattle();
 
                 FinishBattle(battle, level);
