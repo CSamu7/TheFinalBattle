@@ -1,5 +1,5 @@
-﻿using TheFinalBattle.PlayableClasses.Heroes;
-using TheFinalBattle.Items;
+﻿using TheFinalBattle.Items;
+using TheFinalBattle.PlayableClasses;
 
 namespace TheFinalBattle
 {
@@ -7,19 +7,17 @@ namespace TheFinalBattle
     {
         public void Start()
         {
-            GameConfiguration gameConfiguration = new ConfigurationScreen().CreateConfigGame();
+            var settings = new ScreenConfiguration().GetSettings();
 
-            Console.Write("Enter your name, hero: ");
-            string name = Console.ReadLine() ?? "A hero with no name";
+            Entity player = new PlayerConfiguration().GetPlayer();
 
-            Protagonist trueProgrammer = new Protagonist(name);
-
-            Party heroes = new Party(gameConfiguration.HeroePartyAI);
-            heroes.AddMember(trueProgrammer);
+            Party heroes = new Party(settings.PartyConfiguration.HeroePartyAI);
             heroes.Inventory.AddItem(new Medicine(), 3);
+            heroes.AddMembers(player);
 
-            Party enemies = new Party(gameConfiguration.EnemyPartyAI);
-            Battles battles = new Battles(gameConfiguration.LevelConfiguration);
+            Party enemies = new Party(settings.PartyConfiguration.EnemyPartyAI);
+
+            Battles battles = new Battles(settings.Levels);
             battles.Start(heroes, enemies);
         }
     }

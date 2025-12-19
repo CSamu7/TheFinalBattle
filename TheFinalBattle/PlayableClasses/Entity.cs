@@ -2,11 +2,13 @@
 using TheFinalBattle.Items;
 using TheFinalBattle.PlayableClasses.Enemies;
 using TheFinalBattle.PlayableClasses.Heroes;
+using Utils;
 
 namespace TheFinalBattle.PlayableClasses
 {
-    public abstract class Entity
+    public abstract class Entity : IGameObject
     {
+        public abstract int Id { get; init; }
         public abstract string Name { get; init; }
         public abstract int MaxHP { get; init; }
         public abstract IAttack StandardAttack { get; init; }
@@ -17,17 +19,37 @@ namespace TheFinalBattle.PlayableClasses
         {
             HP = MaxHP;
         }
-    };
-    public static class EntitiesList
-    {
-        private static readonly List<Entity> _entities = new List<Entity>() {
-            new Akechi(), new JackFrost(), new Mara(), new Mothman(),
-            new Pixie(), new Reaper(), new WealthHand(), new Vin(), new Yosuke()
-        };
-        public static Entity GetEntityByName(string name)
+        public Gear? Kill()
         {
-            return _entities.Where(entity => entity.Name == name).FirstOrDefault();  
-        }
-    }
+            if (Gear is not null)
+            {
+                Console.Write($"{Name} has dropped the gear: ");
+                ConsoleUtils.WriteLine($"{Gear.Name}", ConsoleColor.Green);
+                Thread.Sleep(1000);
+                return Gear;
+            }
 
+            return null;
+        }
+    };
+    public class EntitiesList : IObjectList<Entity>
+    {
+        public EntitiesList()
+        {
+            List<Entity> test = _entities.Distinct().ToList();
+        }
+        private readonly List<Entity> _entities = new List<Entity>
+        {
+            new Pixie(),
+            new JackFrost(),
+            new Mara(),
+            new Mothman(),
+            new Vin() ,
+            new Yosuke(), 
+            new Akechi() ,
+            new WealthHand(), 
+            new Reaper() 
+        };
+        public Entity? GetByID(int id) => _entities.Where(entity => entity.ID == id).FirstOrDefault(); 
+    }
 }

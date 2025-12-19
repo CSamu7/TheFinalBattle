@@ -5,6 +5,7 @@ namespace TheFinalBattle.Items
 {
     public class KingFrostCape : IDefensiveModifier
     {
+        public int Id { get; init; } = 4;
         public string Name { get; init; } = "King Frost Cape";
         public AttackData AdjustAttack(AttackData attackData)
         {

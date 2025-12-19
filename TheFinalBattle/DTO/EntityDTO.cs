@@ -5,20 +5,27 @@ namespace TheFinalBattle.DTO
 {
     public class EntityDTO
     {
-        public string Name { get; init; }
-        public string? Gear { get; init; }
-        public string? DefensiveModifier { get; init; }
-        public Entity Parse()
+        public required int Id { get; init; }
+        public int? IdGear { get; init; }
+        public int? IdDefensiveModifier { get; init; }
+    }
+    public static class EntityDTOExtensions
+    {
+        public static Entity? Map(this EntityDTO entity)
         {
-            ItemsList itemsList = new ItemsList();
+            EntitiesList entities = new EntitiesList();
+            ItemList itemList = new ItemList();
             DefensiveModifierList modifiersList = new DefensiveModifierList();
 
-            Gear? gear = (Gear?)itemsList.GetByName(Gear ?? "");
-            IDefensiveModifier? defensiveModifier = modifiersList.GetByName(DefensiveModifier ?? "");
+            Entity? enemy = entities.GetByID(entity.Id);
 
-            Entity enemy = EntitiesList.GetEntityByName(Name);
-            enemy.Gear = gear;
-            enemy.DefensiveModifier = defensiveModifier;
+            if (enemy is null) return null;
+
+            if (entity.IdGear is not null)
+                enemy.Gear = (Gear)itemList.GetByID(entity.IdGear.Value);
+
+            if (entity.IdDefensiveModifier is not null)
+                enemy.DefensiveModifier = modifiersList.GetByID(entity.IdDefensiveModifier.Value);
 
             return enemy;
         }

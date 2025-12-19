@@ -3,9 +3,8 @@ using TheFinalBattle.PlayableClasses;
 
 namespace TheFinalBattle.Items
 {
-    public interface IDefensiveModifier
+    public interface IDefensiveModifier : IGameObject
     {
-        public string Name { get; init; }
         public string GetSuccessfulMessage(Entity defensor);
         public AttackData AdjustAttack(AttackData attackData);
     }

@@ -1,42 +1,34 @@
 ﻿using TheFinalBattle.Generators;
 using TheFinalBattle.Interface;
-using TheFinalBattle.Items;
 
 namespace TheFinalBattle
 {
     public class Battles
     {
-        private ILevelBuilder _levelGenerator;
         public int battleNumber { get; private set; } = 1;
-        public Battles(ILevelBuilder levelGenerator)
+        private readonly List<Level> _levels;
+        private Level? _level;
+        public Battles(List<Level> levels)
         {
-            _levelGenerator = levelGenerator;
+            _levels = levels;
         }
-
         public void Start(Party heroes, Party enemies)
         {
-            while(heroes.Members.Count > 0)
+            while (heroes.Members.Count > 0)
             {
-                Level level = _levelGenerator.GetLevel(this);
-
-                if (level.Enemies.Count <= 0)
+                if (_levels.ElementAtOrDefault(battleNumber) is null)
                 {
                     BattleResults.DisplayGameOver();
                     return;
                 }
 
-                enemies.AddMembers(level.Enemies);
-                level.EnemyInventory.TransferInventory(enemies.Inventory);
-
                 Battle battle = new Battle(heroes, enemies);
-                battle.StartBattle();
+                battle.Start();
 
-                FinishBattle(battle, level);
-                battleNumber++;
+                FinishBattle(battle);
             }
         }
-
-        public void FinishBattle(Battle battle, Level level)
+        public void FinishBattle(Battle battle)
         {
             var results = new BattleResults(battle);
             results.DisplayResults();
@@ -46,10 +38,12 @@ namespace TheFinalBattle
 
             enemyInventory.TransferInventory(heroesInventory);
 
-            foreach(SlotInventory slot in level.Rewards)
+            foreach(SlotInventory slot in _level.Rewards)
             {
                 battle.Heroes.Inventory.AddItem(slot.Item, slot.Amount);
             }
+
+            battleNumber++;
         }
     }
 }

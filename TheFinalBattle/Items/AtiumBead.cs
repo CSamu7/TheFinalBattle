@@ -6,6 +6,7 @@ namespace TheFinalBattle.Items
     internal class AtiumBead : IDefensiveModifier
     {
         public string Name { get; init; } = "Atium Bead";
+        public int Id { get; init; } = 1;
         public AttackData AdjustAttack(AttackData attackData)
         {
             return attackData with { Success = attackData.Success - .1 };

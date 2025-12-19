@@ -1,14 +1,11 @@
-﻿using TheFinalBattle.PlayableClasses;
-
-namespace TheFinalBattle.Generators
+﻿namespace TheFinalBattle.Generators
 {
     public record Level(
-        List<Entity> Enemies,
-        Inventory EnemyInventory,
+        Party Enemies,
         List<SlotInventory> Rewards
     );
     public interface ILevelBuilder
     {
-        public Level GetLevel(Battles battles);
+        public List<Level> GetLevels();
     }
 }

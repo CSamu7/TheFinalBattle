@@ -1,6 +1,7 @@
 ﻿using TheFinalBattle.PlayableClasses;
 using TheFinalBattle.PartyControl;
 using Utils;
+using TheFinalBattle.Items;
 
 namespace TheFinalBattle
 {
@@ -10,47 +11,33 @@ namespace TheFinalBattle
         public List<Entity> Members { get; init; } = new List<Entity>();
         public Inventory Inventory { get; init; } = new Inventory();
         public IPartyControl PartyControl { get; set; } = new PartyAI();
-        public Party(IPartyControl partyControl)
+        public Party(params Entity[] members)
         {
-            PartyControl = partyControl;
+            AddMembers(members); 
         }
-        public void RemoveMember(Entity entity)
+        public Party(IPartyControl control, params Entity[] members)
         {
-            Members.Remove(entity);
+            PartyControl = control;
+            AddMembers(members);
         }
-        public bool AddMember(Entity member)
+        public bool AddMembers(params Entity[] members)
         {
-            if (Members.Count > _maxMembers)
-            {
+            if (Members.Count() >= _maxMembers)
                 return false;
-            }
 
-            Members.Add(member);
+            Members.AddRange(members);
             return true;
         }
-        public void AddMembers(List<Entity> members)
-        {
-            foreach (Entity member in members)
-            {
-                if (!AddMember(member)){
-                    break;
-                }
-            }
-        }
-        public void RemoveDeadMembers(Inventory enemyInventory)
+        public void RemoveMember(Entity entity) =>
+            Members.Remove(entity);
+        public void CleanParty(Inventory enemyInventory)
         {
             List<Entity> deadMembers = Members.Where(member => member.HP <= 0).ToList();
 
             foreach (Entity entity in deadMembers)
             {
-                if (entity.Gear is not null)
-                {
-                    Console.Write($"The enemy {entity.Name} has dropped the gear: ");
-                    ConsoleUtils.WriteLine($"{entity.Gear.Name}", ConsoleColor.Green);
-                    Thread.Sleep(1000);
-                    enemyInventory.AddItem(entity.Gear);
-                }
-
+                Gear? gear = entity.Kill();
+                if(gear is not null) enemyInventory.AddItem(gear);
                 RemoveMember(entity);
             }
         }

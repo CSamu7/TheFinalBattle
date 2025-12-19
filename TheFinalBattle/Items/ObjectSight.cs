@@ -5,6 +5,7 @@ namespace TheFinalBattle.Items
 {
     public class ObjectSight : IDefensiveModifier
     {
+        public int Id { get; init; } = 1;
         public string Name { get; init; } = "Object Sight";
         public string GetSuccessfulMessage(Entity defensor)
         {

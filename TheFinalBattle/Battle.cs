@@ -13,7 +13,7 @@ namespace TheFinalBattle
             Enemies = enemies;
             Heroes = heroes;
         }
-        public void StartBattle()
+        public void Start()
         {
             while (Heroes.Members.Count > 0 && Enemies.Members.Count > 0)
             {
@@ -50,8 +50,8 @@ namespace TheFinalBattle
                 
                 Console.WriteLine("-------------------------------------");
                 
-                enemy.RemoveDeadMembers(actualParty.Inventory);
-                actualParty.RemoveDeadMembers(enemy.Inventory);
+                enemy.CleanParty(actualParty.Inventory);
+                actualParty.CleanParty(enemy.Inventory);
             }
         }
     }

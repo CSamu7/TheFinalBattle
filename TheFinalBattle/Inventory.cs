@@ -2,13 +2,14 @@
 
 namespace TheFinalBattle
 {
+
     public record SlotInventory(Item Item, int Amount = 1);
     public class Inventory
     {
         public List<SlotInventory> Items { get; init; } = new List<SlotInventory>();
         public void AddItem(Item item, int amount = 1)
         {
-            int index = Items.FindIndex(slot => slot.Item == item);
+            int index = Items.FindIndex(slot => item.ID == slot.Item.ID);
 
             if (index == -1)
             {
@@ -29,7 +30,7 @@ namespace TheFinalBattle
         }
         public void RemoveItem(Item itemToRemove, int amount = 1)
         {
-            int index = Items.FindIndex(slot => slot.Item == itemToRemove);
+            int index = Items.FindIndex(slot => slot.Item.ID == itemToRemove.ID);
 
             if (index == -1) return;
 

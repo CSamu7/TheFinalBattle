@@ -24,5 +24,10 @@
         {
             ConsoleUtils.WriteLine(message, ConsoleColor.Red);
         }
+
+        public static void Warn(string message)
+        {
+            ConsoleUtils.WriteLine(message, ConsoleColor.Yellow);
+        }
     }
 }

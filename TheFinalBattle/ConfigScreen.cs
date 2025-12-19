@@ -1,51 +1,35 @@
 ﻿using TheFinalBattle.Generators;
 using TheFinalBattle.Levels;
 using TheFinalBattle.PartyControl;
+using TheFinalBattle.PlayableClasses;
+using TheFinalBattle.PlayableClasses.Heroes;
 using Utils;
 
 namespace TheFinalBattle
 {
-    public record GameConfiguration(
-        IPartyControl HeroePartyAI, 
-        IPartyControl EnemyPartyAI, 
-        ILevelBuilder LevelConfiguration);
-    public class ConfigurationScreen
+    public class GameSettings(PartySettings partyConfiguration, List<Level> levels)
     {
-        public GameConfiguration CreateConfigGame()
+        public PartySettings PartyConfiguration { get; set; } = partyConfiguration;
+        public List<Level> Levels { get; } = levels;
+    }
+    public class PartySettings(IPartyControl heroePartyAI, IPartyControl enemyPartyAI)
+    {
+        public IPartyControl HeroePartyAI { get; set; } = heroePartyAI;
+        public IPartyControl EnemyPartyAI { get; set; } = enemyPartyAI;
+    }
+    public class PlayerConfiguration()
+    {
+        public Entity GetPlayer()
         {
-            Console.WriteLine("Configuration of the game: ");
-            IPartyControl heroesAI = GetPartyAI("The heroes are controlled by (PC, Human): ");
-            IPartyControl enemiesAI = GetPartyAI("The monsters are controlled by (PC, Human): ");
-            ILevelBuilder levelBuilder = GetLevelBuilder();
+            Console.Write("Enter your name, hero: ");
+            string name = Console.ReadLine() ?? "A hero with no name";
 
-            return new GameConfiguration(heroesAI, enemiesAI, levelBuilder);
+            return new Protagonist(name);
         }
-        private ILevelBuilder GetLevelBuilder()
-        {
-            while (true) {
-                string input = ConsoleUtils.Input("Do you want to load your own levels? (y/n) ");
-
-                if (input == "n") return new ScriptLevelBuilder();
-                if (input == "") continue;
-
-                try
-                {
-                    string pathname = ConsoleUtils.Input("Enter the pathname of the file: ");
-
-                    if (!File.Exists(pathname))
-                    {
-                        ConsoleUtils.Error($"The file doesn't exist");
-                        continue;
-                    }
-
-                    return new FileLevelBuilder(pathname);
-                }   catch (Exception e)
-                {
-                    ConsoleUtils.Error("The serialization failed. Check if your levels.json is well formatted");
-                }
-            }
-        }
-        private IPartyControl GetPartyAI(string message)
+    }
+    public class PartyConfiguration()
+    {
+        public IPartyControl GetPartyAI(string message)
         {
             PartyControlValidator _partyValidator = new PartyControlValidator();
 
@@ -57,6 +41,59 @@ namespace TheFinalBattle
 
                 if (ai is not null) return ai;
             }
+        }
+    }
+    public class LevelConfiguration
+    {
+        public List<Level> GetLevels()
+        {
+            ILevelBuilder? levelBuilder = null;
+
+            while (true)
+            {
+                string input = ConsoleUtils.Input("Do you want to load your own levels? (y/n) ");
+
+                if (input == "n")
+                    levelBuilder = new ScriptLevelBuilder();
+
+                if (input == "y")
+                    levelBuilder = GetFileBuilder();
+
+                if (levelBuilder is not null)
+                    break;
+            } 
+
+            return levelBuilder.GetLevels();
+        }
+
+        private FileLevelBuilder GetFileBuilder()
+        {
+            while (true)
+            {
+                string pathname = ConsoleUtils.Input("Enter the pathname of the file: ");
+
+                if (!File.Exists(pathname))
+                {
+                    ConsoleUtils.Error($"The file doesn't exist");
+                    continue;
+                }
+
+                return new FileLevelBuilder(pathname);
+            }
+        }
+    }
+    public class ScreenConfiguration
+    {
+        LevelConfiguration levelConfig = new LevelConfiguration();
+        PartyConfiguration partyConfig = new PartyConfiguration();
+        public GameSettings GetSettings()
+        {
+            Console.WriteLine("Configuration of the game: ");
+            IPartyControl heroesAI = partyConfig.GetPartyAI("The heroes are controlled by (PC, Human): ");
+            IPartyControl enemiesAI = partyConfig.GetPartyAI("The monsters are controlled by (PC, Human): ");
+            List<Level> levelBuilder = levelConfig.GetLevels();
+
+            return new GameSettings(new(heroesAI, enemiesAI), levelBuilder);
         }
     }
 }
