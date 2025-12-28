@@ -3,23 +3,27 @@
 namespace TheFinalBattle
 {
 
-    public record SlotInventory(Item Item, int Amount = 1);
+    public class SlotInventory(Item item, int amount = 1)
+    {
+        public Item Item { get; init; } = item;
+        public int Amount { get; set; } = amount;
+    }
     public class Inventory
     {
         public List<SlotInventory> Items { get; init; } = new List<SlotInventory>();
         public void AddItem(Item item, int amount = 1)
         {
-            int index = Items.FindIndex(slot => item.ID == slot.Item.ID);
+            int index = Items.FindIndex(slot => item.Id == slot.Item.Id);
 
             if (index == -1)
             {
                 Items.Add(new SlotInventory(item, amount));
             } else
             {
-                Items[index] = Items[index] with { Amount = amount + Items[index].Amount };
+                Items[index].Amount += amount;
             }
         }
-        public void TransferInventory(Inventory invDestiny)
+        public void Transfer(Inventory invDestiny)
         {
             foreach (SlotInventory invItem in Items)
             {
@@ -30,7 +34,7 @@ namespace TheFinalBattle
         }
         public void RemoveItem(Item itemToRemove, int amount = 1)
         {
-            int index = Items.FindIndex(slot => slot.Item.ID == itemToRemove.ID);
+            int index = Items.FindIndex(slot => slot.Item.Id == itemToRemove.Id);
 
             if (index == -1) return;
 
@@ -39,7 +43,7 @@ namespace TheFinalBattle
                 Items.RemoveAt(index);
             } else
             {
-                Items[index] = Items[index] with { Amount = Items[index].Amount - amount };
+                Items[index].Amount -= amount;
             }
         }
     }

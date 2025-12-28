@@ -1,6 +1,7 @@
 ﻿using TheFinalBattle.Items;
 using TheFinalBattle.PlayableClasses;
 using TheFinalBattle.PlayerCommands;
+using TheFinalBattle.PlayerCommands.Attacks;
 
 namespace TheFinalBattle.PartyControl
 {
@@ -47,9 +48,9 @@ namespace TheFinalBattle.PartyControl
         public IEntityCommand SelectAttack(Party enemies, Entity entity)
         {
             if (entity.Gear is not null)
-                return new Attack(entity.Gear.SpecialAttack, enemies.Members[0]);
+                return new AttackCommand(entity.Gear.SpecialAttack, enemies.Members[0]);
 
-            return new Attack(entity.StandardAttack, enemies.Members[0]);
+            return new AttackCommand(entity.StandardAttack, enemies.Members[0]);
         }
     }
 }

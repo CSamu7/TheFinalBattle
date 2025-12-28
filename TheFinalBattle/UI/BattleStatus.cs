@@ -32,7 +32,7 @@ namespace TheFinalBattle.Interface
             Console.WriteLine(_innerBorder);
 
             Thread.Sleep(800);
-            Console.WriteLine($"It is {entity.Name} turn...");
+            Console.WriteLine($"It is {entity} turn...");
         }
         private void DisplayTitle()
         {
@@ -50,10 +50,10 @@ namespace TheFinalBattle.Interface
             foreach (Entity entity in party.Members)
             {
                 ConsoleColor entityActiveColor = actualEntity == entity ? ConsoleColor.Yellow : ConsoleColor.White;
-                ConsoleUtils.WriteLine($"* {entity.Name} ({entity.HP}/{entity.MaxHP})", entityActiveColor);
+                ConsoleUtils.WriteLine($"* {entity} ({entity.HP}/{entity.MaxHP})", entityActiveColor);
                 if (entity.Gear is not null)
                 {
-                    Console.WriteLine($"  - {entity.Gear.Name}");
+                    Console.WriteLine($"  - {entity.Gear}");
                 }
             }
         }
@@ -63,10 +63,10 @@ namespace TheFinalBattle.Interface
 
             foreach (Entity entity in party.Members)
             {
-                Console.WriteLine($"{_tabs}* {entity.Name} ({entity.HP}/{entity.MaxHP})");
+                Console.WriteLine($"{_tabs}* {entity} ({entity.HP}/{entity.MaxHP})");
                 if (entity.Gear is not null)
                 {
-                    Console.WriteLine($"{_tabs}  - {entity.Gear.Name}");
+                    Console.WriteLine($"{_tabs}  - {entity.Gear}");
                 }
             }
         }

@@ -1,4 +1,4 @@
-﻿namespace TheFinalBattle.Attacks
+﻿namespace TheFinalBattle.PlayerCommands.Attacks
 {
     public class Zionga : IAttack
     {

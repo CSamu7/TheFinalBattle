@@ -1,7 +1,7 @@
 ﻿namespace TheFinalBattle.Generators
 {
     public record Level(
-        Party Enemies,
+        Party EnemyParty,
         List<SlotInventory> Rewards
     );
     public interface ILevelBuilder

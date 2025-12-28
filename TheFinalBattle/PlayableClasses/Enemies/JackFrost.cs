@@ -1,5 +1,5 @@
-﻿using TheFinalBattle.Attacks;
-using TheFinalBattle.Items;
+﻿using TheFinalBattle.Items;
+using TheFinalBattle.PlayerCommands.Attacks;
 
 namespace TheFinalBattle.PlayableClasses.Enemies
 {

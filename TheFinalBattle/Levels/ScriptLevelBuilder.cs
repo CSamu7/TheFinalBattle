@@ -9,13 +9,18 @@ namespace TheFinalBattle.Levels
         private readonly List<Level> _levels = new List<Level>()
         {
             new Level(
-                Enemies: [new Pixie()],
-                EnemyInventory: new Inventory{ Items=[ new (new Medicine()) ] },
+                EnemyParty: new Party
+                {
+                    Members = [new Pixie()],
+                    Inventory =  new Inventory{ Items=[ new (new Medicine()) ] }
+                },
                 Rewards: [new(new Medicine())]
             ),
             new Level(
-                Enemies: [new Mothman(), new Mothman()],
-                EnemyInventory: new(),
+                EnemyParty: new Party
+                {
+                    Members = [new Mothman(), new Mothman()],
+                },
                 Rewards: [new(new Gun())]
             )
         };

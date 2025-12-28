@@ -5,45 +5,43 @@ namespace TheFinalBattle
 {
     public class Battles
     {
-        public int battleNumber { get; private set; } = 1;
         private readonly List<Level> _levels;
-        private Level? _level;
-        public Battles(List<Level> levels)
+        private readonly GameSettings _gameSettings;
+        public Battles(GameSettings gameSettings)
         {
-            _levels = levels;
+            _gameSettings = gameSettings;
+            _levels = gameSettings.Levels;
         }
-        public void Start(Party heroes, Party enemies)
+        public void Start(Party heroes)
         {
-            while (heroes.Members.Count > 0)
+            for (int i = 0; i < _levels.Count; i++)
             {
-                if (_levels.ElementAtOrDefault(battleNumber) is null)
-                {
-                    BattleResults.DisplayGameOver();
+                _levels[i].EnemyParty.PartyControl = _gameSettings.PartySettings.EnemyPartyAI;
+
+                Battle battle = new Battle(heroes, _levels[i].EnemyParty);
+                Party winners = battle.Start();
+
+                if (winners != heroes)
                     return;
-                }
 
-                Battle battle = new Battle(heroes, enemies);
-                battle.Start();
+                FinishBattle(winners, battle, _levels[i]);
+            }
 
-                FinishBattle(battle);
+            BattleResults.DisplayGameOver();
+        }
+        private void GiveItems(List<SlotInventory> items, Party party)
+        {
+            foreach (SlotInventory itemAmount in items) {
+                party.Inventory.AddItem(itemAmount.Item, itemAmount.Amount);
             }
         }
-        public void FinishBattle(Battle battle)
+        private void FinishBattle(Party winners, Battle battle, Level level)
         {
             var results = new BattleResults(battle);
-            results.DisplayResults();
-
-            Inventory enemyInventory = battle.Enemies.Inventory;
-            Inventory heroesInventory = battle.Heroes.Inventory;
-
-            enemyInventory.TransferInventory(heroesInventory);
-
-            foreach(SlotInventory slot in _level.Rewards)
-            {
-                battle.Heroes.Inventory.AddItem(slot.Item, slot.Amount);
-            }
-
-            battleNumber++;
+            results.DisplayResults(level.Rewards);
+            
+            GiveItems(level.Rewards, winners);
+            battle.Enemies.Inventory.Transfer(winners.Inventory);
         }
     }
 }

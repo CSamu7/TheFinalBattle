@@ -43,3 +43,5 @@ namespace TheFinalBattle
         }
     }
 }
+
+public enum PartyControl { AI, Player };

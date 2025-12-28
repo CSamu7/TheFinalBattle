@@ -1,64 +1,80 @@
-﻿using TheFinalBattle.Items;
-using Utils;
+﻿using Utils;
 
 namespace TheFinalBattle.Interface
 {
     public class BattleResults
     {
+        //Esta clase hace un monton de cosas
         private Battle _battle;
         public BattleResults(Battle battle) { 
             _battle = battle;
         }
-        public static void DisplayGameOver()
+        public void DisplayResults(List<SlotInventory> rewards)
         {
-            Console.WriteLine("GAME OVER!");
-            Console.WriteLine("Thanks for play");
-        }
-        public void DisplayResults()
-        {
+            Console.WriteLine("-------------------------------------");
             Console.WriteLine("The battle has finished!");
             Thread.Sleep(500);
 
             if (_battle.Heroes.Members.Count <= 0)
             {
                 DisplayDefeat();
-                Console.WriteLine("End of the game!");
-            } else
-            {
-                DisplayVictory();
+                return;
             }
+
+            DisplayVictory(rewards);
 
             Console.WriteLine("The next battle is starting...");
             Thread.Sleep(800);
         }
-        private void DisplayVictory()
+        public static void DisplayGameOver()
+        {
+            Console.WriteLine("GAME OVER!");
+            Console.WriteLine("Thanks for play");
+        }
+        private void DisplayVictory(List<SlotInventory> rewards)
         {
             Console.WriteLine("You have won!");
-            DisplayItemsWon();
+            DisplayItemsStolen();
+            DisplayRewards(rewards);
         }
         private void DisplayDefeat()
         {
             ConsoleUtils.WriteLine("You have been defeated...", ConsoleColor.Red);
+            Console.WriteLine("End of the game!");
         }
-        private void DisplayItemsWon()
+
+        //Mas o menos, siento que se podría hacer mejor
+        private void DisplayItemsStolen()
         {
             Inventory enemyInventory = _battle.Enemies.Inventory;
 
-            if(enemyInventory.Items.Count <= 0)
+            if (enemyInventory.Items.Count <= 0)
             {
-                Console.WriteLine("The enemies didn't have anything!");
+                ConsoleUtils.WriteLine("The enemies didn't have anything!", ConsoleColor.Red);
             } else
             {
-                Console.WriteLine("You have got the next items: ");
-
-                foreach (SlotInventory itemInv in enemyInventory.Items)
-                {
-                    Console.WriteLine($" * {itemInv.Item.Name} x{itemInv.Amount}");
-                    Thread.Sleep(800);
-                }
+                Console.WriteLine("The enemies had the next items: ");
+                DisplayItemList(enemyInventory.Items);
             }
+        }
+
+        //Las funciones de aqui siento que no van con esta clase. Sobretodo porque pueden ser usadas por otras.
+        private void DisplayRewards(List<SlotInventory> rewards)
+        {
+            Console.WriteLine("You have won the next items:");
+            DisplayItemList(rewards);
 
             Thread.Sleep(1000);
         }
+        public void DisplayItemList(List<SlotInventory> items)
+        {
+            foreach (SlotInventory item in items)
+            {
+                item.Item.ToString();
+                DisplayItem(item);
+            }
+        }
+        private void DisplayItem(SlotInventory itemInv) =>
+            Console.WriteLine($" * {itemInv.Item} x{itemInv.Amount}");
     }
 }

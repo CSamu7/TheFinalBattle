@@ -2,6 +2,7 @@
 using TheFinalBattle.DTO;
 using TheFinalBattle.Generators;
 using TheFinalBattle.UI;
+using TheFinalBattle.Validations;
 
 namespace TheFinalBattle.Levels
 {
@@ -12,7 +13,6 @@ namespace TheFinalBattle.Levels
             PropertyNameCaseInsensitive = true,
             DefaultIgnoreCondition = System.Text.Json.Serialization.JsonIgnoreCondition.WhenWritingNull,
         };
-
         private readonly string _pathname;
         public FileLevelBuilder(string pathname)
         {
@@ -28,15 +28,16 @@ namespace TheFinalBattle.Levels
 
             return parsedLevels;
         }
-        public List<Level> GetLevels(LevelConfiguration levelConfiguration)
+        public List<Level> GetLevels()
         {
             List<LevelDTO> parsedLevels = ParseFromStream();
-            LevelFormatter levelFormatter = new LevelFormatter(levelConfiguration);
-            FileValidationUI validation = new FileValidationUI();
+            LevelsFormatter levelFormatter = new LevelsFormatter();
+            List<Level> validLevels = levelFormatter.Format(parsedLevels);
 
+            FileValidationUI validation = new FileValidationUI(levelFormatter.FormatErrors);
             validation.Display();
 
-            return parsedLevels;
+            return validLevels;
         }
     }
 }

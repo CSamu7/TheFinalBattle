@@ -1,5 +1,5 @@
-﻿using TheFinalBattle.Attacks;
-using TheFinalBattle.PlayableClasses;
+﻿using TheFinalBattle.PlayableClasses;
+using TheFinalBattle.PlayerCommands.Attacks;
 
 namespace TheFinalBattle.Interface
 {

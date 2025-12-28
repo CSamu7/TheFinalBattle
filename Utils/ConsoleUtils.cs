@@ -14,10 +14,16 @@
             Console.WriteLine(message);
             Console.ForegroundColor = ConsoleColor.White;
         }
-        public static string Input(string message)
+
+        /// <summary>
+        /// Get input from the user and return a lowercase string.
+        /// </summary>
+        /// <param name="message"></param>
+        /// <returns></returns>
+        public static string GetInput(string message)
         {
             Console.Write(message);
-            string input = Console.ReadLine() ?? "";
+            string input = Console.ReadLine() ?? String.Empty;
             return input.Clean();
         }
         public static void Error(string message)

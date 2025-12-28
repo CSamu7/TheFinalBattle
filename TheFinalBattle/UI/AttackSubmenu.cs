@@ -1,6 +1,6 @@
-﻿using TheFinalBattle.Attacks;
-using TheFinalBattle.PlayableClasses;
+﻿using TheFinalBattle.PlayableClasses;
 using TheFinalBattle.PlayerCommands;
+using TheFinalBattle.PlayerCommands.Attacks;
 
 namespace TheFinalBattle.Interface
 {
@@ -31,7 +31,7 @@ namespace TheFinalBattle.Interface
                 if (_enemies.Members.Count == 1 && attack is null) return null;
                 if (attack is null) continue;
 
-                return new Attack(attack, enemy);
+                return new AttackCommand(attack, enemy);
             }
         }
     }

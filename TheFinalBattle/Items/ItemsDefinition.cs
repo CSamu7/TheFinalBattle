@@ -1,35 +1,48 @@
 ﻿
-using TheFinalBattle.Attacks;
 using TheFinalBattle.Effects;
+using TheFinalBattle.PlayerCommands.Attacks;
 
 namespace TheFinalBattle.Items
 {
-    public interface IGameObject
+    public record Item(int Id, string Name, string Description)
     {
-        public int Id { get; init; }
-        public string Name { get; init; }
+        public override string ToString() => Name;
     }
-    public record Item(int Id, string Name, string Description) : IGameObject;
     public record Potion(int Id, string Name, string Description, IEffect Effect)
-    : Item(Id, Name, Description);
+    : Item(Id, Name, Description)
+    {
+        public override string ToString() => base.ToString();
+    }
     public record Gear(int Id, string Name, string Description, IAttack SpecialAttack)
-        : Item(Id, Name, Description);
-      
-    public record Medicine() : Potion(1, "Medicine", "Heal 10HP", new Heal(10));
-    public record LuminaSaber() : Gear(2, "Lumina Saber", "A glimmering saber", new BladedRunners());
-    public record Misericorde() : Gear(3, "Misericorde", "A mercy stroke!", new Bufu());
+        : Item(Id, Name, Description)
+    {
+        public override string ToString() => base.ToString();
+    }
+    //Potions
+    public record Medicine() : Potion(1, "Medicine", "Heal 10HP", new Heal(10))
+    {
+        public override string ToString() => base.ToString();
+    }
+    //Gears
+    public record LuminaSaber() : Gear(2, "Lumina Saber", "A glimmering saber", new BladedRunners())
+    {
+        public override string ToString() => base.ToString();
+    }
+    public record Misericorde() : Gear(3, "Misericorde", "A mercy stroke!", new Bufu())
+    {
+        public override string ToString() => base.ToString();
+    }
     public record KolossSword() : Gear(4, "Koloss Sword", "A heavy sword", new Push());
     public record GlassKnife() : Gear(5, "Glass Knife", "", new Slash());
     public record Gun() : Gear(6, "Gun", "", new QuickShot());
     public record ShortGun() : Gear(7, "Short Gun", "", new PowerfulShot());
-
-    public interface IObjectList<T> where T : IGameObject
+    public interface IObjectList<T>
     {
         public T? GetByID(int ID);
     }
-    public class ItemList : IObjectList <Item>
+    public class ItemList : IObjectList<Item>
     {
-        private List<Item> _items = new List<Item>()
+        private readonly List<Item> _items = new List<Item>()
         {
             new Medicine(),
             new LuminaSaber(),

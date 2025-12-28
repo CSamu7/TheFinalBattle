@@ -1,12 +1,12 @@
-﻿using TheFinalBattle.Attacks;
-using TheFinalBattle.Items;
+﻿using TheFinalBattle.Items;
 using TheFinalBattle.PlayableClasses.Enemies;
 using TheFinalBattle.PlayableClasses.Heroes;
+using TheFinalBattle.PlayerCommands.Attacks;
 using Utils;
 
 namespace TheFinalBattle.PlayableClasses
 {
-    public abstract class Entity : IGameObject
+    public abstract class Entity
     {
         public abstract int Id { get; init; }
         public abstract string Name { get; init; }
@@ -31,13 +31,10 @@ namespace TheFinalBattle.PlayableClasses
 
             return null;
         }
+        public override string ToString() => Name;
     };
     public class EntitiesList : IObjectList<Entity>
     {
-        public EntitiesList()
-        {
-            List<Entity> test = _entities.Distinct().ToList();
-        }
         private readonly List<Entity> _entities = new List<Entity>
         {
             new Pixie(),
@@ -50,6 +47,6 @@ namespace TheFinalBattle.PlayableClasses
             new WealthHand(), 
             new Reaper() 
         };
-        public Entity? GetByID(int id) => _entities.Where(entity => entity.ID == id).FirstOrDefault(); 
+        public Entity? GetByID(int id) => _entities.Where(entity => entity.Id == id).FirstOrDefault(); 
     }
 }

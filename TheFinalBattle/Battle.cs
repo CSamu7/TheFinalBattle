@@ -13,17 +13,27 @@ namespace TheFinalBattle
             Enemies = enemies;
             Heroes = heroes;
         }
-        public void Start()
+        /// <summary>
+        /// Returns the winner party
+        /// </summary>
+        /// <returns></returns>
+        public Party Start()
         {
             while (Heroes.Members.Count > 0 && Enemies.Members.Count > 0)
             {
                 StartTurn(Heroes);
 
-                if (Heroes.Members.Count <= 0 || Enemies.Members.Count <= 0) break;
+                if (isBattleFinished()) break;
                     
                 StartTurn(Enemies);
             }
+
+            return GetWinnerParty();
         }
+        private bool isBattleFinished() =>
+            Heroes.Members.Count == 0 || Enemies.Members.Count == 0;
+        public Party GetWinnerParty() =>
+            Enemies.Members.Count == 0 ? Heroes : Enemies;
         public Party GetPartyFor(Entity entity)
         {
             return Heroes.Members.Contains(entity)
@@ -36,6 +46,9 @@ namespace TheFinalBattle
                     ? Enemies
                     : Heroes;
         }
+
+        //Me sigue sin convencer este metodo
+        //Deberiamos crear una clase llamada Turn? La verdad no lo se.
         private void StartTurn(Party actualParty)
         {
             Party enemy = GetEnemyPartyFor(actualParty.Members[0]);
@@ -47,8 +60,6 @@ namespace TheFinalBattle
                 _battleStatus.Display(entity, this);
                 IEntityCommand command = actualParty.PartyControl.SelectAction(entity, this);
                 command.Execute(entity);
-                
-                Console.WriteLine("-------------------------------------");
                 
                 enemy.CleanParty(actualParty.Inventory);
                 actualParty.CleanParty(enemy.Inventory);

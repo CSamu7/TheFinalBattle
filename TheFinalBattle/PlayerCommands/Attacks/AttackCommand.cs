@@ -1,14 +1,13 @@
-﻿using TheFinalBattle.Attacks;
-using TheFinalBattle.PlayableClasses;
+﻿using TheFinalBattle.PlayableClasses;
 using Utils;
 
-namespace TheFinalBattle.PlayerCommands
+namespace TheFinalBattle.PlayerCommands.Attacks
 {
-    public class Attack : IEntityCommand
+    public class AttackCommand : IEntityCommand
     {
         private IAttack _attack;
         private Entity _enemy;
-        public Attack(IAttack attack, Entity enemy)
+        public AttackCommand(IAttack attack, Entity enemy)
         {
             _attack = attack;
             _enemy = enemy;
@@ -18,10 +17,14 @@ namespace TheFinalBattle.PlayerCommands
             _enemy.HP -= damage;
             if (_enemy.HP < 0) _enemy.HP = 0;
 
+            //TODO: Mover a una AttackCommandUI clase.
+
             Console.WriteLine($"{player.Name.ToUpper()} used {_attack.Name.ToUpper()} on {_enemy.Name.ToUpper()}");
             Console.WriteLine($"{_attack.Name.ToUpper()} dealt {damage} damage to {_enemy.Name.ToUpper()} ");
             Console.WriteLine($"{_enemy.Name.ToUpper()} is now at {_enemy.HP}/{_enemy.MaxHP}");
         }
+
+        //TODO: Mover a una AttackCommandUI clase.
         private void FailAttack(Entity player)
         {
             ConsoleUtils.WriteLine($"{player.Name.ToUpper()} fail its attack!", ConsoleColor.Red);
