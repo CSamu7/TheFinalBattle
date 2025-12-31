@@ -1,4 +1,5 @@
-﻿using TheFinalBattle.Generators;
+﻿using System.Text.Json;
+using TheFinalBattle.Generators;
 using TheFinalBattle.Levels;
 using Utils;
 
@@ -6,7 +7,28 @@ namespace TheFinalBattle.UI
 {
     public class LevelConfigUI
     {
-        public List<Level> GetLevelBuilder()
+        private LevelsFileMenu _fileMenuUI = new LevelsFileMenu();
+        public List<Level> GetLevels()
+        {
+            List<Level> levels = new List<Level>();
+
+            while (true)
+            {
+                try
+                {
+                    ILevelBuilder levelBuilder = GetLevelBuilder();
+                    levels = levelBuilder.GetLevels();
+
+                    if (levels.Count > 0)
+                        return levels;
+                } catch (JsonException error) //No me gusta aqui porque es muy especifico al FileLevelBuilder
+                {
+                    ConsoleUtils.Error(error.Message);
+                    continue;
+                }
+            }
+        }
+        public ILevelBuilder GetLevelBuilder()
         {
             ILevelBuilder? levelBuilder = null;
 
@@ -14,14 +36,18 @@ namespace TheFinalBattle.UI
             {
                 string input = ConsoleUtils.GetInput("Do you want to load your own levels? (y/n) ");
 
-                if (input == "n")
-                    levelBuilder = new ScriptLevelBuilder();
+                levelBuilder = input switch
+                {
+                    "n" => new ScriptLevelBuilder(),
+                    "y" => GetFileBuilder(),
+                    _ => null
+                };
 
-                if (input == "y")
-                    levelBuilder = GetFileBuilder();
+                if (levelBuilder is null)
+                    ConsoleUtils.Error("You have to enter an acceptable option (y/n)");
             }
 
-            return levelBuilder.GetLevels();
+            return levelBuilder;
         }
         private FileLevelBuilder GetFileBuilder()
         {

@@ -48,7 +48,7 @@ namespace TheFinalBattle.UI
         }
         private void DisplayError(LevelError error)
         {
-            if (error.Equals(ErrorType.Error))
+            if (error.ErrorType.Equals(ErrorType.Error))
             {
                 ConsoleUtils.Error($" (ERROR) {error.Message}");
             } else

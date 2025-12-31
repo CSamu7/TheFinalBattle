@@ -55,7 +55,7 @@ namespace TheFinalBattle.Validations
 
             foreach (var rawEntity in rawEntities)
             {
-                Entity? entity = FormatObject(rawEntity.Id, new EntitiesList(), $"La {rawEntity.Id}");
+                Entity? entity = FormatObject(rawEntity.Id, new EntitiesList(), $"Enemigo con ID {rawEntity.Id} no existe");
 
                 if (entity is not null) enemies.Add(entity);
             }

@@ -14,6 +14,7 @@ namespace TheFinalBattle.Levels
             DefaultIgnoreCondition = System.Text.Json.Serialization.JsonIgnoreCondition.WhenWritingNull,
         };
         private readonly string _pathname;
+        private LevelsFormatter _levelFormatter = new LevelsFormatter();
         public FileLevelBuilder(string pathname)
         {
             _pathname = Path.Combine(Directory.GetCurrentDirectory(), pathname);
@@ -21,6 +22,7 @@ namespace TheFinalBattle.Levels
         private List<LevelDTO> ParseFromStream()
         {
             using FileStream stream = File.OpenRead(_pathname);
+
             List<LevelDTO>? parsedLevels = JsonSerializer.Deserialize<List<LevelDTO>>(stream, _jsonOptions);
 
             if (parsedLevels is null)
@@ -31,10 +33,9 @@ namespace TheFinalBattle.Levels
         public List<Level> GetLevels()
         {
             List<LevelDTO> parsedLevels = ParseFromStream();
-            LevelsFormatter levelFormatter = new LevelsFormatter();
-            List<Level> validLevels = levelFormatter.Format(parsedLevels);
+            List<Level> validLevels = _levelFormatter.Format(parsedLevels);
 
-            FileValidationUI validation = new FileValidationUI(levelFormatter.FormatErrors);
+            FileValidationUI validation = new FileValidationUI(_levelFormatter.FormatErrors);
             validation.Display();
 
             return validLevels;
