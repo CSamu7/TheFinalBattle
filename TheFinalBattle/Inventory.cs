@@ -3,21 +3,21 @@
 namespace TheFinalBattle
 {
 
-    public class SlotInventory(Item item, int amount = 1)
+    public class ItemAmount(Item item, int amount = 1)
     {
         public Item Item { get; init; } = item;
         public int Amount { get; set; } = amount;
     }
     public class Inventory
     {
-        public List<SlotInventory> Items { get; init; } = new List<SlotInventory>();
+        public List<ItemAmount> Items { get; init; } = new List<ItemAmount>();
         public void AddItem(Item item, int amount = 1)
         {
             int index = Items.FindIndex(slot => item.Id == slot.Item.Id);
 
             if (index == -1)
             {
-                Items.Add(new SlotInventory(item, amount));
+                Items.Add(new ItemAmount(item, amount));
             } else
             {
                 Items[index].Amount += amount;
@@ -25,7 +25,7 @@ namespace TheFinalBattle
         }
         public void Transfer(Inventory invDestiny)
         {
-            foreach (SlotInventory invItem in Items)
+            foreach (ItemAmount invItem in Items)
             {
                 invDestiny.AddItem(invItem.Item, invItem.Amount);
             }

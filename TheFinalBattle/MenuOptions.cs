@@ -30,7 +30,7 @@ namespace TheFinalBattle
         {
             List<MenuItemAction<Item>> optionItems = new();
 
-            foreach (SlotInventory slot in inventory.Items)
+            foreach (ItemAmount slot in inventory.Items)
             {
                 optionItems.Add(
                     new MenuItemAction<Item>($"{slot.Item.Name} x{slot.Amount}", true, slot.Item));

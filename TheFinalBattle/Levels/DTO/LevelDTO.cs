@@ -1,13 +1,13 @@
-﻿namespace TheFinalBattle.DTO
+﻿namespace TheFinalBattle.Levels.DTO
 {
     public class PartyDTO
     {
-        public required List<SlotInventoryDTO> Inventory { get; set; }
+        public required List<ItemAmountDTO> Inventory { get; set; }
         public required List<EntityDTO> Enemies { get; set; }
     }
     public class LevelDTO
     {
         public required PartyDTO PartyEnemy { get; init; }
-        public required List<SlotInventoryDTO> Rewards { get; init; }
+        public required List<ItemAmountDTO> Rewards { get; init; } = [];
     }
 }

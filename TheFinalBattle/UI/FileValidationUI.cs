@@ -1,15 +1,15 @@
-﻿using Utils;
+﻿using TheFinalBattle.Levels.Parser;
+using Utils;
 
 namespace TheFinalBattle.UI
 {
-    public enum ErrorType { Warn, Error}
-    public record LevelError(string Message, ErrorType ErrorType);
-    public record LevelErrors(List<LevelError> Errors);
+    public record MappingError(string Message, ErrorType ErrorType);
+    public record LevelErrors(List<MappingError> Errors);
     public class FileValidationUI
     {
-        private readonly List<LevelErrors> _errors;
-        private string _title = "Validación de Niveles";
-        public FileValidationUI(List<LevelErrors> errors)
+        private readonly List<List<MappingError>> _errors;
+        private readonly string _title = "Validación de Niveles";
+        public FileValidationUI(List<List<MappingError>> errors)
         {
             _errors = errors;
         }
@@ -22,31 +22,25 @@ namespace TheFinalBattle.UI
             {
                 Console.WriteLine($"Level {i + 1}:");
 
-                var errorsInLevel = _errors[i].Errors;
-                DisplayLevelErrors(errorsInLevel);
+                if (_errors[i].Count == 0)
+                {
+                    ConsoleUtils.WriteLine("Valid level", ConsoleColor.Green);
+                } else
+                {
+                    foreach (MappingError error in _errors[i])
+                    {
+                        DisplayError(error);
+                    }
+                }
             }
-
-            //Deberiamos darle la opción al usuario de volver a escoger que niveles quiere cargar
+            //TODO: Deberiamos darle la opción al usuario de volver a escoger que niveles quiere cargar
             //o si quiere proseguir.
-            Thread.Sleep(2000);
+            Console.ReadLine();
             
             Console.Clear();
 
         }
-        private void DisplayLevelErrors(List<LevelError> errorsInLevel)
-        {
-            if (errorsInLevel.Count == 0)
-            {
-                ConsoleUtils.WriteLine("No errors found!", ConsoleColor.Green);
-                return;
-            }
-
-            foreach (var error in errorsInLevel)
-            {
-                DisplayError(error);
-            }
-        }
-        private void DisplayError(LevelError error)
+        private void DisplayError(MappingError error)
         {
             if (error.ErrorType.Equals(ErrorType.Error))
             {

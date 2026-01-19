@@ -9,7 +9,7 @@ namespace TheFinalBattle.Interface
         public BattleResults(Battle battle) { 
             _battle = battle;
         }
-        public void DisplayResults(List<SlotInventory> rewards)
+        public void DisplayResults(List<ItemAmount> rewards)
         {
             Console.WriteLine("-------------------------------------");
             Console.WriteLine("The battle has finished!");
@@ -31,7 +31,7 @@ namespace TheFinalBattle.Interface
             Console.WriteLine("GAME OVER!");
             Console.WriteLine("Thanks for play");
         }
-        private void DisplayVictory(List<SlotInventory> rewards)
+        private void DisplayVictory(List<ItemAmount> rewards)
         {
             Console.WriteLine("You have won!");
             DisplayItemsStolen();
@@ -59,22 +59,22 @@ namespace TheFinalBattle.Interface
         }
 
         //Las funciones de aqui siento que no van con esta clase. Sobretodo porque pueden ser usadas por otras.
-        private void DisplayRewards(List<SlotInventory> rewards)
+        private void DisplayRewards(List<ItemAmount> rewards)
         {
             Console.WriteLine("You have won the next items:");
             DisplayItemList(rewards);
 
             Thread.Sleep(1000);
         }
-        public void DisplayItemList(List<SlotInventory> items)
+        public void DisplayItemList(List<ItemAmount> items)
         {
-            foreach (SlotInventory item in items)
+            foreach (ItemAmount item in items)
             {
                 item.Item.ToString();
                 DisplayItem(item);
             }
         }
-        private void DisplayItem(SlotInventory itemInv) =>
+        private void DisplayItem(ItemAmount itemInv) =>
             Console.WriteLine($" * {itemInv.Item} x{itemInv.Amount}");
     }
 }

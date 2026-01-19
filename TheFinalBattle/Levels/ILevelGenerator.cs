@@ -2,7 +2,7 @@
 {
     public record Level(
         Party EnemyParty,
-        List<SlotInventory> Rewards
+        List<ItemAmount> Rewards
     );
     public interface ILevelBuilder
     {

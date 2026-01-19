@@ -29,9 +29,9 @@ namespace TheFinalBattle
 
             BattleResults.DisplayGameOver();
         }
-        private void GiveItems(List<SlotInventory> items, Party party)
+        private void GiveItems(List<ItemAmount> items, Party party)
         {
-            foreach (SlotInventory itemAmount in items) {
+            foreach (ItemAmount itemAmount in items) {
                 party.Inventory.AddItem(itemAmount.Item, itemAmount.Amount);
             }
         }
