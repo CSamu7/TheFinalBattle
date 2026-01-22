@@ -19,7 +19,7 @@ namespace TheFinalBattle.Levels
             List<LevelDTO> parsedLevels = _reader.Read(_pathname);
             List<Level> validLevels = _levelFormatter.MapLevels(parsedLevels);
 
-            FileValidationUI validation = new(_levelFormatter.ErrorsPerLevel);
+            FileValidationUI validation = new(_levelFormatter.Alerts);
             validation.Display();
 
             return validLevels;

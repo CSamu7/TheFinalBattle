@@ -1,19 +1,15 @@
-﻿using TheFinalBattle.Items;
-using TheFinalBattle.Levels.DTO;
-using TheFinalBattle.PlayableClasses;
-using TheFinalBattle.UI;
+﻿using TheFinalBattle.UI;
 
-namespace TheFinalBattle.Levels.Parser
+namespace TheFinalBattle.Levels.Mappers
 {
-
     public record MappingResult<T>
     {
         private T? _result;
-        public List<MappingAlert> Alerts { get; init; } = []; 
-        public T Result 
-        { 
-            get => IsValid ? _result! : throw new InvalidOperationException(); 
-            private set => _result = value; 
+        public List<MappingAlert> Alerts { get; init; } = [];
+        public T Result
+        {
+            get => IsValid ? _result! : throw new InvalidOperationException();
+            private set => _result = value;
         }
         public bool IsValid { get; init; }
         private MappingResult(T? result, List<MappingAlert> alerts, bool isValid)
@@ -27,11 +23,5 @@ namespace TheFinalBattle.Levels.Parser
 
         public static MappingResult<T> Failure(List<MappingAlert> alerts)
             => new MappingResult<T>(default(T), alerts, false);
-    }
-
-    public interface IMapper<TSource, TDestination>
-    {
-        public MappingResult<TDestination> Map(TSource destination);
-
     }
 }

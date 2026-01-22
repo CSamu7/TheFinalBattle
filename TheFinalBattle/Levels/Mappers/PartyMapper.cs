@@ -1,6 +1,5 @@
-﻿using System.Collections.Generic;
-using System.Text;
-using TheFinalBattle.Levels.DTO;
+﻿using TheFinalBattle.Levels.DTO;
+using TheFinalBattle.Levels.Mappers;
 using TheFinalBattle.PlayableClasses;
 using TheFinalBattle.UI;
 
@@ -13,25 +12,25 @@ namespace TheFinalBattle.Levels.Parser
         private readonly MapperList _mapperlist = new();
         public MappingResult<Party> Map(PartyDTO party)
         {
-            List<MappingAlert> Errors = [];
+            List<MappingAlert> Alerts = [];
 
-            (List<ItemAmount> items, List<MappingAlert> itemAlerts) = 
+            (List<ItemAmount> items, List<MappingAlert> itemAlerts) =
                 _mapperlist.MapItems(party.Inventory, _itemAmountMapper);
 
             (List<Entity> entities, List<MappingAlert> entityAlerts) =
                 _mapperlist.MapItems(party.Enemies, _entityMapper);
 
-            Errors.AddRange(itemAlerts);
-            Errors.AddRange(entityAlerts);
+            Alerts.AddRange(itemAlerts);
+            Alerts.AddRange(entityAlerts);
 
-            return MappingResult<Party>.Success(
-                new Party
-                {
-                    Inventory = new Inventory { Items = items },
-                    Members = entities
-                },
-                Errors
-            );
+            return entities.Count == 0
+                ? MappingResult<Party>.Failure(Alerts)
+                : MappingResult<Party>.Success(
+                    new Party
+                    {
+                        Inventory = new Inventory { Items = items },
+                        Members = entities
+                    }, Alerts);
         }
     }
 }

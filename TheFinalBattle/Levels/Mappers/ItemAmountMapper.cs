@@ -1,10 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using TheFinalBattle.Items;
+﻿using TheFinalBattle.Items;
 using TheFinalBattle.Levels.DTO;
+using TheFinalBattle.Levels.Mappers;
 using TheFinalBattle.UI;
 
 namespace TheFinalBattle.Levels.Parser
@@ -20,7 +16,7 @@ namespace TheFinalBattle.Levels.Parser
 
             if (item is null)
             {
-                Alerts.Add(new($"Item #{rawItem.Id} doesn't exist", ErrorType.Warn));
+                Alerts.Add(new($"Item #{rawItem.Id} doesn't exist", AlertType.Warn));
                 return MappingResult<ItemAmount>.Failure(Alerts);
             }
             

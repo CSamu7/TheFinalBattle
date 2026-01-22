@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using TheFinalBattle.Levels.Mappers;
 using TheFinalBattle.UI;
 
 namespace TheFinalBattle.Levels.Parser

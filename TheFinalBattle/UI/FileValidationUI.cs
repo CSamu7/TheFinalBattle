@@ -1,53 +1,51 @@
-﻿using TheFinalBattle.Levels.Parser;
+﻿using System.Data;
+using TheFinalBattle.Levels.Parser;
 using Utils;
 
 namespace TheFinalBattle.UI
 {
-    public record MappingAlert(string Message, ErrorType ErrorType);
+    public record MappingAlert(string Message, AlertType AlertType);
     public record LevelErrors(List<MappingAlert> Errors);
     public class FileValidationUI
     {
-        private readonly List<List<MappingAlert>> _errors;
+        private readonly List<List<MappingAlert>> _alerts;
         private readonly string _title = "Validación de Niveles";
-        public FileValidationUI(List<List<MappingAlert>> errors)
+        public FileValidationUI(List<List<MappingAlert>> alerts)
         {
-            _errors = errors;
+            _alerts = alerts;
         }
         public void Display()
         {
             Console.Clear();
             Console.WriteLine(_title);
 
-            for (int i = 0; i < _errors.Count; i++)
+            for (int i = 0; i < _alerts.Count; i++)
             {
                 Console.WriteLine($"Level {i + 1}:");
 
-                if (_errors[i].Count == 0)
+                foreach (MappingAlert alert in _alerts[i])
                 {
-                    ConsoleUtils.WriteLine("Valid level", ConsoleColor.Green);
-                } else
-                {
-                    foreach (MappingAlert error in _errors[i])
-                    {
-                        DisplayError(error);
-                    }
+                    DisplayAlert(alert);
                 }
             }
-            //TODO: Deberiamos darle la opción al usuario de volver a escoger que niveles quiere cargar
-            //o si quiere proseguir.
-            Console.ReadLine();
-            
-            Console.Clear();
 
+            Console.WriteLine("Press any key");
+            Console.ReadLine();
         }
-        private void DisplayError(MappingAlert error)
+
+        //TODO: Deberiamos darle la opción al usuario de volver a escoger que niveles quiere cargar
+        //o si quiere proseguir.
+        private void DisplayAlert(MappingAlert alert)
         {
-            if (error.ErrorType.Equals(ErrorType.Error))
+            if (alert.AlertType.Equals(AlertType.Error))
             {
-                ConsoleUtils.Error($" (ERROR) {error.Message}");
+                ConsoleUtils.Error($" (ERROR) {alert.Message}");
+            } else if(alert.AlertType.Equals(AlertType.Warn))
+            {
+                ConsoleUtils.Warn($" (WARNING) {alert.Message}");
             } else
             {
-                ConsoleUtils.Warn($" (WARNING) {error.Message}");
+                Console.WriteLine($" {alert.Message}");
             }
         }
     }
