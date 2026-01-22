@@ -9,32 +9,30 @@ using TheFinalBattle.UI;
 
 namespace TheFinalBattle.Levels.Parser
 {
-    public class LevelMapper : AbstractMapper<LevelDTO, Level?>
+    public class LevelMapper : IMapper<LevelDTO, Level>
     {
-        public override List<MappingError> Errors { get; protected set; } = [];
         private readonly PartyMapper _partyMapper = new();
         private readonly ItemAmountMapper _itemAmountMapper = new();
-        public override Level? Map(LevelDTO rawLevel)
+        public MappingResult<Level> Map(LevelDTO rawLevel)
         {
-            Errors = [];
+            List<MappingAlert> alerts = [];
 
-            List<ItemAmount> rewards =rawLevel.Rewards
-                .Select(rew => _itemAmountMapper.Map(rew))
+            List<ItemAmount> rewards = rawLevel.Rewards
+                .Select(rew => _itemAmountMapper.Map(rew).MappedObject)
                 .OfType<ItemAmount>()   
                 .ToList();
 
-            Party party = _partyMapper.Map(rawLevel.PartyEnemy);
+            MappingResult<Party> party = _partyMapper.Map(rawLevel.PartyEnemy);
 
-            Errors.AddRange(_partyMapper.Errors);
-            Errors.AddRange(_itemAmountMapper.Errors);
+            errors.AddRange(party.Errors);
 
-            if (party.Members.Count == 0)
-            {
-                Errors.Add(new("This level doesn't have valid enemies. Omitting level...", ErrorType.Error));
-                return null;
-            }
+            if (party.MappedObject?.Members.Count == 0)
+                errors.Add(new("This level doesn't have valid enemies. Omitting level...", ErrorType.Error));
 
-            return new Level(party, rewards);
+            return new MappingResult<Level>(
+                new Level(party.MappedObject, rewards),
+                errors
+            );
         }
     }
 }

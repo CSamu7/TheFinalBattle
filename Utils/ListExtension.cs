@@ -10,5 +10,7 @@
                 text.Invoke(list[i]);
             }
         }
+
+        public static List<T> Split
     }
 }

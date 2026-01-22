@@ -4,7 +4,7 @@ using Utils;
 
 namespace TheFinalBattle.Items
 {
-    public class DrinkPotion : IUseItem
+    public class DrinkPotion : IUseItemCommand
     {
         private Potion _potion;
         private Inventory _inventory;

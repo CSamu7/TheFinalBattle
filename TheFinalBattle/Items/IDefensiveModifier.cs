@@ -3,7 +3,7 @@ using TheFinalBattle.PlayerCommands.Attacks;
 
 namespace TheFinalBattle.Items
 {
-    //Cambiar a que sea una clase?
+    //FIX: Cambiar a que sea una clase abstracta.
     public interface IDefensiveModifier
     {
         public int Id { get; init; }

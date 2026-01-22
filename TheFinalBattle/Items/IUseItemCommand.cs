@@ -2,7 +2,7 @@
 
 namespace TheFinalBattle.Items
 {
-    public interface IUseItem
+    public interface IUseItemCommand
     {
         public void Use(Entity entity);
     }

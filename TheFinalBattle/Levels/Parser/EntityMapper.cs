@@ -5,15 +5,11 @@ using TheFinalBattle.UI;
 
 namespace TheFinalBattle.Levels.Parser
 {
-    public class EntityMapper : AbstractMapper<EntityDTO, Entity?>
+    public class EntityMapper : IMapper<EntityDTO, Entity>
     {
         private readonly EntitiesList entities = new();
-        public override List<MappingError> Errors { get; protected set; } = [];
-        public override Entity? Map(EntityDTO entity)
+        public MappingResult<Entity> Map(EntityDTO entity)
         {
-            //FIX: No me parece buena idea poner en cada Mapper que los errores se restablezcan.
-            Errors = [];
-
             IDefensiveModifier? defensiveModifier =
                 entity.IdDefensiveModifier is not null ? GetDefensiveModifier(entity.IdDefensiveModifier.Value) : null;
 
@@ -23,7 +19,7 @@ namespace TheFinalBattle.Levels.Parser
 
             if (enemy is null) Errors.Add(new($"Entity #{entity.Id} doesn't exist", ErrorType.Error));
 
-            return enemy;
+            return new MappingResult<Entity>(enemy, Errors);
         }
         private Gear? GetGear(int id)
         {

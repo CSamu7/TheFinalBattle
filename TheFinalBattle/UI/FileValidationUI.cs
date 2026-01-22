@@ -3,13 +3,13 @@ using Utils;
 
 namespace TheFinalBattle.UI
 {
-    public record MappingError(string Message, ErrorType ErrorType);
-    public record LevelErrors(List<MappingError> Errors);
+    public record MappingAlert(string Message, ErrorType ErrorType);
+    public record LevelErrors(List<MappingAlert> Errors);
     public class FileValidationUI
     {
-        private readonly List<List<MappingError>> _errors;
+        private readonly List<List<MappingAlert>> _errors;
         private readonly string _title = "Validación de Niveles";
-        public FileValidationUI(List<List<MappingError>> errors)
+        public FileValidationUI(List<List<MappingAlert>> errors)
         {
             _errors = errors;
         }
@@ -27,7 +27,7 @@ namespace TheFinalBattle.UI
                     ConsoleUtils.WriteLine("Valid level", ConsoleColor.Green);
                 } else
                 {
-                    foreach (MappingError error in _errors[i])
+                    foreach (MappingAlert error in _errors[i])
                     {
                         DisplayError(error);
                     }
@@ -40,7 +40,7 @@ namespace TheFinalBattle.UI
             Console.Clear();
 
         }
-        private void DisplayError(MappingError error)
+        private void DisplayError(MappingAlert error)
         {
             if (error.ErrorType.Equals(ErrorType.Error))
             {

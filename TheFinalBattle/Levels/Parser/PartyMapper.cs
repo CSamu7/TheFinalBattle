@@ -1,43 +1,37 @@
-﻿using System.Text;
+﻿using System.Collections.Generic;
+using System.Text;
 using TheFinalBattle.Levels.DTO;
 using TheFinalBattle.PlayableClasses;
 using TheFinalBattle.UI;
 
 namespace TheFinalBattle.Levels.Parser
 {
-    internal class PartyMapper : AbstractMapper<PartyDTO, Party>
+    internal class PartyMapper : IMapper<PartyDTO, Party>
     {
-        //FIX. Sigue manteniendo los errores de la anterior party formateada.
-        /*TODO: Crear un objeto llamado MappingResult que contenga lo siguiente:
-         * El objeto parseado
-         * La lista de errores
-         */
-        public override List<MappingError> Errors { get; protected set; } = new List<MappingError>();
-        public readonly EntityMapper _entityMapper = new();
+        private readonly EntityMapper _entityMapper = new();
         private readonly ItemAmountMapper _itemAmountMapper = new();
-        public override Party Map(PartyDTO party)
+        private readonly MapperList _mapperlist = new();
+        public MappingResult<Party> Map(PartyDTO party)
         {
-            Errors = [];
+            List<MappingAlert> Errors = [];
 
-            //FIX: Los errores se reinician porque la lista se elimina cada vez que se usa el metodo
-            //Map, debo que buscar otra alternativa para subir los errores.
-            List<Entity> enemies = party.Enemies
-                .Select(raw => _entityMapper.Map(raw))
-                .OfType<Entity>()
-                .ToList();
+            (List<ItemAmount> items, List<MappingAlert> itemAlerts) = 
+                _mapperlist.MapItems(party.Inventory, _itemAmountMapper);
 
-            List<ItemAmount> items = party.Inventory
-                .Select(raw => _itemAmountMapper.Map(raw))
-                .OfType<ItemAmount>()
-                .ToList();    
+            (List<Entity> entities, List<MappingAlert> entityAlerts) =
+                _mapperlist.MapItems(party.Enemies, _entityMapper);
 
-            Errors.AddRange(_entityMapper.Errors);
+            Errors.AddRange(itemAlerts);
+            Errors.AddRange(entityAlerts);
 
-            return new Party
-            {
-                Inventory = new Inventory { Items = items},
-                Members = enemies
-            };
+            return MappingResult<Party>.Success(
+                new Party
+                {
+                    Inventory = new Inventory { Items = items },
+                    Members = entities
+                },
+                Errors
+            );
         }
     }
 }

@@ -2,7 +2,7 @@
 
 namespace TheFinalBattle.Items
 {
-    public class EquipGear : IUseItem
+    public class EquipGear : IUseItemCommand
     {
         private Inventory _inventory;
         private Gear _gear;
@@ -16,9 +16,7 @@ namespace TheFinalBattle.Items
             _inventory.RemoveItem(_gear);
 
             if (entity.Gear is not null)
-            { 
                 _inventory.AddItem(entity.Gear);
-            }
 
             entity.Gear = _gear;
 

@@ -5,7 +5,7 @@ using TheFinalBattle.PlayerCommands.Attacks;
 
 namespace TheFinalBattle.PartyControl
 {
-    //Rework PartyAI
+    //TODO: Rework PartyAI
     public class PartyAI : IPartyControl
     {
         private Random _rnd = new Random();        

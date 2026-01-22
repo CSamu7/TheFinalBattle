@@ -34,7 +34,7 @@ namespace TheFinalBattle.Tests
             _party.CleanParty(enemyInventory);
 
             Assert.True(_party.Members.Count() == 2);
-            Assert.Contains(enemyInventory.Items, slot => slot.Item.ID == new Misericorde().ID);
+            Assert.Contains(enemyInventory.Items, slot => slot.Item.Id == new Misericorde().Id);
         }
     }
 }
