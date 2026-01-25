@@ -5,11 +5,14 @@ using TheFinalBattle.UI;
 
 namespace TheFinalBattle.Levels.Parser
 {
+    public record LevelsResult(int LevelsChecked, List<Level> Levels, List<List<MappingAlert>> Alerts);
     public class LevelsMapper()
     {
         private readonly LevelMapper _levelMapper = new();
         public List<List<MappingAlert>> Alerts { get; set; } = [];
-        public List<Level> MapLevels(List<LevelDTO> jsonLevels)
+        public int LevelsChecked { get; private set; }
+        public int LevelsValid { get; private set; }
+        public LevelsResult MapLevels(List<LevelDTO> jsonLevels)
         {
             List<Level> levels = [];
 
@@ -22,7 +25,7 @@ namespace TheFinalBattle.Levels.Parser
                     levels.Add(level.Result);
             }
 
-            return levels;
+            return new LevelsResult(jsonLevels.Count, levels, Alerts);
         }
     }
     public enum AlertType { Info, Warn, Error }

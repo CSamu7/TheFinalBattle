@@ -5,26 +5,22 @@ using Utils;
 
 namespace TheFinalBattle.UI
 {
-    public class LevelConfigUI
+    public class LevelsMenu
     {
-        private LevelsFileMenu _fileMenuUI = new LevelsFileMenu();
         public List<Level> GetLevels()
         {
-            List<Level> levels = new List<Level>();
-
             while (true)
             {
                 try
                 {
                     ILevelBuilder levelBuilder = GetLevelBuilder();
-                    levels = levelBuilder.GetLevels();
+                    List<Level> levels = levelBuilder.GetLevels();
 
-                    if (levels.Count > 0)
+                    if(levels.Count > 0)
                         return levels;
                 } catch (JsonException error) //No me gusta aqui porque es muy especifico al FileLevelBuilder
                 {
                     ConsoleUtils.Error(error.Message);
-                    continue;
                 }
             }
         }
@@ -34,6 +30,7 @@ namespace TheFinalBattle.UI
 
             while (levelBuilder is null)
             {
+                Console.Clear();
                 string input = ConsoleUtils.GetInput("Do you want to load your own levels? (y/n) ");
 
                 levelBuilder = input switch

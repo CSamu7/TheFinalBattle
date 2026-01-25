@@ -8,11 +8,13 @@ namespace TheFinalBattle.UI
     public record LevelErrors(List<MappingAlert> Errors);
     public class FileValidationUI
     {
+        private readonly LevelsResult _results;
         private readonly List<List<MappingAlert>> _alerts;
         private readonly string _title = "Validación de Niveles";
-        public FileValidationUI(List<List<MappingAlert>> alerts)
+        public FileValidationUI(LevelsResult results)
         {
-            _alerts = alerts;
+            _results = results;
+            _alerts = results.Alerts;
         }
         public void Display()
         {
@@ -29,12 +31,10 @@ namespace TheFinalBattle.UI
                 }
             }
 
+            Console.WriteLine($"{_results.Levels.Count}/{_results.LevelsChecked} valid levels.");
             Console.WriteLine("Press any key");
             Console.ReadLine();
         }
-
-        //TODO: Deberiamos darle la opción al usuario de volver a escoger que niveles quiere cargar
-        //o si quiere proseguir.
         private void DisplayAlert(MappingAlert alert)
         {
             if (alert.AlertType.Equals(AlertType.Error))
