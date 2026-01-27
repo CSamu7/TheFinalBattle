@@ -1,11 +1,10 @@
 ﻿using TheFinalBattle.Levels.DTO;
-using TheFinalBattle.Levels.Mappers;
 using TheFinalBattle.PlayableClasses;
 using TheFinalBattle.UI;
 
-namespace TheFinalBattle.Levels.Parser
+namespace TheFinalBattle.Levels.Mappers
 {
-    internal class PartyMapper : IMapper<PartyDTO, Party>
+    public class PartyMapper : IMapper<PartyDTO, Party>
     {
         private readonly EntityMapper _entityMapper = new();
         private readonly ItemAmountMapper _itemAmountMapper = new();

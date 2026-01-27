@@ -1,4 +1,4 @@
-﻿using TheFinalBattle.Generators;
+﻿using TheFinalBattle.Levels;
 using TheFinalBattle.PartyControl;
 
 namespace TheFinalBattle

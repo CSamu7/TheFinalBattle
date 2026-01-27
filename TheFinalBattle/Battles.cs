@@ -1,5 +1,5 @@
-﻿using TheFinalBattle.Generators;
-using TheFinalBattle.Interface;
+﻿using TheFinalBattle.Interface;
+using TheFinalBattle.Levels;
 
 namespace TheFinalBattle
 {

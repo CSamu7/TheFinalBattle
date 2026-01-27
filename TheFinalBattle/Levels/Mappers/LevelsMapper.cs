@@ -1,9 +1,7 @@
-﻿using TheFinalBattle.Generators;
-using TheFinalBattle.Levels.DTO;
-using TheFinalBattle.Levels.Mappers;
+﻿using TheFinalBattle.Levels.DTO;
 using TheFinalBattle.UI;
 
-namespace TheFinalBattle.Levels.Parser
+namespace TheFinalBattle.Levels.Mappers
 {
     public record LevelsResult(int LevelsChecked, List<Level> Levels, List<List<MappingAlert>> Alerts);
     public class LevelsMapper()

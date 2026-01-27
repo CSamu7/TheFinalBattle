@@ -1,4 +1,4 @@
-﻿namespace TheFinalBattle.Generators
+﻿namespace TheFinalBattle.Levels
 {
     public record Level(
         Party EnemyParty,

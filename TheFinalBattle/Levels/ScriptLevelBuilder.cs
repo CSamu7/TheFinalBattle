@@ -1,5 +1,4 @@
-﻿using TheFinalBattle.Generators;
-using TheFinalBattle.Items;
+﻿using TheFinalBattle.Items;
 using TheFinalBattle.PlayableClasses.Enemies;
 
 namespace TheFinalBattle.Levels
@@ -12,7 +11,7 @@ namespace TheFinalBattle.Levels
                 EnemyParty: new Party
                 {
                     Members = [new Pixie()],
-                    Inventory =  new Inventory{ Items=[ new (new Medicine()) ] }
+                    Inventory = new Inventory{ Items=[ new (new Medicine()) ] }
                 },
                 Rewards: [new(new Medicine())]
             ),

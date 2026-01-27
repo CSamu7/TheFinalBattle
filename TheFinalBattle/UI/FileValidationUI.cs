@@ -1,5 +1,5 @@
 ﻿using System.Data;
-using TheFinalBattle.Levels.Parser;
+using TheFinalBattle.Levels.Mappers;
 using Utils;
 
 namespace TheFinalBattle.UI

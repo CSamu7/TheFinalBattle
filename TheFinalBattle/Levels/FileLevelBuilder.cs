@@ -1,6 +1,5 @@
-﻿using TheFinalBattle.Generators;
-using TheFinalBattle.Levels.DTO;
-using TheFinalBattle.Levels.Parser;
+﻿using TheFinalBattle.Levels.DTO;
+using TheFinalBattle.Levels.Mappers;
 using TheFinalBattle.UI;
 
 namespace TheFinalBattle.Levels

@@ -1,6 +1,4 @@
-﻿using TheFinalBattle.Levels.Mappers;
-
-namespace TheFinalBattle.Levels.Parser
+﻿namespace TheFinalBattle.Levels.Mappers
 {
     public interface IMapper<TSource, TDestination>
     {

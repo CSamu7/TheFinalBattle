@@ -1,9 +1,8 @@
 ﻿using TheFinalBattle.Items;
 using TheFinalBattle.Levels.DTO;
-using TheFinalBattle.Levels.Mappers;
 using TheFinalBattle.UI;
 
-namespace TheFinalBattle.Levels.Parser
+namespace TheFinalBattle.Levels.Mappers
 {
     public class ItemAmountMapper : IMapper<ItemAmountDTO, ItemAmount>
     {

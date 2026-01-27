@@ -1,7 +1,6 @@
-﻿using TheFinalBattle.Levels.Mappers;
-using TheFinalBattle.UI;
+﻿using TheFinalBattle.UI;
 
-namespace TheFinalBattle.Levels.Parser
+namespace TheFinalBattle.Levels.Mappers
 {
     public class MapperList
     {
