@@ -4,21 +4,17 @@ using TheFinalBattle.PlayerCommands.Attacks;
 
 namespace TheFinalBattle.Items
 {
-    public record Item(int Id, string Name, string Description)
-    {
-        public override string ToString() => Name;
-    }
+    public record Item(int Id, string Name, string Description);
     public record Potion(int Id, string Name, string Description, IEffect Effect)
     : Item(Id, Name, Description)
     {
-        public override string ToString() => base.ToString();
+        public override string ToString() => Name;
     }
     public record Gear(int Id, string Name, string Description, IAttack SpecialAttack)
         : Item(Id, Name, Description)
     {
-        public override string ToString() => base.ToString();
+        public override string ToString() => Name;
     }
-    //Potions
     public record Medicine() : Potion(1, "Medicine", "Heal 10HP", new Heal(10))
     {
         public override string ToString() => base.ToString();
@@ -32,10 +28,21 @@ namespace TheFinalBattle.Items
     {
         public override string ToString() => base.ToString();
     }
-    public record KolossSword() : Gear(4, "Koloss Sword", "A heavy sword", new Push());
-    public record GlassKnife() : Gear(5, "Glass Knife", "", new Slash());
-    public record Gun() : Gear(6, "Gun", "", new QuickShot());
-    public record ShortGun() : Gear(7, "Short Gun", "", new PowerfulShot());
+    public record KolossSword() : Gear(4, "Koloss Sword", "A heavy sword", new Push())
+    {
+        public override string ToString() => base.ToString();
+    }
+    public record GlassKnife() : Gear(5, "Glass Knife", "", new Slash()) {
+        public override string ToString() => base.ToString();
+    }
+    public record Gun() : Gear(6, "Gun", "", new QuickShot())
+    {
+        public override string ToString() => base.ToString();
+    }
+    public record ShortGun() : Gear(7, "Short Gun", "", new PowerfulShot())
+    {
+        public override string ToString() => base.ToString();
+    }
     public interface IObjectList<T>
     {
         public T? GetByID(int ID);
