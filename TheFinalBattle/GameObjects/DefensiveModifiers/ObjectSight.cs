@@ -5,7 +5,6 @@ namespace TheFinalBattle.GameObjects.DefensiveModifiers
 {
     public class ObjectSight : AbstractDefensiveModifier
     {
-        public override int Id { get; init; } = 1;
         public override string Name { get; init; } = "Object Sight";
         public override string GetSuccessfulMessage(Entity defensor)
         {

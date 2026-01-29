@@ -5,7 +5,6 @@ namespace TheFinalBattle.GameObjects.DefensiveModifiers
 {
     public abstract class AbstractDefensiveModifier
     {
-        public abstract int Id { get; init; }
         public abstract string Name { get; init; }
         public abstract string GetSuccessfulMessage(Entity defensor);
         public abstract AttackData ModifyAttack(AttackData attackData);

@@ -6,7 +6,6 @@ namespace TheFinalBattle.GameObjects.DefensiveModifiers
     internal class AtiumBead : AbstractDefensiveModifier
     {
         public override string Name { get; init; } = "Atium Bead";
-        public override int Id { get; init; } = 2;
         public override AttackData ModifyAttack(AttackData attackData)
         {
             return attackData with { Success = attackData.Success - .1 };

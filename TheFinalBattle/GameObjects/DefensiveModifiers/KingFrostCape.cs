@@ -5,7 +5,6 @@ namespace TheFinalBattle.GameObjects.DefensiveModifiers
 {
     public class KingFrostCape : AbstractDefensiveModifier
     {
-        public override int Id { get; init; } = 3;
         public override string Name { get; init; } = "King Frost Cape";
         public override AttackData ModifyAttack(AttackData attackData)
         {
