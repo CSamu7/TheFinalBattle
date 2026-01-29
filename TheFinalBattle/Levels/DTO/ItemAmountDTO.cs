@@ -1,6 +1,4 @@
-﻿using TheFinalBattle.Items;
-
-namespace TheFinalBattle.Levels.DTO
+﻿namespace TheFinalBattle.Levels.DTO
 {
     public class ItemAmountDTO
     {

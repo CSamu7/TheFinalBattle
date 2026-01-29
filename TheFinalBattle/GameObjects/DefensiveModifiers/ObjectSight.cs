@@ -1,17 +1,17 @@
-﻿using TheFinalBattle.PlayableClasses;
+﻿using TheFinalBattle.GameObjects.Entities;
 using TheFinalBattle.PlayerCommands.Attacks;
 
-namespace TheFinalBattle.Items
+namespace TheFinalBattle.GameObjects.DefensiveModifiers
 {
-    public class ObjectSight : IDefensiveModifier
+    public class ObjectSight : AbstractDefensiveModifier
     {
-        public int Id { get; init; } = 1;
-        public string Name { get; init; } = "Object Sight";
-        public string GetSuccessfulMessage(Entity defensor)
+        public override int Id { get; init; } = 1;
+        public override string Name { get; init; } = "Object Sight";
+        public override string GetSuccessfulMessage(Entity defensor)
         {
             return $"bye bye";
         }
-        public AttackData AdjustAttack(AttackData attackData)
+        public override AttackData ModifyAttack(AttackData attackData)
         {
             if (attackData.DamageType.Equals(DamageType.Decoding))
             {

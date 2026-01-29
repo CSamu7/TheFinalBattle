@@ -1,6 +1,6 @@
-﻿using TheFinalBattle.Items;
-using TheFinalBattle.PlayableClasses;
-using TheFinalBattle.PlayableClasses.Heroes;
+﻿using TheFinalBattle.GameObjects.Entities;
+using TheFinalBattle.GameObjects.Entities.Heroes;
+using TheFinalBattle.GameObjects.Items;
 using TheFinalBattle.UI;
 using Utils;
 

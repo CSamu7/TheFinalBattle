@@ -1,8 +1,8 @@
 ﻿using TheFinalBattle.Effects;
-using TheFinalBattle.PlayableClasses;
+using TheFinalBattle.GameObjects.Entities;
 using Utils;
 
-namespace TheFinalBattle.Items
+namespace TheFinalBattle.GameObjects.Items
 {
     public class DrinkPotion : IUseItemCommand
     {

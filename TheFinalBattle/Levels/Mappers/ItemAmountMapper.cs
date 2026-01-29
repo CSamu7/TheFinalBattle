@@ -1,4 +1,4 @@
-﻿using TheFinalBattle.Items;
+﻿using TheFinalBattle.GameObjects.Items;
 using TheFinalBattle.Levels.DTO;
 using TheFinalBattle.UI;
 

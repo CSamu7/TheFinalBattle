@@ -1,5 +1,5 @@
-﻿using TheFinalBattle.Items;
-using TheFinalBattle.PlayableClasses.Heroes;
+﻿using TheFinalBattle.GameObjects.Entities.Heroes;
+using TheFinalBattle.GameObjects.Items;
 
 namespace TheFinalBattle.Tests.UseItemCommands
 {

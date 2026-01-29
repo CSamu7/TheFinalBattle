@@ -1,5 +1,5 @@
-﻿using TheFinalBattle.Items;
-using TheFinalBattle.PlayableClasses.Enemies;
+﻿using TheFinalBattle.GameObjects.Entities.Enemies;
+using TheFinalBattle.GameObjects.Items;
 
 namespace TheFinalBattle.Levels
 {

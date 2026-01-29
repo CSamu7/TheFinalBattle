@@ -1,10 +1,9 @@
-﻿using TheFinalBattle.Items;
-using TheFinalBattle.PlayableClasses.Enemies;
-using TheFinalBattle.PlayableClasses.Heroes;
+﻿using TheFinalBattle.GameObjects.DefensiveModifiers;
+using TheFinalBattle.GameObjects.Items;
 using TheFinalBattle.PlayerCommands.Attacks;
 using Utils;
 
-namespace TheFinalBattle.PlayableClasses
+namespace TheFinalBattle.GameObjects.Entities
 {
     public abstract class Entity
     {
@@ -12,9 +11,9 @@ namespace TheFinalBattle.PlayableClasses
         public abstract string Name { get; init; }
         public abstract int MaxHP { get; init; }
         public abstract IAttack StandardAttack { get; init; }
-        public int HP { get; set; } 
+        public int HP { get; set; }
         public Gear? Gear { get; set; } = null;
-        public IDefensiveModifier? DefensiveModifier { get; set; } = null;
+        public AbstractDefensiveModifier? DefensiveModifier { get; set; } = null;
         public Entity()
         {
             HP = MaxHP;
@@ -33,20 +32,5 @@ namespace TheFinalBattle.PlayableClasses
         }
         public override string ToString() => Name;
     };
-    public class EntitiesList : IObjectList<Entity>
-    {
-        private readonly List<Entity> _entities = new List<Entity>
-        {
-            new Pixie(),
-            new JackFrost(),
-            new Mara(),
-            new Mothman(),
-            new Vin() ,
-            new Yosuke(), 
-            new Akechi() ,
-            new WealthHand(), 
-            new Reaper() 
-        };
-        public Entity? GetByID(int id) => _entities.Where(entity => entity.Id == id).FirstOrDefault(); 
-    }
+
 }

@@ -1,5 +1,5 @@
-﻿using TheFinalBattle.Items;
-using TheFinalBattle.PlayableClasses;
+﻿using TheFinalBattle.GameObjects.Entities;
+using TheFinalBattle.GameObjects.Items;
 using TheFinalBattle.PlayerCommands;
 using TheFinalBattle.PlayerCommands.Attacks;
 

@@ -1,7 +1,6 @@
-﻿using TheFinalBattle.Items;
-using TheFinalBattle.PlayerCommands.Attacks;
+﻿using TheFinalBattle.PlayerCommands.Attacks;
 
-namespace TheFinalBattle.PlayableClasses.Enemies
+namespace TheFinalBattle.GameObjects.Entities.Enemies
 {
     public class JackFrost : Entity
     {

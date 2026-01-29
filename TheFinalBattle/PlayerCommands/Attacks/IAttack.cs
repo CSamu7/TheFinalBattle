@@ -1,5 +1,6 @@
 ﻿namespace TheFinalBattle.PlayerCommands.Attacks
 {
+    //TODO: Otra propuesta para Abstract?
     public interface IAttack
     {
         public string Name { get; }

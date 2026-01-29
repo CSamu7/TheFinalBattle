@@ -1,5 +1,5 @@
-﻿using TheFinalBattle.Interface;
-using TheFinalBattle.PlayableClasses;
+﻿using TheFinalBattle.GameObjects.Entities;
+using TheFinalBattle.Interface;
 using TheFinalBattle.PlayerCommands;
 
 namespace TheFinalBattle

@@ -1,7 +1,4 @@
-﻿using TheFinalBattle.Items;
-using TheFinalBattle.PlayableClasses;
-
-namespace TheFinalBattle.Levels.DTO
+﻿namespace TheFinalBattle.Levels.DTO
 {
     public class EntityDTO
     {

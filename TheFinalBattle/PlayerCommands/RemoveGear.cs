@@ -1,4 +1,4 @@
-﻿using TheFinalBattle.PlayableClasses;
+﻿using TheFinalBattle.GameObjects.Entities;
 
 namespace TheFinalBattle.PlayerCommands
 {

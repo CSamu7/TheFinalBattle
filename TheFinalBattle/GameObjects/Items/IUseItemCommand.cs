@@ -1,6 +1,6 @@
-﻿using TheFinalBattle.PlayableClasses;
+﻿using TheFinalBattle.GameObjects.Entities;
 
-namespace TheFinalBattle.Items
+namespace TheFinalBattle.GameObjects.Items
 {
     public interface IUseItemCommand
     {

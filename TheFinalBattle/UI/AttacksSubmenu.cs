@@ -1,4 +1,4 @@
-﻿using TheFinalBattle.PlayableClasses;
+﻿using TheFinalBattle.GameObjects.Entities;
 using TheFinalBattle.PlayerCommands.Attacks;
 
 namespace TheFinalBattle.Interface

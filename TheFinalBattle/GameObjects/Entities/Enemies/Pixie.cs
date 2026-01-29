@@ -1,6 +1,7 @@
-﻿using TheFinalBattle.PlayerCommands.Attacks;
+﻿using TheFinalBattle.GameObjects.Entities;
+using TheFinalBattle.PlayerCommands.Attacks;
 
-namespace TheFinalBattle.PlayableClasses.Enemies
+namespace TheFinalBattle.GameObjects.Entities.Enemies
 {
     public class Pixie : Entity
     {

@@ -1,6 +1,7 @@
-﻿using TheFinalBattle.PlayerCommands.Attacks;
+﻿using TheFinalBattle.GameObjects.Entities;
+using TheFinalBattle.PlayerCommands.Attacks;
 
-namespace TheFinalBattle.PlayableClasses.Heroes
+namespace TheFinalBattle.GameObjects.Entities.Heroes
 {
     public class Yosuke : Entity
     {
