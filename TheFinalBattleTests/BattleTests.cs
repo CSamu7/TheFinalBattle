@@ -1,4 +1,4 @@
-﻿using TheFinalBattle.PlayableClasses.Enemies;
+﻿using TheFinalBattle.GameObjects.Entities.Enemies;
 
 namespace TheFinalBattle.Tests
 {

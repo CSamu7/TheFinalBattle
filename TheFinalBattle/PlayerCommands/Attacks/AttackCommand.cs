@@ -38,7 +38,7 @@ namespace TheFinalBattle.PlayerCommands.Attacks
 
             if (attackData.Success > rndSuccess)
             {
-                AttackData attackDataModified = _enemy.DefensiveModifier?.AdjustAttack(attackData) ?? attackData;
+                AttackData attackDataModified = _enemy.DefensiveModifier?.ModifyAttack(attackData) ?? attackData;
 
                 if(attackDataModified != attackData)
                 {

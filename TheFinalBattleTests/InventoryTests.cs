@@ -1,46 +1,50 @@
-﻿using TheFinalBattle.Items;
+﻿using TheFinalBattle.GameObjects.Items;
 
 namespace TheFinalBattle.Tests
 {
     public class InventoryTests
     {
-        private Inventory _inventory;
-        public InventoryTests() { 
-             _inventory = new Inventory();
-        }
         [Fact]
-        public void AddItem_IfTheresNoItemSaved_AddToInventory()
+        public void Add_item_if_there_is_not_in_inventory()
         {
-            _inventory.AddItem(new Medicine());
+            Inventory inventory = new Inventory();
 
-            Assert.True(_inventory.Items.Count() == 1);
+            inventory.AddItem(new Medicine());
+
+            Assert.True(inventory.Items.Count() == 1);
         }
 
         [Fact]
-        public void AddItem_IfInventoryHasItem_IncreaseAmount()
+        public void Increase_amount_if_item_is_in_inventory()
         {
-            //Una mejor forma de añadir miembros a una party
-            _inventory.AddItem(new Medicine(), 2);
+            Inventory inventory = new Inventory();
 
-            Assert.True(_inventory.Items.Count() == 1, $"{_inventory.Items.Count()}");
+            inventory.AddItem(new Medicine(), 2);
+            inventory.AddItem(new Medicine(), 2);
+
+            Assert.True(inventory.Items[0].Amount == 4);
         }
 
         [Fact]
-        public void RemoveItem_IfAmountToRemoveIsLessThanActualAmount_ReduceAmount()
+        public void Decrease_amount_if_amount_to_reduce_is_less_than_actual_amount()
         {
-            _inventory.AddItem(new Medicine(), 3);
-            _inventory.RemoveItem(new Medicine(), 2);
+            Inventory inventory = new Inventory();
 
-            Assert.True(_inventory.Items[0].Amount == 1);
+            inventory.AddItem(new Medicine(), 3);
+            inventory.RemoveItem(new Medicine(), 2);
+
+            Assert.True(inventory.Items[0].Amount == 1);
         }
 
         [Fact]
-        public void RemoveItem_IfAmountToRemoveIsEqualThanActualAmount_RemoveItem()
+        public void Remove_item_if_amount_to_reduce_is_equal_or_greather_tan_actual_amount()
         {
-            _inventory.AddItem(new Medicine(), 3);
-            _inventory.RemoveItem(new Medicine(), 3);
+            Inventory inventory = new Inventory();
 
-            Assert.True(_inventory.Items.Count() == 0);
+            inventory.AddItem(new Medicine(), 3);
+            inventory.RemoveItem(new Medicine(), 3);
+
+            Assert.True(inventory.Items.Count() == 0);
         }
 
     }
