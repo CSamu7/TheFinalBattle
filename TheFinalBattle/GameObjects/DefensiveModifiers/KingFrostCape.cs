@@ -8,8 +8,9 @@ namespace TheFinalBattle.GameObjects.DefensiveModifiers
         public override string Name { get; init; } = "King Frost Cape";
         public override AttackData ModifyAttack(AttackData attackData)
         {
+            //TODO: No me gusta que se modifique el ataque original, en todo caso se debería que crear una copia.
             if (attackData.DamageType.Equals(DamageType.Ice))
-                attackData = attackData with { Damage = 1 };
+                attackData = attackData with { DamagePoints = 1 };
 
             return attackData;
         }

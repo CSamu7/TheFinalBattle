@@ -12,13 +12,14 @@ namespace TheFinalBattle.GameObjects.DefensiveModifiers
         }
         public override AttackData ModifyAttack(AttackData attackData)
         {
+            //TODO: Estanderizar como se calcula esto.
             if (attackData.DamageType.Equals(DamageType.Decoding))
             {
-                int reducedDamage = attackData.Damage - 2;
+                int reducedDamage = attackData.DamagePoints - 2;
 
                 if (reducedDamage < 0) reducedDamage = 0;
 
-                attackData = attackData with { Damage = reducedDamage };
+                attackData = attackData with { DamagePoints = reducedDamage };
             }
             
             return attackData;

@@ -3,7 +3,7 @@ using TheFinalBattle.PlayerCommands.Attacks;
 
 namespace TheFinalBattle.GameObjects.DefensiveModifiers
 {
-    internal class AtiumBead : AbstractDefensiveModifier
+    public class AtiumBead : AbstractDefensiveModifier
     {
         public override string Name { get; init; } = "Atium Bead";
         public override AttackData ModifyAttack(AttackData attackData)
