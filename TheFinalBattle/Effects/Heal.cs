@@ -12,8 +12,6 @@ namespace TheFinalBattle.Effects
         public void Consume(Entity entity)
         {
             entity.HP += _healing;
-
-            if (entity.HP > entity.MaxHP) entity.HP = entity.MaxHP;
         }
     }
 }

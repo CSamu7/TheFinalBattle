@@ -14,7 +14,7 @@ namespace TheFinalBattle.Levels.Mappers
         {
             _alerts = [];
 
-            AbstractDefensiveModifier? defensiveModifier =
+            AbstractAttackModifier? defensiveModifier =
                 entity.IdDefensiveModifier is not null ? GetDefensiveModifier(entity.IdDefensiveModifier.Value) : null;
 
             Gear? gear1 = entity.IdGear is not null ? GetGear(entity.IdGear.Value) : null;
@@ -39,11 +39,11 @@ namespace TheFinalBattle.Levels.Mappers
 
             return gear;
         }
-        private AbstractDefensiveModifier? GetDefensiveModifier(int id)
+        private AbstractAttackModifier? GetDefensiveModifier(int id)
         {
             DefensiveModifierList list = new();
 
-            AbstractDefensiveModifier? modifier = list.GetByID(id);
+            AbstractAttackModifier? modifier = list.GetByID(id);
 
             if (modifier is null)
                 _alerts.Add(new($"Defensive modifier #{id} doesn't exist", AlertType.Warn));

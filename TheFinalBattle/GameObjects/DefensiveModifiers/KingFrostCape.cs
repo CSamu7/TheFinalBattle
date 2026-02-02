@@ -3,7 +3,7 @@ using TheFinalBattle.PlayerCommands.Attacks;
 
 namespace TheFinalBattle.GameObjects.DefensiveModifiers
 {
-    public class KingFrostCape : AbstractDefensiveModifier
+    public class KingFrostCape : AbstractAttackModifier
     {
         public override string Name { get; init; } = "King Frost Cape";
         public override AttackData ModifyAttack(AttackData attackData)

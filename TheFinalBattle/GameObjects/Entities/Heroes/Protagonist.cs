@@ -14,7 +14,7 @@ namespace TheFinalBattle.GameObjects.Entities.Heroes
         {
             Name = name;
             Gear = new Misericorde();
-            DefensiveModifier = new ObjectSight();
+            AttackModifier = new ObjectSight();
         }
     }
 }

@@ -13,7 +13,7 @@ namespace TheFinalBattle.GameObjects.Entities.Heroes
         public Vin()
         {
             Gear = new KolossSword();
-            DefensiveModifier = new AtiumBead(); //10% de esquivar un ataque.
+            AttackModifier = new AtiumBead(); //10% de esquivar un ataque.
         }
 
     }

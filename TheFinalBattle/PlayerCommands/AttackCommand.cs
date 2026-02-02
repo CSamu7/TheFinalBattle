@@ -1,59 +1,42 @@
 ﻿using TheFinalBattle.GameObjects.Entities;
 using TheFinalBattle.PlayerCommands.Attacks;
-using Utils;
+using TheFinalBattle.UI;
 
 namespace TheFinalBattle.PlayerCommands
 {
     public class AttackCommand : IEntityCommand
     {
-        private IAttack _attack;
-        private Entity _enemy;
-
-        //public AttackCommand(AttackEvent attack)
-        public AttackCommand(IAttack attack, Entity enemy)
+        private static Random _random = new Random();
+        private readonly AttackCommandUI _commandUI;
+        private readonly IAttack _attack;
+        private readonly Entity _defensor;
+        public AttackCommand(IAttack attack, Entity defensor)
         {
             _attack = attack;
-            _enemy = enemy;
+            _defensor = defensor;
+            _commandUI = new(defensor, attack);
         }
-        public void Execute(Entity player)
+        public void Execute(Entity attacker)
         {
             AttackData attackData = _attack.CalculateAttack();
+            AttackData newAttackData = _defensor.AttackModifier?.ModifyAttack(attackData) ?? attackData;
             
-            Random rnd = new Random();
-            double rndSuccess = rnd.NextDouble();
+            double rndSuccess = _random.NextDouble();
 
             if (attackData.Success > rndSuccess)
             {
-                AttackData attackDataModified = _enemy.DefensiveModifier?.ModifyAttack(attackData) ?? attackData;
-
-                if (attackDataModified != attackData)
-                {
-                    string msg = _enemy.DefensiveModifier?.GetSuccessfulMessage(player) ?? "";
-                    Console.WriteLine(msg);
-                }
-
-                SuccessAttack(player, attackDataModified.DamagePoints);
+                _commandUI.ModifierReduceDamage(attackData.DamagePoints, newAttackData.DamagePoints, attacker);
+                _defensor.HP -= newAttackData.DamagePoints;
+                _commandUI.SuccessAttack(attacker, newAttackData.DamagePoints);
             } else
             {
-                FailAttack(player);
+                if (attackData.Success > rndSuccess && rndSuccess > newAttackData.Success) 
+                {
+                    _commandUI.ModifierAvoidAttack(attacker);
+                }
+
+                _commandUI.FailAttack(attacker);
             }
         }
-
-        //TODO: Mover a una AttackCommandUI clase.
-        private void SuccessAttack(Entity player, int damage)
-        {
-            _enemy.HP -= damage;
-            if (_enemy.HP < 0) _enemy.HP = 0;
-
-            Console.WriteLine($"{player.Name.ToUpper()} used {_attack.Name.ToUpper()} on {_enemy.Name.ToUpper()}");
-            Console.WriteLine($"{_attack.Name.ToUpper()} dealt {damage} damage to {_enemy.Name.ToUpper()} ");
-            Console.WriteLine($"{_enemy.Name.ToUpper()} is now at {_enemy.HP}/{_enemy.MaxHP}");
-        }
-
-        private void FailAttack(Entity player)
-        {
-            ConsoleUtils.WriteLine($"{player.Name.ToUpper()} fail its attack!", ConsoleColor.Red);
-        }
-
     }
 }

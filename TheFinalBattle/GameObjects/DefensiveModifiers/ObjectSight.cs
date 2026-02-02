@@ -3,7 +3,7 @@ using TheFinalBattle.PlayerCommands.Attacks;
 
 namespace TheFinalBattle.GameObjects.DefensiveModifiers
 {
-    public class ObjectSight : AbstractDefensiveModifier
+    public class ObjectSight : AbstractAttackModifier
     {
         public override string Name { get; init; } = "Object Sight";
         public override string GetSuccessfulMessage(Entity defensor)
