@@ -4,9 +4,10 @@ using TheFinalBattle.UI;
 
 namespace TheFinalBattle.PlayerCommands
 {
+
     public class AttackCommand : IEntityCommand
     {
-        private static Random _random = new Random();
+        private readonly static Random _random = new Random();
         private readonly AttackCommandUI _commandUI;
         private readonly IAttack _attack;
         private readonly Entity _defensor;
@@ -18,25 +19,39 @@ namespace TheFinalBattle.PlayerCommands
         }
         public void Execute(Entity attacker)
         {
-            AttackData attackData = _attack.CalculateAttack();
-            AttackData newAttackData = _defensor.AttackModifier?.ModifyAttack(attackData) ?? attackData;
-            
-            double rndSuccess = _random.NextDouble();
+            ProccessedAttack proccesedAttack = ProcessAttack(attacker);
 
-            if (attackData.Success > rndSuccess)
+            if (proccesedAttack.NewDataAttack.Success > proccesedAttack.RandomSuccess)
             {
-                _commandUI.ModifierReduceDamage(attackData.DamagePoints, newAttackData.DamagePoints, attacker);
-                _defensor.HP -= newAttackData.DamagePoints;
-                _commandUI.SuccessAttack(attacker, newAttackData.DamagePoints);
+                _commandUI.DisplayModifierInSuccessAttack(proccesedAttack);
+                _defensor.HP -= proccesedAttack.NewDataAttack.DamagePoints;
+                _commandUI.SuccessAttack(attacker, proccesedAttack.NewDataAttack.DamagePoints);
             } else
             {
-                if (attackData.Success > rndSuccess && rndSuccess > newAttackData.Success) 
-                {
-                    _commandUI.ModifierAvoidAttack(attacker);
-                }
-
+                _commandUI.DisplayModifierInFailAttack(proccesedAttack);
                 _commandUI.FailAttack(attacker);
             }
+        }
+        public ProccessedAttack ProcessAttack(Entity attacker)
+        {
+            AttackData attackData = _attack.CalculateAttack();
+
+            AttackData defensorAttackData =
+                _defensor.AttackModifier is not null && _defensor.AttackModifier.IsDefensive
+                    ? _defensor.AttackModifier.ModifyAttack(attackData)
+                    : attackData;
+
+            AttackData finalAttackData =
+                attacker.AttackModifier is not null && !attacker.AttackModifier.IsDefensive
+                    ? attacker.AttackModifier.ModifyAttack(defensorAttackData)
+                    : defensorAttackData;
+
+            double rndSuccess = _random.NextDouble();
+
+            ProccessedAttack attackEventData = new
+                (attacker, _defensor, attackData, finalAttackData, _attack, rndSuccess);
+
+            return attackEventData;
         }
     }
 }
