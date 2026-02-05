@@ -6,5 +6,4 @@ namespace TheFinalBattle.Effects
     {
         void Consume(Entity entity);
     }
-
 }

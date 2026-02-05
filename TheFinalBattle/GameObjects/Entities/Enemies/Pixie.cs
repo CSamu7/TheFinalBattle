@@ -1,4 +1,4 @@
-﻿using TheFinalBattle.GameObjects.Entities;
+﻿using TheFinalBattle.GameObjects.DefensiveModifiers;
 using TheFinalBattle.PlayerCommands.Attacks;
 
 namespace TheFinalBattle.GameObjects.Entities.Enemies
@@ -9,5 +9,9 @@ namespace TheFinalBattle.GameObjects.Entities.Enemies
         public override string Name { get; init; } = "Pixie";
         public override int MaxHP { get; init; } = 5;
         public override IAttack StandardAttack { get; init; } = new Zio();
+        public Pixie()
+        {
+            AttackModifier = new AtiumBead();
+        }
     }
 }
