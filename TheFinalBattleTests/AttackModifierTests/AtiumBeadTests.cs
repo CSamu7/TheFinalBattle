@@ -19,7 +19,7 @@ namespace TheFinalBattle.Tests.AttackModifierTests
 
             AttackData newData = modifier.ModifyAttack(attackData);
 
-            Assert.Equal(.9, newData.Success);
+            Assert.Equal(.8, newData.Success);
         }
     }
 }

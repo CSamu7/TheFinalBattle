@@ -20,8 +20,9 @@ namespace TheFinalBattle.PlayerCommands
         public void Execute(Entity attacker)
         {
             ProccessedAttack proccesedAttack = ProcessAttack(attacker);
+            bool attackIsSuccessful = proccesedAttack.NewDataAttack.Success >= proccesedAttack.RandomSuccess;
 
-            if (proccesedAttack.NewDataAttack.Success > proccesedAttack.RandomSuccess)
+            if (attackIsSuccessful)
             {
                 _commandUI.DisplayModifierInSuccessAttack(proccesedAttack);
                 _defensor.HP -= proccesedAttack.NewDataAttack.DamagePoints;

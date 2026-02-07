@@ -11,9 +11,7 @@ namespace TheFinalBattle.GameObjects.DefensiveModifiers
         {
             return attackData with { Success = attackData.Success - .2 };
         }
-        public override string GetSuccessfulMessage(Entity defensor)
-        {
-            return $"{defensor.Name} saw the future and evaded the attack!";
-        }
+        public override string GetSuccessfulMessage(Entity holder)
+            => $"{holder.Name} saw the future and evaded the attack!";
     }
 }

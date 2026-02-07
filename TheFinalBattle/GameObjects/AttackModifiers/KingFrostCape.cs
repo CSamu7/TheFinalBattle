@@ -9,15 +9,18 @@ namespace TheFinalBattle.GameObjects.DefensiveModifiers
         public override bool IsDefensive => true;
         public override AttackData ModifyAttack(AttackData attackData)
         {
-            //TODO: No me gusta que se modifique el ataque original, en todo caso se debería que crear una copia.
-            if (attackData.DamageType.Equals(DamageType.Ice))
-                attackData = attackData with { DamagePoints = 1 };
+            AttackData newData = attackData with { };
 
-            return attackData;
+            if (attackData.DamageType.Equals(DamageType.Ice))
+            {
+                newData = newData with { DamagePoints = 1 };
+            }
+
+            return newData;
         }
-        public override string GetSuccessfulMessage(Entity defensor)
+        public override string GetSuccessfulMessage(Entity holder)
         {
-            return $"The cape has protected {defensor.Name} from the cold...";
+            return $"The cape has protected {holder.Name} from the cold...";
         }
     }
 }
