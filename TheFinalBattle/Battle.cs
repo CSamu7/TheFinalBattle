@@ -13,10 +13,6 @@ namespace TheFinalBattle
             Enemies = enemies;
             Heroes = heroes;
         }
-        /// <summary>
-        /// Returns the winner party
-        /// </summary>
-        /// <returns></returns>
         public Party Start()
         {
             while (Heroes.Members.Count > 0 && Enemies.Members.Count > 0)
@@ -46,9 +42,6 @@ namespace TheFinalBattle
                     ? Enemies
                     : Heroes;
         }
-
-        //Me sigue sin convencer este metodo
-        //Deberiamos crear una clase llamada Turn? La verdad no lo se.
         private void StartTurn(Party actualParty)
         {
             Party enemy = GetEnemyPartyFor(actualParty.Members[0]);

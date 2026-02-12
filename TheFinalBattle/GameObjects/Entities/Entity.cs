@@ -16,9 +16,16 @@ namespace TheFinalBattle.GameObjects.Entities
             get => _hp; 
             set 
             {
-                if (value < 0) _hp = 0;
-                if (value > MaxHP) _hp = MaxHP;
-                _hp = value;
+                if (value <= 0)
+                {
+                    _hp = 0;
+                } else if (value >= MaxHP)
+                {
+                    _hp = MaxHP;
+                } else
+                {
+                    _hp = value;
+                }
             }
         }
         public Gear? Gear { get; set; } = null;
@@ -26,6 +33,11 @@ namespace TheFinalBattle.GameObjects.Entities
         public Entity()
         {
             _hp = MaxHP;
+        }
+        public Entity(int maxHP)
+        {
+            MaxHP = maxHP;
+            _hp = maxHP;
         }
         public Gear? Kill()
         {
