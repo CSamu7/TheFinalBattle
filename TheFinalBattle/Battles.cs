@@ -1,5 +1,5 @@
-﻿using TheFinalBattle.Interface;
-using TheFinalBattle.Levels;
+﻿using TheFinalBattle.Levels;
+using TheFinalBattle.UI;
 
 namespace TheFinalBattle
 {

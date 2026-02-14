@@ -1,7 +1,7 @@
 ﻿using TheFinalBattle.GameObjects.Entities;
 using Utils;
 
-namespace TheFinalBattle.Interface
+namespace TheFinalBattle.UI
 {
     public class BattleStatus
     {

@@ -1,7 +1,6 @@
-﻿using TheFinalBattle.PartyControl;
-using Utils;
-using TheFinalBattle.GameObjects.Entities;
+﻿using TheFinalBattle.GameObjects.Entities;
 using TheFinalBattle.GameObjects.Items;
+using TheFinalBattle.PartyControl;
 
 namespace TheFinalBattle
 {

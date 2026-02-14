@@ -1,5 +1,5 @@
 ﻿using Utils;
-namespace TheFinalBattle.Interface
+namespace TheFinalBattle.UI
 {
     public abstract class MenuTemplate<T> where T : class
     {

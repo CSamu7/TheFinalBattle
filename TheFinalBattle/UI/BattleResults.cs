@@ -1,6 +1,6 @@
 ﻿using Utils;
 
-namespace TheFinalBattle.Interface
+namespace TheFinalBattle.UI
 {
     public class BattleResults
     {

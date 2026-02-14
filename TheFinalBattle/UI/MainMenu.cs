@@ -1,7 +1,7 @@
 ﻿using TheFinalBattle.GameObjects.Entities;
 using TheFinalBattle.PlayerCommands;
 
-namespace TheFinalBattle.Interface
+namespace TheFinalBattle.UI
 {
     public class MainMenu : MenuTemplate<Func<IEntityCommand?>>
     {

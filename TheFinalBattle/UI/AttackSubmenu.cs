@@ -2,7 +2,7 @@
 using TheFinalBattle.PlayerCommands;
 using TheFinalBattle.PlayerCommands.Attacks;
 
-namespace TheFinalBattle.Interface
+namespace TheFinalBattle.UI
 {
     public interface ICommandCreation
     {

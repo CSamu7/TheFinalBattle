@@ -1,6 +1,6 @@
 ﻿using TheFinalBattle.GameObjects.Entities;
-using TheFinalBattle.Interface;
 using TheFinalBattle.PlayerCommands;
+using TheFinalBattle.UI;
 
 namespace TheFinalBattle
 {

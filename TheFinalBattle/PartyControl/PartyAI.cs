@@ -1,7 +1,6 @@
 ﻿using TheFinalBattle.GameObjects.Entities;
 using TheFinalBattle.GameObjects.Items;
 using TheFinalBattle.PlayerCommands;
-using TheFinalBattle.PlayerCommands.Attacks;
 
 namespace TheFinalBattle.PartyControl
 {

@@ -4,7 +4,6 @@ using TheFinalBattle.UI;
 
 namespace TheFinalBattle.PlayerCommands
 {
-
     public class AttackCommand : IEntityCommand
     {
         private readonly static Random _random = new Random();

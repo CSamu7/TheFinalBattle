@@ -1,8 +1,8 @@
-﻿using TheFinalBattle.PlayerCommands;
-using TheFinalBattle.Interface;
-using TheFinalBattle.PlayerCommands.Attacks;
-using TheFinalBattle.GameObjects.Entities;
+﻿using TheFinalBattle.GameObjects.Entities;
 using TheFinalBattle.GameObjects.Items;
+using TheFinalBattle.PlayerCommands;
+using TheFinalBattle.PlayerCommands.Attacks;
+using TheFinalBattle.UI;
 
 namespace TheFinalBattle
 {

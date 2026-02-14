@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using TheFinalBattle.GameObjects.DefensiveModifiers;
+﻿using TheFinalBattle.GameObjects.DefensiveModifiers;
 using TheFinalBattle.PlayerCommands.Attacks;
 
 namespace TheFinalBattle.Tests.AttackModifierTests

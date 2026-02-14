@@ -1,7 +1,7 @@
 ﻿using TheFinalBattle.GameObjects.Entities;
 using TheFinalBattle.PlayerCommands.Attacks;
 
-namespace TheFinalBattle.Interface
+namespace TheFinalBattle.UI
 {
     public class AttacksSubmenu : MenuTemplate<IAttack>
     {

@@ -2,7 +2,7 @@
 using TheFinalBattle.GameObjects.Items;
 using TheFinalBattle.PlayerCommands;
 
-namespace TheFinalBattle.Interface
+namespace TheFinalBattle.UI
 {
     public class ItemSubmenu : MenuTemplate<Item>, ICommandCreation
     {

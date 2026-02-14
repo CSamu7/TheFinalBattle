@@ -1,6 +1,6 @@
 ﻿using TheFinalBattle.GameObjects.Entities;
 
-namespace TheFinalBattle.Interface
+namespace TheFinalBattle.UI
 {
     public class EnemiesSubmenu : MenuTemplate<Entity>
     {
