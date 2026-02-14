@@ -1,6 +1,6 @@
-﻿using TheFinalBattle.GameObjects.DefensiveModifiers;
+﻿using TheFinalBattle.GameObjects.Attacks;
+using TheFinalBattle.GameObjects.DefensiveModifiers;
 using TheFinalBattle.GameObjects.Items;
-using TheFinalBattle.PlayerCommands.Attacks;
 using Utils;
 
 namespace TheFinalBattle.GameObjects.Entities
@@ -12,9 +12,10 @@ namespace TheFinalBattle.GameObjects.Entities
         public abstract string Name { get; init; }
         public abstract int MaxHP { get; init; }
         public abstract IAttack StandardAttack { get; init; }
-        public int HP { 
-            get => _hp; 
-            set 
+        public int HP
+        {
+            get => _hp;
+            set
             {
                 if (value <= 0)
                 {

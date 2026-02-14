@@ -17,9 +17,9 @@ namespace TheFinalBattle.Tests.Mappers
             List<EntityDTO> entites = new List<EntityDTO>();
             int countValidEntities = validEntities;
 
-            for(int i = 0; i < totalEntites; i++)
+            for (int i = 0; i < totalEntites; i++)
             {
-                if(countValidEntities > 0)
+                if (countValidEntities > 0)
                 {
                     entites.Add(GetValidEntityDTO());
                     countValidEntities--;
@@ -28,7 +28,7 @@ namespace TheFinalBattle.Tests.Mappers
                     entites.Add(GetInvalidEntityDTO());
                 }
             }
-        
+
             return new PartyDTO { Enemies = entites, Inventory = [] };
         }
     }

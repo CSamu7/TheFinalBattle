@@ -1,5 +1,5 @@
 ﻿using TheFinalBattle.GameObjects.AttackModifiers;
-using TheFinalBattle.PlayerCommands.Attacks;
+using TheFinalBattle.GameObjects.Attacks;
 
 namespace TheFinalBattle.Tests.AttackModifierTests
 {

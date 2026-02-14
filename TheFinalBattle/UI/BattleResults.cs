@@ -1,4 +1,5 @@
-﻿using Utils;
+﻿using TheFinalBattle.Parties;
+using Utils;
 
 namespace TheFinalBattle.UI
 {
@@ -6,7 +7,8 @@ namespace TheFinalBattle.UI
     {
         //Esta clase hace un monton de cosas
         private Battle _battle;
-        public BattleResults(Battle battle) { 
+        public BattleResults(Battle battle)
+        {
             _battle = battle;
         }
         public void DisplayResults(List<ItemAmount> rewards)

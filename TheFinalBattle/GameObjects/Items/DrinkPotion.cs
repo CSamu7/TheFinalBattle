@@ -1,5 +1,6 @@
-﻿using TheFinalBattle.Effects;
+﻿using TheFinalBattle.GameObjects.Effects;
 using TheFinalBattle.GameObjects.Entities;
+using TheFinalBattle.Parties;
 using Utils;
 
 namespace TheFinalBattle.GameObjects.Items

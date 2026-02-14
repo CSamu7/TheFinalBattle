@@ -4,8 +4,8 @@ namespace TheFinalBattle.Levels.Mappers
 {
     public class MapperList
     {
-   
-        public (List<TDestination> items, List<MappingAlert> errors) 
+
+        public (List<TDestination> items, List<MappingAlert> errors)
             MapItems<TSource, TDestination>(List<TSource> dtoItems, IMapper<TSource, TDestination> mapper)
         {
             List<MappingResult<TDestination>> mappingItems =
@@ -22,7 +22,7 @@ namespace TheFinalBattle.Levels.Mappers
                 .Select(item => item.Result)
                 .ToList();
 
-            return (items, itemsErrors);      
+            return (items, itemsErrors);
         }
     }
 }

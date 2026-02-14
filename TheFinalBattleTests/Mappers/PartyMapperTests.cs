@@ -1,5 +1,6 @@
 ﻿using TheFinalBattle.Levels.DTO;
 using TheFinalBattle.Levels.Mappers;
+using TheFinalBattle.Parties;
 
 namespace TheFinalBattle.Tests.Mappers
 {
@@ -12,7 +13,7 @@ namespace TheFinalBattle.Tests.Mappers
             PartyMapper partyMapper = new PartyMapper();
 
             MappingResult<Party> result = partyMapper.Map(partyDto);
-            
+
             Assert.True(result.IsValid);
             Assert.True(result.Result.Members.Count == 1);
         }

@@ -6,7 +6,7 @@
         {
             for (int i = 0; i < list.Count; i++)
             {
-                Console.Write($"({i+1}) ");
+                Console.Write($"({i + 1}) ");
                 text.Invoke(list[i]);
             }
         }

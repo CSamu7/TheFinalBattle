@@ -39,7 +39,7 @@ namespace TheFinalBattle.UI
             if (alert.AlertType.Equals(AlertType.Error))
             {
                 ConsoleUtils.Error($" (ERROR) {alert.Message}");
-            } else if(alert.AlertType.Equals(AlertType.Warn))
+            } else if (alert.AlertType.Equals(AlertType.Warn))
             {
                 ConsoleUtils.Warn($" (WARNING) {alert.Message}");
             } else

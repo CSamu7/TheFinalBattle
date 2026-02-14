@@ -1,4 +1,4 @@
-﻿using TheFinalBattle.PlayerCommands.Attacks;
+﻿using TheFinalBattle.GameObjects.Attacks;
 
 namespace TheFinalBattle.GameObjects.Items
 {

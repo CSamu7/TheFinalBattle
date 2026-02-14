@@ -1,4 +1,4 @@
-﻿using TheFinalBattle.PartyControl;
+﻿using TheFinalBattle.Parties;
 using Utils;
 
 namespace TheFinalBattle.UI

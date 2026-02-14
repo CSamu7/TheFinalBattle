@@ -1,5 +1,4 @@
-﻿using TheFinalBattle.GameObjects.Entities;
-using TheFinalBattle.PlayerCommands.Attacks;
+﻿using TheFinalBattle.GameObjects.Attacks;
 
 namespace TheFinalBattle.GameObjects.Entities.Heroes
 {

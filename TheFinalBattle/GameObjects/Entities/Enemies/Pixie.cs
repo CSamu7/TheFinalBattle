@@ -1,5 +1,5 @@
-﻿using TheFinalBattle.GameObjects.DefensiveModifiers;
-using TheFinalBattle.PlayerCommands.Attacks;
+﻿using TheFinalBattle.GameObjects.Attacks;
+using TheFinalBattle.GameObjects.DefensiveModifiers;
 
 namespace TheFinalBattle.GameObjects.Entities.Enemies
 {

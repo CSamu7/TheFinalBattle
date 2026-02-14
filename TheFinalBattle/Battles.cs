@@ -1,4 +1,5 @@
 ﻿using TheFinalBattle.Levels;
+using TheFinalBattle.Parties;
 using TheFinalBattle.UI;
 
 namespace TheFinalBattle
@@ -31,7 +32,8 @@ namespace TheFinalBattle
         }
         private void GiveItems(List<ItemAmount> items, Party party)
         {
-            foreach (ItemAmount itemAmount in items) {
+            foreach (ItemAmount itemAmount in items)
+            {
                 party.Inventory.AddItem(itemAmount.Item, itemAmount.Amount);
             }
         }
@@ -39,7 +41,7 @@ namespace TheFinalBattle
         {
             var results = new BattleResults(battle);
             results.DisplayResults(level.Rewards);
-            
+
             GiveItems(level.Rewards, winners);
             battle.Enemies.Inventory.Transfer(winners.Inventory);
         }

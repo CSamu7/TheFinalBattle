@@ -19,7 +19,7 @@ namespace TheFinalBattle.Levels.Mappers
                 MappingResult<Level> level = _levelMapper.Map(jsonLevel);
                 Alerts.Add(level.Alerts);
 
-                if(level.IsValid)
+                if (level.IsValid)
                     levels.Add(level.Result);
             }
 

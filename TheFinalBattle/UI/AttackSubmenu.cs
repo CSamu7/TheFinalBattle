@@ -1,6 +1,7 @@
-﻿using TheFinalBattle.GameObjects.Entities;
+﻿using TheFinalBattle.GameObjects.Attacks;
+using TheFinalBattle.GameObjects.Entities;
+using TheFinalBattle.Parties;
 using TheFinalBattle.PlayerCommands;
-using TheFinalBattle.PlayerCommands.Attacks;
 
 namespace TheFinalBattle.UI
 {
@@ -13,7 +14,8 @@ namespace TheFinalBattle.UI
         private readonly EnemiesSubmenu _enemiesSubmenu;
         private readonly AttacksSubmenu _attacksSubmenu;
         private readonly Party _enemies;
-        public AttackSubmenu(Party enemies, Entity entity) {
+        public AttackSubmenu(Party enemies, Entity entity)
+        {
             _enemiesSubmenu = new EnemiesSubmenu(entity, enemies);
             _attacksSubmenu = new AttacksSubmenu(entity);
             _enemies = enemies;

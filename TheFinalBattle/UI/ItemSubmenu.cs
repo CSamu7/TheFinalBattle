@@ -1,5 +1,6 @@
 ﻿using TheFinalBattle.GameObjects.Entities;
 using TheFinalBattle.GameObjects.Items;
+using TheFinalBattle.Parties;
 using TheFinalBattle.PlayerCommands;
 
 namespace TheFinalBattle.UI
@@ -8,7 +9,8 @@ namespace TheFinalBattle.UI
     {
         protected override List<MenuItemAction<Item>> Options { get; set; }
         private Inventory _inventory;
-        public ItemSubmenu(Inventory inventory, Entity entity) {
+        public ItemSubmenu(Inventory inventory, Entity entity)
+        {
             _inventory = inventory;
 
             Options = new MenuOptions(entity).GetItems(_inventory);
@@ -19,8 +21,8 @@ namespace TheFinalBattle.UI
         {
             Item? item = GetOption();
 
-            return item is null 
-                ? null 
+            return item is null
+                ? null
                 : new UseItem(item, _inventory);
         }
     }

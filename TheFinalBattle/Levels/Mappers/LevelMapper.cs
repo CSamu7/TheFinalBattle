@@ -1,4 +1,5 @@
 ﻿using TheFinalBattle.Levels.DTO;
+using TheFinalBattle.Parties;
 using TheFinalBattle.UI;
 
 namespace TheFinalBattle.Levels.Mappers
@@ -13,7 +14,7 @@ namespace TheFinalBattle.Levels.Mappers
             List<MappingAlert> alerts = [];
 
             MappingResult<Party> party = _partyMapper.Map(rawLevel.PartyEnemy);
-            (List<ItemAmount> items, List<MappingAlert> itemAlerts) = 
+            (List<ItemAmount> items, List<MappingAlert> itemAlerts) =
                 mapper.MapItems(rawLevel.Rewards, _itemAmountMapper);
 
             alerts.AddRange(party.Alerts);

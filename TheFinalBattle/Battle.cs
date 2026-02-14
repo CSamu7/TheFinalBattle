@@ -1,4 +1,5 @@
 ﻿using TheFinalBattle.GameObjects.Entities;
+using TheFinalBattle.Parties;
 using TheFinalBattle.PlayerCommands;
 using TheFinalBattle.UI;
 
@@ -6,10 +7,11 @@ namespace TheFinalBattle
 {
     public class Battle
     {
-        public Party Heroes {  get; private set; } 
+        public Party Heroes { get; private set; }
         public Party Enemies { get; private set; }
         private BattleStatus _battleStatus = new();
-        public Battle(Party heroes, Party enemies) {
+        public Battle(Party heroes, Party enemies)
+        {
             Enemies = enemies;
             Heroes = heroes;
         }
@@ -20,7 +22,7 @@ namespace TheFinalBattle
                 StartTurn(Heroes);
 
                 if (isBattleFinished()) break;
-                    
+
                 StartTurn(Enemies);
             }
 
@@ -53,7 +55,7 @@ namespace TheFinalBattle
                 _battleStatus.Display(entity, this);
                 IEntityCommand command = actualParty.PartyControl.SelectAction(entity, this);
                 command.Execute(entity);
-                
+
                 enemy.CleanParty(actualParty.Inventory);
                 actualParty.CleanParty(enemy.Inventory);
             }

@@ -15,7 +15,7 @@ namespace TheFinalBattle.UI
                     ILevelBuilder levelBuilder = GetLevelBuilder();
                     List<Level> levels = levelBuilder.GetLevels();
 
-                    if(levels.Count > 0)
+                    if (levels.Count > 0)
                         return levels;
                 } catch (JsonException error) //No me gusta aqui porque es muy especifico al FileLevelBuilder
                 {

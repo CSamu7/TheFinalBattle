@@ -1,4 +1,5 @@
 ﻿using TheFinalBattle.GameObjects.Entities.Enemies;
+using TheFinalBattle.Parties;
 
 namespace TheFinalBattle.Tests
 {

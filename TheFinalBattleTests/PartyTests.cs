@@ -1,6 +1,6 @@
 using TheFinalBattle.GameObjects.Entities.Enemies;
 using TheFinalBattle.GameObjects.Items;
-using TheFinalBattle.PartyControl;
+using TheFinalBattle.Parties;
 
 namespace TheFinalBattle.Tests
 {
@@ -11,7 +11,7 @@ namespace TheFinalBattle.Tests
         {
             Party party = new Party(new PartyHuman());
             party.AddMembers(new Akechi(), new Akechi(), new Akechi());
-            
+
             bool isMemberAdded = party.AddMembers(new Akechi());
 
             Assert.False(isMemberAdded);

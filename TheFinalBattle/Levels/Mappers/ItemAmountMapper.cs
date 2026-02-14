@@ -1,5 +1,6 @@
 ﻿using TheFinalBattle.GameObjects.Items;
 using TheFinalBattle.Levels.DTO;
+using TheFinalBattle.Parties;
 using TheFinalBattle.UI;
 
 namespace TheFinalBattle.Levels.Mappers
@@ -18,7 +19,7 @@ namespace TheFinalBattle.Levels.Mappers
                 Alerts.Add(new($"Item #{rawItem.Id} doesn't exist", AlertType.Warn));
                 return MappingResult<ItemAmount>.Failure(Alerts);
             }
-            
+
             return MappingResult<ItemAmount>.Success(new(item, rawItem.Amount), Alerts);
         }
     }

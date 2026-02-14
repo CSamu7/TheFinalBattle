@@ -1,4 +1,5 @@
 ﻿using TheFinalBattle.GameObjects.Items;
+using TheFinalBattle.Parties;
 
 namespace TheFinalBattle.Tests
 {

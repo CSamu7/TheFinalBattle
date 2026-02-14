@@ -10,8 +10,9 @@ namespace TheFinalBattle.Tests.Mappers
         public void Level_is_mapped_if_at_least_enemy_is_valid()
         {
             LevelMapper mapper = new LevelMapper();
-            LevelDTO levelDto = new LevelDTO { 
-                Rewards = [], PartyEnemy = Helper.GetPartyDTO(2,1)
+            LevelDTO levelDto = new LevelDTO
+            {
+                Rewards = [], PartyEnemy = Helper.GetPartyDTO(2, 1)
             };
 
             MappingResult<Level> result = mapper.Map(levelDto);

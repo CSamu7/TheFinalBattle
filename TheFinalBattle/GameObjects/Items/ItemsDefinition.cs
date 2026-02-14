@@ -1,5 +1,5 @@
-﻿using TheFinalBattle.Effects;
-using TheFinalBattle.PlayerCommands.Attacks;
+﻿using TheFinalBattle.GameObjects.Attacks;
+using TheFinalBattle.GameObjects.Effects;
 
 namespace TheFinalBattle.GameObjects.Items
 {

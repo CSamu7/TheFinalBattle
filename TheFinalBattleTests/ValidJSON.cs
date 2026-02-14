@@ -19,7 +19,7 @@
                 "{\n\"name\": \"Medicine\",\n " +
                 "\"amount\": 2\n      }\n    ]\n  }\n]";
 
-        public static string InvalidFormat =  "[{\"enemies\": [\n" +
+        public static string InvalidFormat = "[{\"enemies\": [\n" +
               "{\n\"name\": \"Pixie\", " +
               "\n\"defensiveModifier\": \"AtiumBead\"," +
               "\n\"gear\": \"Gun\"\n}\n],\n" +

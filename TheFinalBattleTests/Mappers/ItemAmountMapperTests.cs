@@ -1,5 +1,6 @@
 ﻿using TheFinalBattle.Levels.DTO;
 using TheFinalBattle.Levels.Mappers;
+using TheFinalBattle.Parties;
 
 namespace TheFinalBattle.Tests.Mappers
 {

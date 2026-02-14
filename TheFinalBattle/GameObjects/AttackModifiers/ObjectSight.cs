@@ -1,5 +1,5 @@
-﻿using TheFinalBattle.GameObjects.Entities;
-using TheFinalBattle.PlayerCommands.Attacks;
+﻿using TheFinalBattle.GameObjects.Attacks;
+using TheFinalBattle.GameObjects.Entities;
 
 namespace TheFinalBattle.GameObjects.DefensiveModifiers
 {
@@ -18,7 +18,7 @@ namespace TheFinalBattle.GameObjects.DefensiveModifiers
                 int reducedDamage = newData.DamagePoints - 2;
                 newData = newData with { DamagePoints = reducedDamage };
             }
-            
+
             return newData;
         }
     }

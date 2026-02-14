@@ -1,6 +1,6 @@
-﻿using TheFinalBattle.GameObjects.Entities;
+﻿using TheFinalBattle.GameObjects.Attacks;
+using TheFinalBattle.GameObjects.Entities;
 using TheFinalBattle.PlayerCommands;
-using TheFinalBattle.PlayerCommands.Attacks;
 using Utils;
 
 namespace TheFinalBattle.UI
@@ -9,7 +9,8 @@ namespace TheFinalBattle.UI
     {
         private readonly Entity _defensor;
         private readonly IAttack _attack;
-        public AttackCommandUI(Entity defensor, IAttack attack) { 
+        public AttackCommandUI(Entity defensor, IAttack attack)
+        {
             _defensor = defensor;
             _attack = attack;
         }

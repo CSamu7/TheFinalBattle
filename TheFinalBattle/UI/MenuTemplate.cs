@@ -1,4 +1,5 @@
-﻿using Utils;
+﻿using TheFinalBattle.Validations;
+using Utils;
 namespace TheFinalBattle.UI
 {
     public abstract class MenuTemplate<T> where T : class
@@ -26,7 +27,7 @@ namespace TheFinalBattle.UI
         private MenuState ValidateInput()
         {
             ActionValidator<T> optionValidator = new ActionValidator<T>(Options);
-            InputValidator basicValidator = new InputValidator(Options.Count, IsSubmenu);
+            MenuOptionValidator basicValidator = new MenuOptionValidator(Options.Count, IsSubmenu);
 
             if (!basicValidator.Validate(Console.ReadLine() ?? ""))
             {
@@ -37,7 +38,7 @@ namespace TheFinalBattle.UI
             _indexOption = basicValidator.IndexOption;
             //If the user wants to comeback to the prev menu.
             if (IsSubmenu && _indexOption == Options.Count) return MenuState.BackPrevMenu;
-            
+
             if (!optionValidator.Validate(_indexOption))
             {
                 ConsoleUtils.Error(optionValidator.Errors[0]);

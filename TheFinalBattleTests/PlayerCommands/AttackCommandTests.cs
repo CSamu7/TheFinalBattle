@@ -1,10 +1,10 @@
 ﻿using TheFinalBattle.GameObjects.AttackModifiers;
+using TheFinalBattle.GameObjects.Attacks;
 using TheFinalBattle.GameObjects.DefensiveModifiers;
 using TheFinalBattle.GameObjects.Entities;
 using TheFinalBattle.GameObjects.Entities.Enemies;
 using TheFinalBattle.GameObjects.Entities.Heroes;
 using TheFinalBattle.PlayerCommands;
-using TheFinalBattle.PlayerCommands.Attacks;
 using TheFinalBattle.Tests.AttackModifierTests;
 
 namespace TheFinalBattle.Tests.PlayerCommands
@@ -18,7 +18,7 @@ namespace TheFinalBattle.Tests.PlayerCommands
             Entity attacker = new Vin { AttackModifier = new KingFrostCape() };
             Entity defensor = new Pixie { MaxHP = 10, HP = 10 };
             AttackCommand sut = new AttackCommand(testWeapon, defensor);
-            
+
             sut.Execute(attacker);
 
             Assert.Equal(5, defensor.HP);

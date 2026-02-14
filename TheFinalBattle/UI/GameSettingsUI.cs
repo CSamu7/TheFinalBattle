@@ -1,5 +1,5 @@
 ﻿using TheFinalBattle.Levels;
-using TheFinalBattle.PartyControl;
+using TheFinalBattle.Parties;
 
 namespace TheFinalBattle.UI
 {

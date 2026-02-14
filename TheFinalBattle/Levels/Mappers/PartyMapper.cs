@@ -1,5 +1,6 @@
 ﻿using TheFinalBattle.GameObjects.Entities;
 using TheFinalBattle.Levels.DTO;
+using TheFinalBattle.Parties;
 using TheFinalBattle.UI;
 
 namespace TheFinalBattle.Levels.Mappers

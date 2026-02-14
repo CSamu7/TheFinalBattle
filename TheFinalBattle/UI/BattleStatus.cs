@@ -1,4 +1,5 @@
 ﻿using TheFinalBattle.GameObjects.Entities;
+using TheFinalBattle.Parties;
 using Utils;
 
 namespace TheFinalBattle.UI
@@ -11,8 +12,9 @@ namespace TheFinalBattle.UI
 
         private readonly string _tabs;
         private readonly string _innerBorder;
-        public BattleStatus() {
-            _innerBorder = "".PadRight(_borderLength, _innerSymbolBorder); 
+        public BattleStatus()
+        {
+            _innerBorder = "".PadRight(_borderLength, _innerSymbolBorder);
             _tabs = "".PadRight(8, '\t');
         }
         public void Display(Entity entity, Battle battle)
