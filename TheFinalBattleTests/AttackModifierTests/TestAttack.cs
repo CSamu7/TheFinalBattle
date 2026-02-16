@@ -5,11 +5,11 @@ namespace TheFinalBattle.Tests.AttackModifierTests
     /// <summary>
     /// Weapon with 5 of damage and 100% of success.
     /// </summary>
-    public class TestWeapon : Attack
+    public class TestAttack : Attack
     {
         public override string Name => "Test";
         public override DamageType DamageType { get; }
-        public TestWeapon(DamageType damageType)
+        public TestAttack(DamageType damageType)
         {
             DamageType = damageType;
 

@@ -8,11 +8,11 @@ namespace TheFinalBattle.Tests.AttackModifierTests
         [Fact]
         public void Reduce_damage_if_attack_is_ice_type()
         {
-            FrostCape modifier = new FrostCape();
-            TestWeapon testWeapon = new TestWeapon(DamageType.Ice);
-            var attackData = testWeapon.CalculateAttack();
+            FrostCape sut = new FrostCape();
+            TestAttack testAttack = new TestAttack(DamageType.Ice);
+            var attackData = testAttack.CalculateAttack();
 
-            AttackData newData = modifier.ModifyAttack(attackData);
+            AttackData newData = sut.ModifyAttack(attackData);
 
             Assert.True(newData.DamagePoints == 1);
         }
@@ -24,7 +24,7 @@ namespace TheFinalBattle.Tests.AttackModifierTests
         public void Do_nothing_if_is_not_ice_damage(DamageType damageType)
         {
             FrostCape modifier = new FrostCape();
-            TestWeapon testWeapon = new TestWeapon(damageType);
+            TestAttack testWeapon = new TestAttack(damageType);
             var attackData = testWeapon.CalculateAttack();
 
             AttackData newData = modifier.ModifyAttack(attackData);

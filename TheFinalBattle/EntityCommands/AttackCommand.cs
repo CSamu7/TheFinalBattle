@@ -25,7 +25,7 @@ namespace TheFinalBattle.PlayerCommands
             {
                 _commandUI.DisplayModifierInSuccessAttack(proccesedAttack);
                 _defensor.HP -= proccesedAttack.NewDataAttack.DamagePoints;
-                _commandUI.SuccessAttack(attacker, proccesedAttack.NewDataAttack.DamagePoints);
+                _commandUI.DisplayAttackInfo(attacker, proccesedAttack.NewDataAttack.DamagePoints);
             } else
             {
                 _commandUI.DisplayModifierInFailAttack(proccesedAttack);

@@ -8,11 +8,11 @@ namespace TheFinalBattle.Tests.AttackModifierTests
         [Fact]
         public void Reduce_attack_success()
         {
-            Atium modifier = new Atium();
-            TestWeapon testWeapon = new TestWeapon(DamageType.Decoding);
-            AttackData attackData = testWeapon.CalculateAttack();
+            Atium sut = new Atium();
+            TestAttack testAttack = new TestAttack(DamageType.Decoding);
+            AttackData attackData = testAttack.CalculateAttack();
 
-            AttackData newData = modifier.ModifyAttack(attackData);
+            AttackData newData = sut.ModifyAttack(attackData);
 
             Assert.Equal(.8, newData.Success);
         }

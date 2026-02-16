@@ -28,7 +28,8 @@ namespace TheFinalBattle.GameObjects.Items
         {
             new Medicine(),
             new GlassKnife(),
-            new MeteorStaff(),
+            new Debugger(),
+            new IceStaff(),
         };
         public Item? GetByID(int id) => _items.Find(item => item.Id == id);
     }

@@ -1,6 +1,7 @@
 ﻿using TheFinalBattle.Levels.DTO;
 using TheFinalBattle.Levels.Mappers;
 using TheFinalBattle.Parties;
+using TheFinalBattle.Tests.Mappers.Helpers;
 using TheFinalBattle.UI;
 
 namespace TheFinalBattle.Tests.Mappers

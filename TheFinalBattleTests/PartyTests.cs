@@ -1,5 +1,4 @@
 using TheFinalBattle.GameObjects.Entities.Enemies;
-using TheFinalBattle.GameObjects.Items;
 using TheFinalBattle.Parties;
 
 namespace TheFinalBattle.Tests
@@ -21,14 +20,14 @@ namespace TheFinalBattle.Tests
         public void CleanParty_IfAMemberIsDead_RemoveFromParty()
         {
             Party sut = new Party(new PartyHuman());
-            Skeleton entityDead = new Skeleton { HP = 0, Gear = new Misericorde() };
+            Skeleton entityDead = new Skeleton { HP = 0, Gear = new TestGear() };
             sut.AddMembers(entityDead, new Skeleton(), new Skeleton());
             Inventory enemyInventory = new Inventory();
 
             sut.CleanParty(enemyInventory);
 
             Assert.True(sut.Members.Count() == 2);
-            Assert.Contains(enemyInventory.Items, slot => slot.Item.Id == new Misericorde().Id);
+            Assert.Contains(enemyInventory.Items, slot => slot.Item.Id == new TestGear().Id);
         }
     }
 }

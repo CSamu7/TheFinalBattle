@@ -11,7 +11,14 @@ namespace TheFinalBattle.Levels
             new Level(
                 EnemyParty: new Party
                 {
-                    Members = [new Fairy()],
+                    Members = [new Skeleton()],
+                },
+                Rewards: [new(new Medicine())]
+            ),
+            new Level(
+                EnemyParty: new Party
+                {
+                    Members = [new Archer(), new Fairy { Gear = new IceStaff() }],
                     Inventory = new Inventory{ Items=[ new (new Medicine()) ] }
                 },
                 Rewards: [new(new Medicine())]
@@ -19,9 +26,34 @@ namespace TheFinalBattle.Levels
             new Level(
                 EnemyParty: new Party
                 {
-                    Members = [new FireHog(), new FireHog()],
+                    Members = [new IceGolem()],
                 },
-                Rewards: [new(new Gun())]
+                Rewards : []
+                ),
+            new Level(
+                EnemyParty: new Party
+                {
+                    Members = [new FireHog(), new FireHog()],
+                    Inventory = new Inventory {Items = [new(new Medicine())]}
+                },
+                Rewards: [new(new Medicine())]
+            ),
+            new Level(
+                EnemyParty: new Party
+                {
+                    Members = [new Undefined(), new Archer()],
+                    Inventory = new Inventory {Items = [new(new Medicine()) ]}
+                },
+                Rewards: [new(new Debugger())]
+            ),
+
+            new Level(
+                EnemyParty: new Party
+                {
+                    Members = [new TheUncodedOne()],
+                    Inventory = new Inventory {Items = [new(new Medicine(), 2) ]}
+                },
+                Rewards: []
             )
         };
         public List<Level> GetLevels() => _levels;

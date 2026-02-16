@@ -13,10 +13,10 @@ namespace TheFinalBattle.Tests.PlayerCommands
         [Fact]
         public void If_attacker_has_defensive_modifier_then_dont_modify_attack()
         {
-            TestWeapon testWeapon = new TestWeapon(DamageType.Ice);
+            TestAttack testAttack = new TestAttack(DamageType.Ice);
             Entity attacker = new Vin { AttackModifier = new FrostCape() };
             Entity defensor = new Fairy { MaxHP = 10, HP = 10 };
-            AttackCommand sut = new AttackCommand(testWeapon, defensor);
+            AttackCommand sut = new AttackCommand(testAttack, defensor);
 
             sut.Execute(attacker);
 
@@ -26,10 +26,10 @@ namespace TheFinalBattle.Tests.PlayerCommands
         [Fact]
         public void If_defensor_has_ofensive_modifier_then_dont_modify_attack()
         {
-            TestWeapon testWeapon = new TestWeapon(DamageType.Physical);
+            TestAttack testAttack = new TestAttack(DamageType.Physical);
             Entity attacker = new Vin();
             Entity defensor = new Fairy { MaxHP = 10, HP = 10, AttackModifier = new MagmaStone() };
-            AttackCommand sut = new AttackCommand(testWeapon, defensor);
+            AttackCommand sut = new AttackCommand(testAttack, defensor);
 
             sut.Execute(attacker);
 

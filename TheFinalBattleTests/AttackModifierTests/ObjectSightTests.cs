@@ -8,11 +8,11 @@ namespace TheFinalBattle.Tests.AttackModifierTests
         [Fact]
         public void Reduce_damage_if_attack_is_decoding_type()
         {
-            ObjectSight modifier = new ObjectSight();
-            TestWeapon testWeapon = new TestWeapon(DamageType.Decoding);
-            AttackData attackData = testWeapon.CalculateAttack();
+            ObjectSight sut = new ObjectSight();
+            TestAttack testAttack = new TestAttack(DamageType.Decoding);
+            AttackData attackData = testAttack.CalculateAttack();
 
-            AttackData newData = modifier.ModifyAttack(attackData);
+            AttackData newData = sut.ModifyAttack(attackData);
 
             Assert.Equal(3, newData.DamagePoints);
         }

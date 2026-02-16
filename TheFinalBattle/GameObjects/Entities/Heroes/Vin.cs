@@ -1,6 +1,5 @@
 ﻿using TheFinalBattle.GameObjects.AttackModifiers;
 using TheFinalBattle.GameObjects.Attacks;
-using TheFinalBattle.GameObjects.Items;
 
 namespace TheFinalBattle.GameObjects.Entities.Heroes
 {
@@ -11,7 +10,7 @@ namespace TheFinalBattle.GameObjects.Entities.Heroes
         public override Attack StandardAttack { get; init; } = new PowerfulShot();
         public Vin()
         {
-            AttackModifier = new Atium(); 
+            AttackModifier = new Atium();
         }
 
     }

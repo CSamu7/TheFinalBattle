@@ -9,7 +9,7 @@ namespace TheFinalBattle.Parties
     }
     public class Inventory
     {
-        public List<ItemAmount> Items { get; init; } = new List<ItemAmount>();
+        public List<ItemAmount> Items { get; init; } = [];
         public void AddItem(Item item, int amount = 1)
         {
             int index = Items.FindIndex(slot => item.Id == slot.Item.Id);
