@@ -1,4 +1,4 @@
-﻿using TheFinalBattle.GameObjects.DefensiveModifiers;
+﻿using TheFinalBattle.GameObjects.AttackModifiers;
 using TheFinalBattle.GameObjects.Entities;
 using TheFinalBattle.GameObjects.Items;
 using TheFinalBattle.Levels.DTO;
@@ -41,7 +41,7 @@ namespace TheFinalBattle.Levels.Mappers
         }
         private AbstractAttackModifier? GetDefensiveModifier(int id)
         {
-            DefensiveModifierList list = new();
+            AttackModifiersList list = new();
 
             AbstractAttackModifier? modifier = list.GetByID(id);
 

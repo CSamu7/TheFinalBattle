@@ -1,11 +1,11 @@
 ﻿using TheFinalBattle.GameObjects.Attacks;
 using TheFinalBattle.GameObjects.Entities;
 
-namespace TheFinalBattle.GameObjects.DefensiveModifiers
+namespace TheFinalBattle.GameObjects.AttackModifiers
 {
-    public class KingFrostCape : AbstractAttackModifier
+    public class FrostCape : AbstractAttackModifier
     {
-        public override string Name { get; init; } = "King Frost Cape";
+        public override string Name { get; init; } = "Frost Cape";
         public override bool IsDefensive => true;
         public override AttackData ModifyAttack(AttackData attackData)
         {

@@ -15,7 +15,7 @@ namespace TheFinalBattle.Tests.PlayerCommands
         public void If_attacker_has_defensive_modifier_then_dont_modify_attack()
         {
             TestWeapon testWeapon = new TestWeapon(DamageType.Ice);
-            Entity attacker = new Vin { AttackModifier = new KingFrostCape() };
+            Entity attacker = new Vin { AttackModifier = new FrostCape() };
             Entity defensor = new Pixie { MaxHP = 10, HP = 10 };
             AttackCommand sut = new AttackCommand(testWeapon, defensor);
 

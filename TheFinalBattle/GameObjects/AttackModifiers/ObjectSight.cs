@@ -1,7 +1,7 @@
 ﻿using TheFinalBattle.GameObjects.Attacks;
 using TheFinalBattle.GameObjects.Entities;
 
-namespace TheFinalBattle.GameObjects.DefensiveModifiers
+namespace TheFinalBattle.GameObjects.AttackModifiers
 {
     public class ObjectSight : AbstractAttackModifier
     {
@@ -15,8 +15,8 @@ namespace TheFinalBattle.GameObjects.DefensiveModifiers
 
             if (attackData.DamageType.Equals(DamageType.Decoding))
             {
-                int reducedDamage = newData.DamagePoints - 2;
-                newData = newData with { DamagePoints = reducedDamage };
+                int newDamage = newData.DamagePoints - 2;
+                newData = newData with { DamagePoints = newDamage };
             }
 
             return newData;

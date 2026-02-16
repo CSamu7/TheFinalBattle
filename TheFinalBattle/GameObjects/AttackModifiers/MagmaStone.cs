@@ -1,5 +1,4 @@
 ﻿using TheFinalBattle.GameObjects.Attacks;
-using TheFinalBattle.GameObjects.DefensiveModifiers;
 using TheFinalBattle.GameObjects.Entities;
 
 namespace TheFinalBattle.GameObjects.AttackModifiers

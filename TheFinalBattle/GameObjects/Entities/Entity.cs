@@ -1,5 +1,5 @@
-﻿using TheFinalBattle.GameObjects.Attacks;
-using TheFinalBattle.GameObjects.DefensiveModifiers;
+﻿using TheFinalBattle.GameObjects.AttackModifiers;
+using TheFinalBattle.GameObjects.Attacks;
 using TheFinalBattle.GameObjects.Items;
 using Utils;
 

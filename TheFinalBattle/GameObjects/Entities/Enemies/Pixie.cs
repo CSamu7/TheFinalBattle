@@ -11,7 +11,7 @@ namespace TheFinalBattle.GameObjects.Entities.Enemies
         public override IAttack StandardAttack { get; init; } = new Zio();
         public Pixie()
         {
-            AttackModifier = new AtiumBead();
+            AttackModifier = new Atium();
         }
     }
 }

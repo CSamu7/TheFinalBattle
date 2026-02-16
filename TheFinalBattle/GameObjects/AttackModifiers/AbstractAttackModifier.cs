@@ -1,7 +1,7 @@
 ﻿using TheFinalBattle.GameObjects.Attacks;
 using TheFinalBattle.GameObjects.Entities;
 
-namespace TheFinalBattle.GameObjects.DefensiveModifiers
+namespace TheFinalBattle.GameObjects.AttackModifiers
 {
     public abstract class AbstractAttackModifier
     {

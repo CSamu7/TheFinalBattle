@@ -1,5 +1,5 @@
-﻿using TheFinalBattle.GameObjects.Attacks;
-using TheFinalBattle.GameObjects.DefensiveModifiers;
+﻿using TheFinalBattle.GameObjects.AttackModifiers;
+using TheFinalBattle.GameObjects.Attacks;
 
 namespace TheFinalBattle.Tests.AttackModifierTests
 {
@@ -8,7 +8,7 @@ namespace TheFinalBattle.Tests.AttackModifierTests
         [Fact]
         public void Reduce_attack_success()
         {
-            AtiumBead modifier = new AtiumBead();
+            Atium modifier = new Atium();
             TestWeapon testWeapon = new TestWeapon(DamageType.Decoding);
             AttackData attackData = testWeapon.CalculateAttack();
 
