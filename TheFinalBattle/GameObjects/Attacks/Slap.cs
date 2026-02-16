@@ -6,7 +6,7 @@
         public DamageType DamageType => DamageType.Physical;
         public AttackData CalculateAttack()
         {
-            return new AttackData(2, DamageType, .85);
+            return new AttackData(1, DamageType);
         }
     }
 }

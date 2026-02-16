@@ -8,7 +8,7 @@ namespace TheFinalBattle.GameObjects.Entities.Enemies
         public override int Id { get; init; } = 7;
         public override string Name { get; init; } = "Pixie";
         public override int MaxHP { get; init; } = 5;
-        public override IAttack StandardAttack { get; init; } = new Zio();
+        public override IAttack StandardAttack { get; init; } = new Pointer();
         public Pixie()
         {
             AttackModifier = new Atium();

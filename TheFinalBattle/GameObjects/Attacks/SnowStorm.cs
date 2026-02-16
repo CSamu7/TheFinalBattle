@@ -1,12 +1,12 @@
 ﻿namespace TheFinalBattle.GameObjects.Attacks
 {
-    public class Bufu : IAttack
+    public class SnowStorm : IAttack
     {
-        public string Name { get; } = "Bufu";
+        public string Name { get; } = "SnowStorm";
         public DamageType DamageType { get; } = DamageType.Ice;
         public AttackData CalculateAttack()
         {
-            return new AttackData(10, DamageType);
+            return new AttackData(3, DamageType, .70);
         }
     }
 }

@@ -7,7 +7,7 @@
 
         public AttackData CalculateAttack()
         {
-            return new AttackData(3, DamageType, .55);
+            return new AttackData(3, DamageType, .50);
         }
     }
 }

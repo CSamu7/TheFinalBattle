@@ -6,7 +6,7 @@ namespace TheFinalBattle.GameObjects.Items
     {
         public override string ToString() => base.ToString();
     }
-    public record Misericorde() : Gear(3, "Misericorde", "A mercy stroke!", new Bufu())
+    public record Misericorde() : Gear(3, "Misericorde", "A mercy stroke!", new SnowStorm())
     {
         public override string ToString() => base.ToString();
     }

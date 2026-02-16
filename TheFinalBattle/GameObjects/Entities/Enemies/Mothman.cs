@@ -7,6 +7,6 @@ namespace TheFinalBattle.GameObjects.Entities.Enemies
         public override int Id { get; init; } = 8;
         public override string Name { get; init; } = "Mothman";
         public override int MaxHP { get; init; } = 8;
-        public override IAttack StandardAttack { get; init; } = new Zionga();
+        public override IAttack StandardAttack { get; init; } = new FlareUp();
     }
 }
