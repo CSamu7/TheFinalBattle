@@ -9,7 +9,7 @@ namespace TheFinalBattle.UI
     {
         private readonly LevelsResult _results;
         private readonly List<List<MappingAlert>> _alerts;
-        private readonly string _title = "Validación de Niveles";
+        private readonly string _title = "Level Validation";
         public FileValidationUI(LevelsResult results)
         {
             _results = results;
@@ -44,7 +44,7 @@ namespace TheFinalBattle.UI
                 ConsoleUtils.Warn($" (WARNING) {alert.Message}");
             } else
             {
-                Console.WriteLine($" {alert.Message}");
+                Console.WriteLine($" (INFO) {alert.Message}");
             }
         }
     }

@@ -26,7 +26,7 @@ namespace TheFinalBattle.Levels.Mappers
                 return MappingResult<Level>.Failure(alerts);
             } else
             {
-                alerts.Add(new("This level can be created", AlertType.Info));
+                alerts.Add(new("Valid Level", AlertType.Info));
                 return MappingResult<Level>.Success(new(party.Result, items), alerts);
             }
         }
