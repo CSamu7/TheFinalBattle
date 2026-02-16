@@ -8,8 +8,8 @@ namespace TheFinalBattle.UI
     public class AttackCommandUI
     {
         private readonly Entity _defensor;
-        private readonly IAttack _attack;
-        public AttackCommandUI(Entity defensor, IAttack attack)
+        private readonly Attack _attack;
+        public AttackCommandUI(Entity defensor, Attack attack)
         {
             _defensor = defensor;
             _attack = attack;

@@ -6,17 +6,16 @@ namespace TheFinalBattle.GameObjects.Entities
 {
     public class EntitiesList : IGameObjectList<Entity>
     {
-        private readonly List<Entity> _entities = [
-            new Pixie(),
-            new JackFrost(),
-            new Mara(),
-            new Mothman(),
-            new Vin() ,
-            new Yosuke(),
-            new Akechi() ,
-            new WealthHand(),
-            new Reaper()
-        ];
-        public Entity? GetByID(int id) => _entities.Where(entity => entity.Id == id).FirstOrDefault();
+        private readonly Dictionary<int, Entity> _entities = new Dictionary<int, Entity>()
+        {
+            {1, new Vin() },
+            {2, new Skeleton() },
+            {3, new Archer() },
+            {4, new Fairy() },
+            {5, new Undefined() },
+            {6, new FireHog() },
+            {7, new TheUncodedOne() }
+        };
+        public Entity? GetByID(int id) => _entities.GetValueOrDefault(id);
     }
 }

@@ -1,9 +1,9 @@
 ﻿namespace TheFinalBattle.GameObjects.Attacks
 {
-    public class PowerfulShot : IAttack
+    public class PowerfulShot : Attack
     {
-        public string Name => "Powerful Shot";
-        public DamageType DamageType => DamageType.Range;
-        public AttackData CalculateAttack() => new AttackData(4, DamageType, .55);
+        public override string Name => "Powerful Shot";
+        public override DamageType DamageType => DamageType.Range;
+        public override AttackData CalculateAttack() => new AttackData(4, DamageType, .55);
     }
 }

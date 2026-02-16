@@ -11,7 +11,7 @@ namespace TheFinalBattle.Levels
             new Level(
                 EnemyParty: new Party
                 {
-                    Members = [new Pixie()],
+                    Members = [new Fairy()],
                     Inventory = new Inventory{ Items=[ new (new Medicine()) ] }
                 },
                 Rewards: [new(new Medicine())]
@@ -19,7 +19,7 @@ namespace TheFinalBattle.Levels
             new Level(
                 EnemyParty: new Party
                 {
-                    Members = [new Mothman(), new Mothman()],
+                    Members = [new FireHog(), new FireHog()],
                 },
                 Rewards: [new(new Gun())]
             )

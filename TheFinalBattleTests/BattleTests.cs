@@ -8,8 +8,8 @@ namespace TheFinalBattle.Tests
         [Fact]
         public void Get_Party_Of_Entity()
         {
-            Party _heroes = new Party(new Akechi(), new Akechi());
-            Party _enemies = new Party(new Mothman(), new Mothman());
+            Party _heroes = new Party(new Skeleton(), new Skeleton());
+            Party _enemies = new Party(new FireHog(), new FireHog());
             Battle _battle = new Battle(_heroes, _enemies);
 
             Party party = _battle.GetPartyFor(_heroes.Members[0]);
@@ -20,8 +20,8 @@ namespace TheFinalBattle.Tests
         [Fact]
         public void Get_Enemy_Party_Of_Entity()
         {
-            Party _heroes = new Party(new Akechi(), new Akechi());
-            Party _enemies = new Party(new Mothman(), new Mothman());
+            Party _heroes = new Party(new Skeleton(), new Skeleton());
+            Party _enemies = new Party(new FireHog(), new FireHog());
             Battle _battle = new Battle(_heroes, _enemies);
 
             Party party = _battle.GetEnemyPartyFor(_heroes.Members[0]);

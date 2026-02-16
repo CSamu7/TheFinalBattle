@@ -10,7 +10,7 @@ namespace TheFinalBattle.PlayerCommands
         AttackData OriginalDataAttack,
         //The data after the modifiers were applied
         AttackData NewDataAttack,
-        IAttack Attack,
+        Attack Attack,
         double RandomSuccess
     );
 }

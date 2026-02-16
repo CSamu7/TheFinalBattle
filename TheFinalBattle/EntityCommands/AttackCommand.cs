@@ -8,9 +8,9 @@ namespace TheFinalBattle.PlayerCommands
     {
         private readonly static Random _random = new Random();
         private readonly AttackCommandUI _commandUI;
-        private readonly IAttack _attack;
+        private readonly Attack _attack;
         private readonly Entity _defensor;
-        public AttackCommand(IAttack attack, Entity defensor)
+        public AttackCommand(Attack attack, Entity defensor)
         {
             _attack = attack;
             _defensor = defensor;

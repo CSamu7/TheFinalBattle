@@ -10,9 +10,9 @@ namespace TheFinalBattle.Tests
         public void AddMembers_WhenTeamIsFull_ReturnFalse()
         {
             Party party = new Party(new PartyHuman());
-            party.AddMembers(new Akechi(), new Akechi(), new Akechi());
+            party.AddMembers(new Skeleton(), new Skeleton(), new Skeleton());
 
-            bool isMemberAdded = party.AddMembers(new Akechi());
+            bool isMemberAdded = party.AddMembers(new Skeleton());
 
             Assert.False(isMemberAdded);
             Assert.True(party.Members.Count == 3);
@@ -21,8 +21,8 @@ namespace TheFinalBattle.Tests
         public void CleanParty_IfAMemberIsDead_RemoveFromParty()
         {
             Party sut = new Party(new PartyHuman());
-            Akechi entityDead = new Akechi { HP = 0, Gear = new Misericorde() };
-            sut.AddMembers(entityDead, new Akechi(), new Akechi());
+            Skeleton entityDead = new Skeleton { HP = 0, Gear = new Misericorde() };
+            sut.AddMembers(entityDead, new Skeleton(), new Skeleton());
             Inventory enemyInventory = new Inventory();
 
             sut.CleanParty(enemyInventory);

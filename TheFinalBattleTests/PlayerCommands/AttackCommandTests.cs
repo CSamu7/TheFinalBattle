@@ -1,6 +1,5 @@
 ﻿using TheFinalBattle.GameObjects.AttackModifiers;
 using TheFinalBattle.GameObjects.Attacks;
-using TheFinalBattle.GameObjects.DefensiveModifiers;
 using TheFinalBattle.GameObjects.Entities;
 using TheFinalBattle.GameObjects.Entities.Enemies;
 using TheFinalBattle.GameObjects.Entities.Heroes;
@@ -16,7 +15,7 @@ namespace TheFinalBattle.Tests.PlayerCommands
         {
             TestWeapon testWeapon = new TestWeapon(DamageType.Ice);
             Entity attacker = new Vin { AttackModifier = new FrostCape() };
-            Entity defensor = new Pixie { MaxHP = 10, HP = 10 };
+            Entity defensor = new Fairy { MaxHP = 10, HP = 10 };
             AttackCommand sut = new AttackCommand(testWeapon, defensor);
 
             sut.Execute(attacker);
@@ -29,7 +28,7 @@ namespace TheFinalBattle.Tests.PlayerCommands
         {
             TestWeapon testWeapon = new TestWeapon(DamageType.Physical);
             Entity attacker = new Vin();
-            Entity defensor = new Pixie { MaxHP = 10, HP = 10, AttackModifier = new MagmaStone() };
+            Entity defensor = new Fairy { MaxHP = 10, HP = 10, AttackModifier = new MagmaStone() };
             AttackCommand sut = new AttackCommand(testWeapon, defensor);
 
             sut.Execute(attacker);

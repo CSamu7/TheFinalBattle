@@ -3,9 +3,9 @@ using TheFinalBattle.GameObjects.Entities;
 
 namespace TheFinalBattle.UI
 {
-    public class AttacksSubmenu : MenuTemplate<IAttack>
+    public class AttacksSubmenu : MenuTemplate<Attack>
     {
-        protected override List<MenuItemAction<IAttack>> Options { get; set; }
+        protected override List<MenuItemAction<Attack>> Options { get; set; }
         private Entity _entity;
         public AttacksSubmenu(Entity entity)
         {
@@ -15,6 +15,6 @@ namespace TheFinalBattle.UI
             InputText = "Enter your attack: ";
             Options = new MenuOptions(_entity).GetAttacks();
         }
-        public IAttack? SelectAttack() => GetOption();
+        public Attack? SelectAttack() => GetOption();
     }
 }

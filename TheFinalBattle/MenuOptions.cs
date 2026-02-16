@@ -39,13 +39,13 @@ namespace TheFinalBattle
 
             return optionItems;
         }
-        public List<MenuItemAction<IAttack>> GetAttacks()
+        public List<MenuItemAction<Attack>> GetAttacks()
         {
-            return new List<MenuItemAction<IAttack>>
+            return new List<MenuItemAction<Attack>>
             {
-                new MenuItemAction<IAttack>($"Standard Attack: {_entity.StandardAttack.Name}",
+                new MenuItemAction<Attack>($"Standard Attack: {_entity.StandardAttack.Name}",
                     true, _entity.StandardAttack),
-                new MenuItemAction<IAttack>($"Special Attack: {_entity.Gear?.SpecialAttack.Name ?? "????"}",
+                new MenuItemAction<Attack>($"Special Attack: {_entity.Gear?.SpecialAttack.Name ?? "????"}",
                     _entity.Gear is not null, _entity.Gear?.SpecialAttack)
             };
         }

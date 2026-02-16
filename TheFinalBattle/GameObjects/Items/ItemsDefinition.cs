@@ -9,7 +9,7 @@ namespace TheFinalBattle.GameObjects.Items
     {
         public override string ToString() => Name;
     }
-    public record Gear(int Id, string Name, string Description, IAttack SpecialAttack)
+    public record Gear(int Id, string Name, string Description, Attack SpecialAttack)
         : Item(Id, Name, Description)
     {
         public override string ToString() => Name;
@@ -27,12 +27,8 @@ namespace TheFinalBattle.GameObjects.Items
         private readonly List<Item> _items = new List<Item>()
         {
             new Medicine(),
-            new LuminaSaber(),
-            new Misericorde(),
-            new KolossSword(),
             new GlassKnife(),
-            new Gun(),
-            new ShortGun()
+            new MeteorStaff(),
         };
         public Item? GetByID(int id) => _items.Find(item => item.Id == id);
     }

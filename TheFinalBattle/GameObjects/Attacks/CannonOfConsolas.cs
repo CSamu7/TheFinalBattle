@@ -1,11 +1,11 @@
 ﻿namespace TheFinalBattle.GameObjects.Attacks
 {
-    public class CannonOfConsolas : IAttack
+    public class CannonOfConsolas : Attack
     {
         private static Random _random = new Random();
-        public string Name => "Cannon Of Consolas";
-        public DamageType DamageType => DamageType.Decoding;
-        public AttackData CalculateAttack()
+        public override string Name => "Cannon Of Consolas";
+        public override DamageType DamageType => DamageType.Decoding;
+        public override AttackData CalculateAttack()
         {
             int rndNumber = _random.Next(1, 30);
 

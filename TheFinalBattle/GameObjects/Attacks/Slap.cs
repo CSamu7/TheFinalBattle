@@ -1,12 +1,9 @@
 ﻿namespace TheFinalBattle.GameObjects.Attacks
 {
-    public class Slap : IAttack
+    public class Slap : Attack
     {
-        public string Name => "Slap";
-        public DamageType DamageType => DamageType.Physical;
-        public AttackData CalculateAttack()
-        {
-            return new AttackData(1, DamageType);
-        }
+        public override string Name => "Slap";
+        public override DamageType DamageType => DamageType.Physical;
+        public override AttackData CalculateAttack() => new AttackData(1, DamageType);
     }
 }

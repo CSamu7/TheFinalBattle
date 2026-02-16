@@ -8,10 +8,9 @@ namespace TheFinalBattle.GameObjects.Entities
     public abstract class Entity
     {
         private int _hp;
-        public abstract int Id { get; init; }
         public abstract string Name { get; init; }
         public abstract int MaxHP { get; init; }
-        public abstract IAttack StandardAttack { get; init; }
+        public abstract Attack StandardAttack { get; init; }
         public int HP
         {
             get => _hp;

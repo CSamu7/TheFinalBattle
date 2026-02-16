@@ -1,13 +1,9 @@
 ﻿namespace TheFinalBattle.GameObjects.Attacks
 {
-    public class QuickShot : IAttack
+    public class QuickShot : Attack
     {
-        public string Name => "Quickshot";
-        public DamageType DamageType => DamageType.Range;
-
-        public AttackData CalculateAttack()
-        {
-            return new AttackData(3, DamageType, .50);
-        }
+        public override string Name => "Quickshot";
+        public override DamageType DamageType => DamageType.Range;
+        public override AttackData CalculateAttack() => new AttackData(3, DamageType, .50);
     }
 }

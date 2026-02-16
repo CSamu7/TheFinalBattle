@@ -2,28 +2,17 @@
 
 namespace TheFinalBattle.GameObjects.Items
 {
-    public record LuminaSaber() : Gear(2, "Lumina Saber", "A glimmering saber", new BladedRunners())
+    public record Debugger() : Gear(2, "Lumina Saber", "Step Over, Continue", new CannonOfConsolas())
     {
         public override string ToString() => base.ToString();
     }
-    public record Misericorde() : Gear(3, "Misericorde", "A mercy stroke!", new SnowStorm())
+    public record GlassKnife() : Gear(5, "Glass Knife", "An old knife", new Slash())
     {
         public override string ToString() => base.ToString();
     }
-    public record KolossSword() : Gear(4, "Koloss Sword", "A heavy sword", new Push())
+    public record MeteorStaff() : Gear(6, "Meteor Staff", "What's that bright thing in the sky?", new Meteors())
     {
         public override string ToString() => base.ToString();
     }
-    public record GlassKnife() : Gear(5, "Glass Knife", "", new Slash())
-    {
-        public override string ToString() => base.ToString();
-    }
-    public record Gun() : Gear(6, "Gun", "", new QuickShot())
-    {
-        public override string ToString() => base.ToString();
-    }
-    public record ShortGun() : Gear(7, "Short Gun", "", new PowerfulShot())
-    {
-        public override string ToString() => base.ToString();
-    }
+
 }

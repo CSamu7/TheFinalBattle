@@ -28,7 +28,7 @@ namespace TheFinalBattle.UI
                 if (enemy is null) return null;
 
                 //Loop infinito
-                IAttack? attack = _attacksSubmenu.SelectAttack();
+                Attack? attack = _attacksSubmenu.SelectAttack();
 
                 if (_enemies.Members.Count == 1 && attack is null) return null;
                 if (attack is null) continue;

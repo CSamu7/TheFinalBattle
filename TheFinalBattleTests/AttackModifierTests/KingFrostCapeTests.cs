@@ -19,7 +19,7 @@ namespace TheFinalBattle.Tests.AttackModifierTests
 
         [Theory]
         [InlineData(DamageType.Range)]
-        [InlineData(DamageType.Electric)]
+        [InlineData(DamageType.Fire)]
         [InlineData(DamageType.Decoding)]
         public void Do_nothing_if_is_not_ice_damage(DamageType damageType)
         {
