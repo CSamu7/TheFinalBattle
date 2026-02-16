@@ -5,27 +5,27 @@ A basic console RPG game.
 - Load your own levels in a JSON file.
 
 ## Features to add
-- Selection of character.
+- Character selection
 - XP
 - Temporary effects
 
 ## How to load your own levels?
 1. Create a JSON file in \TheFinalBattle\bin\Debug\net8.0
-2. The next structure is for the creation of one level. You can leave idGear and idDefensiveModifier as null.
+2. This JSON structure is for the creation of one level. idGear and IdDefensiveModifier are nullable.
 ```json
 [
   {
     "partyEnemy": {
       "inventory": [
         {
-          "id": 1,
+          "id": 2,
           "amount": 2
         }
       ],
       "enemies": [
         {
-          "id": 2,
-          "idGear": 3,
+          "id": 31,
+          "idGear": 22,
           "idDefensiveModifier": 1
         }
       ]
